@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админка - Maison SV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== ВЕСЬ ТВОЙ СТАРЫЙ CSS ===== */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background: #f8f6f3; color: #2c2c2c; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: #2c2c2c; color: white; padding: 15px 0; }
+        header .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .logo { font-size: 22px; font-weight: 700; }
+        .logo span { color: #c4956a; }
+        .btn { padding: 10px 24px; border-radius: 30px; border: none; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 14px; text-decoration: none; display: inline-block; }
+        .btn-site { background: #c4956a; color: white; }
+        .btn-site:hover { background: #b0855a; }
+        .btn-add { background: #27ae60; color: white; }
+        .btn-add:hover { background: #219a52; }
+        .btn-danger { background: #e74c3c; color: white; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-edit { background: #3498db; color: white; }
+        .btn-edit:hover { background: #2980b9; }
+        .btn-save { background: #2c2c2c; color: white; }
+        .btn-save:hover { background: #3d3d3d; }
+        .btn-cancel { background: #95a5a6; color: white; }
+        .btn-cancel:hover { background: #7f8c8d; }
+        .hero { background: linear-gradient(135deg, #2c2c2c 0%, #4d3d2d 100%); color: white; padding: 40px 0; text-align: center; border-radius: 0 0 40px 40px; margin-bottom: 30px; }
+        .hero h1 { font-size: 36px; }
+        .panel { background: white; border-radius: 20px; padding: 25px; box-shadow: 0 4px 16px rgba(0,0,0,0.06); margin-bottom: 30px; }
+        .panel-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+        .panel-header h2 { font-size: 22px; }
+        .tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tabs button { padding: 10px 24px; border: 2px solid #dce5ed; border-radius: 30px; background: white; cursor: pointer; font-weight: 600; font-size: 15px; transition: 0.3s; color: #2c2c2c; }
+        .tabs button:hover { border-color: #c4956a; }
+        .tabs button.active { background: #c4956a; color: white; border-color: #c4956a; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .form-project {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f6f3;
+            border-radius: 16px;
+            border: 2px dashed #dce5ed;
+        }
+        .form-project .full-width { grid-column: 1 / -1; }
+        .form-project label { font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; }
+        .form-project input, .form-project textarea, .form-project select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+        .form-project input:focus, .form-project textarea:focus, .form-project select:focus { border-color: #c4956a; outline: none; }
+        .form-project .file-input input[type="file"] { padding: 8px 0; border: none; width: 100%; }
+        .form-project .image-previews { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 8px; }
+        .form-project .image-previews img { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; border: 2px solid #dce5ed; }
+        .form-project .help-text { font-size: 12px; color: #7f8c8d; margin-top: 4px; }
+        .form-actions { display: flex; gap: 10px; flex-wrap: wrap; grid-column: 1 / -1; }
+        .form-actions .btn { flex: 1; min-width: 120px; text-align: center; }
+
+        .project-table { width: 100%; border-collapse: collapse; }
+        .project-table th { text-align: left; padding: 10px 8px; background: #f8f6f3; border-bottom: 2px solid #dce5ed; }
+        .project-table td { padding: 10px 8px; border-bottom: 1px solid #eeeae5; vertical-align: middle; }
+        .project-table .project-img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+        .project-table .category-badge { display: inline-block; padding: 3px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; background: #dce5ed; color: #1e2a3a; }
+        .project-table .actions { display: flex; gap: 6px; }
+        .project-table .actions button { border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+
+        .lead-item { border: 1px solid #eeeae5; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; background: #fcfbf9; }
+        .lead-item .lead-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+        .lead-item .lead-name { font-weight: 700; font-size: 17px; }
+        .lead-item .lead-phone { color: #c4956a; font-weight: 600; }
+        .lead-item .lead-date { color: #7f8c8d; font-size: 13px; }
+        .lead-item .lead-message { margin-top: 6px; color: #5a6e7e; }
+        .lead-item .lead-status { display: inline-block; padding: 2px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .lead-status.status-new { background: #dbeafe; color: #1e40af; }
+        .lead-status.status-viewed { background: #d1fae5; color: #065f46; }
+        .lead-status.status-closed { background: #fee2e2; color: #991b1b; }
+
+        .login-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 999; justify-content: center; align-items: center; }
+        .login-overlay.active { display: flex; }
+        .login-box { background: white; padding: 40px; border-radius: 30px; max-width: 400px; width: 90%; text-align: center; }
+        .login-box h2 { margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 14px 18px; border: 2px solid #dce5ed; border-radius: 14px; font-size: 16px; margin-bottom: 16px; }
+        .login-box input:focus { border-color: #c4956a; outline: none; }
+        .login-box .btn-login { width: 100%; padding: 14px; background: #2c2c2c; color: white; border: none; border-radius: 14px; font-weight: 700; font-size: 18px; cursor: pointer; }
+        .login-box .btn-login:hover { background: #3d3d3d; }
+        .login-box .error { color: #e74c3c; margin-bottom: 12px; display: none; }
+
+        @media (max-width: 768px) {
+            .form-project { grid-template-columns: 1fr; }
+            .project-table { font-size: 12px; }
+            .project-table th, .project-table td { padding: 6px 4px; }
+            .project-table .project-img { width: 40px; height: 40px; }
+            .lead-item .lead-header { flex-direction: column; align-items: flex-start; }
+        }
+        @media (max-width: 480px) {
+            .project-table .actions { flex-direction: column; }
+            .project-table .actions button { padding: 4px 10px; font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo">Maison <span>SV</span> <span style="font-size:13px;opacity:0.7;">| Админка</span></div>
+        <div><button class="btn btn-site" onclick="window.location.href='index.html'"><i class="fas fa-store"></i> На сайт</button></div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h1><i class="fas fa-shield-alt"></i> Панель управления</h1>
+        <p>Управление портфолио и заявками</p>
+    </div>
+</section>
+
+<div class="container">
+    <div class="tabs">
+        <button class="active" data-tab="portfolio"><i class="fas fa-images"></i> Портфолио</button>
+        <button data-tab="leads"><i class="fas fa-envelope"></i> Заявки</button>
+    </div>
+
+    <!-- ПОРТФОЛИО -->
+    <div class="tab-content active" id="tabPortfolio">
+        <div class="panel">
+            <div class="panel-header">
+                <h2><i class="fas fa-images"></i> Управление проектами</h2>
+                <button class="btn btn-add" id="showAddForm"><i class="fas fa-plus"></i> Добавить проект</button>
+            </div>
+
+            <div class="form-project" id="projectForm" style="display:none;">
+                <div class="full-width">
+                    <label>Название проекта *</label>
+                    <input type="text" id="projectTitle" placeholder="Например: Квартира на Смоленской">
+                </div>
+                <div>
+                    <label>Категория *</label>
+                    <select id="projectCategory">
+                        <option value="квартиры">Квартиры</option>
+                        <option value="дома">Дома</option>
+                        <option value="офисы">Офисы</option>
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label>Главное фото</label>
+                    <div class="file-input">
+                        <input type="file" id="projectMainImage" accept="image/*">
+                        <div class="help-text">Выберите главное фото для проекта</div>
+                    </div>
+                </div>
+                <div class="full-width">
+                    <label>Дополнительные фото</label>
+                    <div class="file-input">
+                        <input type="file" id="projectExtraImages" accept="image/*" multiple>
+                        <div class="help-text">Выберите несколько фото (до 5 шт.)</div>
+                    </div>
+                    <div class="image-previews" id="imagePreviews"></div>
+                </div>
+                <div class="full-width">
+                    <label>Описание</label>
+                    <textarea id="projectDesc" rows="4" placeholder="Подробное описание проекта..."></textarea>
+                </div>
+                <div class="full-width">
+                    <label>Детали проекта</label>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                        <div><label style="font-weight:400; font-size:13px;">Площадь</label><input type="text" id="detailArea" placeholder="85 м²"></div>
+                        <div><label style="font-weight:400; font-size:13px;">Срок реализации</label><input type="text" id="detailTime" placeholder="4 месяца"></div>
+                        <div><label style="font-weight:400; font-size:13px;">Бюджет</label><input type="text" id="detailBudget" placeholder="4 500 000 ₽"></div>
+                        <div><label style="font-weight:400; font-size:13px;">Стиль</label><input type="text" id="detailStyle" placeholder="Современный минимализм"></div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-save" id="saveProjectBtn"><i class="fas fa-save"></i> Сохранить</button>
+                    <button class="btn btn-cancel" id="cancelProjectBtn">Отмена</button>
+                    <input type="hidden" id="editProjectId" value="">
+                </div>
+            </div>
+
+            <div style="overflow-x:auto;">
+                <table class="project-table">
+                    <thead>
+                        <tr><th>Фото</th><th>Название</th><th>Категория</th><th>Действия</th></tr>
+                    </thead>
+                    <tbody id="projectTableBody">
+                        <tr><td colspan="4" style="text-align:center; padding:30px; color:#7f8c8d;">Загрузка проектов...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЗАЯВКИ -->
+    <div class="tab-content" id="tabLeads">
+        <div class="panel">
+            <div class="panel-header">
+                <h2><i class="fas fa-envelope"></i> Заявки от клиентов</h2>
+                <button class="btn btn-danger" onclick="clearLeads()"><i class="fas fa-trash-alt"></i> Очистить все</button>
+            </div>
+            <div id="leadsContainer"><p style="color:#7f8c8d; text-align:center; padding:20px 0;">Загрузка заявок...</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- МОДАЛКА ВХОДА -->
+<div class="login-overlay" id="loginModal">
+    <div class="login-box">
+        <h2><i class="fas fa-lock"></i> Вход</h2>
+        <div class="error" id="loginError">Неверный пароль!</div>
+        <input type="password" id="loginPassword" placeholder="Введите пароль" onkeydown="if(event.key==='Enter') login()">
+        <button class="btn-login" onclick="login()"><i class="fas fa-sign-in-alt"></i> Войти</button>
+    </div>
+</div>
+
+<!-- ===================================================== -->
+<!-- ПОДКЛЮЧЕНИЕ FIREBASE -->
+<!-- ===================================================== -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+    // =====================================================
+    // 1. НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
+    // =====================================================
+    const firebaseConfig = {
+  apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
+  authDomain: "santecnika-e3374.firebaseapp.com",
+  databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "santecnika-e3374",
+  storageBucket: "santecnika-e3374.firebasestorage.app",
+  messagingSenderId: "1083870527516",
+  appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
+  measurementId: "G-M0LSESGTMS"
+};
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    console.log('🔥 Firebase подключён (админка)!');
+
+    const ADMIN_PASSWORD = 'design123';
+    let editingId = null;
+
+    // =====================================================
+    // 2. АВТОРИЗАЦИЯ
+    // =====================================================
+    function checkAuth() {
+        return sessionStorage.getItem('design_admin_auth') === 'true';
+    }
+
+    function login() {
+        const pass = document.getElementById('loginPassword').value;
+        const error = document.getElementById('loginError');
+        if (pass === ADMIN_PASSWORD) {
+            sessionStorage.setItem('design_admin_auth', 'true');
+            document.getElementById('loginModal').classList.remove('active');
+            loadAllData();
+            error.style.display = 'none';
+        } else {
+            error.style.display = 'block';
+            document.getElementById('loginPassword').value = '';
+        }
+    }
+
+    if (!checkAuth()) {
+        document.getElementById('loginModal').classList.add('active');
+    } else {
+        loadAllData();
+    }
+
+    // =====================================================
+    // 3. ЗАГРУЗКА ДАННЫХ
+    // =====================================================
+    async function loadAllData() {
+        await loadProjects();
+        await loadLeads();
+    }
+
+    // =====================================================
+    // 4. РАБОТА С ФАЙЛАМИ
+    // =====================================================
+    function fileToBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    async function processImages(mainFile, extraFiles) {
+        const images = [];
+        if (mainFile) {
+            const mainData = await fileToBase64(mainFile);
+            images.push(mainData);
+        }
+        if (extraFiles && extraFiles.length > 0) {
+            for (let i = 0; i < Math.min(extraFiles.length, 5); i++) {
+                const data = await fileToBase64(extraFiles[i]);
+                images.push(data);
+            }
+        }
+        return images;
+    }
+
+    // =====================================================
+    // 5. CRUD ПРОЕКТЫ
+    // =====================================================
+    async function loadProjects() {
+        try {
+            const snapshot = await db.collection('portfolio').orderBy('id').get();
+            const tbody = document.getElementById('projectTableBody');
+            if (snapshot.empty) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#7f8c8d;">Проектов пока нет</td></tr>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const imgSrc = data.images && data.images.length > 0 ? data.images[0] : 'https://via.placeholder.com/60/0b2a4a/ffffff?text=?';
+                html += `
+                    <tr>
+                        <td><img src="${imgSrc}" class="project-img" onerror="this.src='https://via.placeholder.com/60/0b2a4a/ffffff?text=?'"></td>
+                        <td><strong>${data.title}</strong></td>
+                        <td><span class="category-badge">${data.category}</span></td>
+                        <td>
+                            <div class="actions">
+                                <button class="btn-edit" onclick="editProject('${doc.id}')"><i class="fas fa-edit"></i></button>
+                                <button class="btn-danger" onclick="deleteProject('${doc.id}')"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+        } catch (e) {
+            console.error('Ошибка загрузки проектов:', e);
+            document.getElementById('projectTableBody').innerHTML = '<tr><td colspan="4" style="text-align:center; color:red;">Ошибка загрузки</td></tr>';
+        }
+    }
+
+    function showAddForm() {
+        document.getElementById('projectForm').style.display = 'grid';
+        document.getElementById('editProjectId').value = '';
+        document.getElementById('projectTitle').value = '';
+        document.getElementById('projectCategory').value = 'квартиры';
+        document.getElementById('projectDesc').value = '';
+        document.getElementById('detailArea').value = '';
+        document.getElementById('detailTime').value = '';
+        document.getElementById('detailBudget').value = '';
+        document.getElementById('detailStyle').value = '';
+        document.getElementById('projectMainImage').value = '';
+        document.getElementById('projectExtraImages').value = '';
+        document.getElementById('imagePreviews').innerHTML = '';
+        document.getElementById('saveProjectBtn').textContent = '➕ Добавить';
+        document.getElementById('showAddForm').style.display = 'none';
+    }
+
+    function hideForm() {
+        document.getElementById('projectForm').style.display = 'none';
+        document.getElementById('showAddForm').style.display = 'inline-block';
+        editingId = null;
+    }
+
+    async function editProject(id) {
+        try {
+            const doc = await db.collection('portfolio').doc(id).get();
+            if (!doc.exists) return;
+            const data = doc.data();
+            editingId = id;
+            document.getElementById('projectForm').style.display = 'grid';
+            document.getElementById('editProjectId').value = id;
+            document.getElementById('projectTitle').value = data.title;
+            document.getElementById('projectCategory').value = data.category;
+            document.getElementById('projectDesc').value = data.description || '';
+            document.getElementById('detailArea').value = data.details?.['Площадь'] || '';
+            document.getElementById('detailTime').value = data.details?.['Срок'] || '';
+            document.getElementById('detailBudget').value = data.details?.['Бюджет'] || '';
+            document.getElementById('detailStyle').value = data.details?.['Стиль'] || '';
+            document.getElementById('projectMainImage').value = '';
+            document.getElementById('projectExtraImages').value = '';
+            const previews = document.getElementById('imagePreviews');
+            previews.innerHTML = '';
+            if (data.images) {
+                data.images.slice(1, 6).forEach(img => {
+                    if (img) {
+                        const imgEl = document.createElement('img');
+                        imgEl.src = img;
+                        previews.appendChild(imgEl);
+                    }
+                });
+            }
+            document.getElementById('saveProjectBtn').textContent = '💾 Сохранить';
+            document.getElementById('showAddForm').style.display = 'none';
+        } catch (e) {
+            console.error('Ошибка загрузки проекта для редактирования:', e);
+            alert('Ошибка загрузки');
+        }
+    }
+
+    async function saveProject() {
+        const title = document.getElementById('projectTitle').value.trim();
+        const category = document.getElementById('projectCategory').value;
+        const description = document.getElementById('projectDesc').value.trim();
+        const area = document.getElementById('detailArea').value.trim();
+        const time = document.getElementById('detailTime').value.trim();
+        const budget = document.getElementById('detailBudget').value.trim();
+        const style = document.getElementById('detailStyle').value.trim();
+        const editId = document.getElementById('editProjectId').value;
+        const mainFile = document.getElementById('projectMainImage').files[0];
+        const extraFiles = document.getElementById('projectExtraImages').files;
+
+        if (!title) {
+            alert('❌ Введите название проекта!');
+            return;
+        }
+
+        let images = [];
+        if (editId) {
+            try {
+                const doc = await db.collection('portfolio').doc(editId).get();
+                if (doc.exists && doc.data().images) {
+                    images = doc.data().images;
+                }
+            } catch (e) {}
+        }
+
+        let newImages = [];
+        if (mainFile || extraFiles.length > 0) {
+            newImages = await processImages(mainFile, extraFiles);
+        }
+
+        const allImages = [...images, ...newImages].slice(0, 6);
+        if (allImages.length === 0) {
+            allImages.push('https://via.placeholder.com/300x200/0b2a4a/ffffff?text=?');
+        }
+
+        const details = {};
+        if (area) details['Площадь'] = area;
+        if (time) details['Срок'] = time;
+        if (budget) details['Бюджет'] = budget;
+        if (style) details['Стиль'] = style;
+
+        const projectData = {
+            title,
+            category,
+            images: allImages,
+            description: description || 'Описание проекта...',
+            details: Object.keys(details).length > 0 ? details : { 'Площадь': '—', 'Срок': '—', 'Бюджет': '—', 'Стиль': '—' }
+        };
+
+        try {
+            if (editId) {
+                await db.collection('portfolio').doc(editId).update(projectData);
+            } else {
+                const snapshot = await db.collection('portfolio').orderBy('id', 'desc').limit(1).get();
+                let newId = 1;
+                if (!snapshot.empty) {
+                    newId = snapshot.docs[0].data().id + 1;
+                }
+                projectData.id = newId;
+                await db.collection('portfolio').add(projectData);
+            }
+            hideForm();
+            loadProjects();
+            alert('✅ Проект сохранён!');
+        } catch (e) {
+            console.error('Ошибка сохранения:', e);
+            alert('❌ Ошибка сохранения');
+        }
+    }
+
+    async function deleteProject(id) {
+        if (!confirm('Удалить этот проект?')) return;
+        try {
+            await db.collection('portfolio').doc(id).delete();
+            loadProjects();
+        } catch (e) {
+            console.error('Ошибка удаления:', e);
+            alert('❌ Ошибка удаления');
+        }
+    }
+
+    // =====================================================
+    // 6. ЗАЯВКИ
+    // =====================================================
+    async function loadLeads() {
+        try {
+            const snapshot = await db.collection('leads').orderBy('date', 'desc').get();
+            const container = document.getElementById('leadsContainer');
+            if (snapshot.empty) {
+                container.innerHTML = '<p style="color:#7f8c8d; text-align:center; padding:20px 0;">Заявок пока нет</p>';
+                return;
+            }
+            let html = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                const status = data.status || 'new';
+                const statusMap = { 'new': 'Новая', 'viewed': 'Просмотрена', 'closed': 'Закрыта' };
+                const statusClass = { 'new': 'status-new', 'viewed': 'status-viewed', 'closed': 'status-closed' };
+                html += `
+                    <div class="lead-item">
+                        <div class="lead-header">
+                            <span class="lead-name">${data.name || 'Без имени'}</span>
+                            <span class="lead-phone"><i class="fas fa-phone"></i> ${data.phone || '—'}</span>
+                            <span class="lead-date">${data.date ? new Date(data.date).toLocaleDateString('ru-RU') : '—'}</span>
+                            <span class="lead-status ${statusClass[status] || 'status-new'}">${statusMap[status] || 'Новая'}</span>
+                        </div>
+                        ${data.message ? `<div class="lead-message">💬 ${data.message}</div>` : ''}
+                        <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;">
+                            <button onclick="updateLeadStatus('${doc.id}', 'viewed')" style="background:#27ae60;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-size:12px;">Просмотрено</button>
+                            <button onclick="updateLeadStatus('${doc.id}', 'closed')" style="background:#e74c3c;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-size:12px;">Закрыть</button>
+                            <button onclick="deleteLead('${doc.id}')" style="background:#95a5a6;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-size:12px;">Удалить</button>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        } catch (e) {
+            console.error('Ошибка загрузки заявок:', e);
+            document.getElementById('leadsContainer').innerHTML = '<p style="color:red;">Ошибка загрузки</p>';
+        }
+    }
+
+    async function updateLeadStatus(id, status) {
+        try {
+            await db.collection('leads').doc(id).update({ status });
+            loadLeads();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function deleteLead(id) {
+        if (!confirm('Удалить эту заявку?')) return;
+        try {
+            await db.collection('leads').doc(id).delete();
+            loadLeads();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function clearLeads() {
+        if (!confirm('Удалить ВСЕ заявки?')) return;
+        try {
+            const snapshot = await db.collection('leads').get();
+            const batch = db.batch();
+            snapshot.forEach(doc => batch.delete(doc.ref));
+            await batch.commit();
+            loadLeads();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // =====================================================
+    // 7. ТАБЫ
+    // =====================================================
+    document.querySelectorAll('.tabs button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tabs button').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            const tabId = this.dataset.tab;
+            document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1)).classList.add('active');
+        });
+    });
+
+    // =====================================================
+    // 8. ПРЕВЬЮ ФОТО
+    // =====================================================
+    document.getElementById('projectExtraImages').addEventListener('change', function() {
+        const previews = document.getElementById('imagePreviews');
+        previews.innerHTML = '';
+        const files = Array.from(this.files).slice(0, 5);
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previews.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+    document.getElementById('projectMainImage').addEventListener('change', function() {
+        const previews = document.getElementById('imagePreviews');
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                previews.prepend(img);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // =====================================================
+    // 9. СОБЫТИЯ
+    // =====================================================
+    document.getElementById('showAddForm').addEventListener('click', showAddForm);
+    document.getElementById('saveProjectBtn').addEventListener('click', saveProject);
+    document.getElementById('cancelProjectBtn').addEventListener('click', hideForm);
+
+    console.log('🎨 Админка Maison SV с Firebase запущена!');
+    console.log('🔑 Пароль: design123');
+</script>
+</body>
+</html>
