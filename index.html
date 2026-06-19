@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== ВЕСЬ ТВОЙ СТАРЫЙ CSS (БЕЗ ИЗМЕНЕНИЙ) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f6f3; color: #2c2c2c; }
@@ -561,18 +560,19 @@
 
 <script>
     // =====================================================
-    // 1. НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
+    // 1. НАСТРОЙКИ FIREBASE (ТВОИ КЛЮЧИ)
     // =====================================================
-      const firebaseConfig = { 
-  apiKey : "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU" , 
-  authDomain : "santecnika-e3374.firebaseapp.com" , 
-  databaseURL : "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app" , 
-  projectId : "santecnika-e3374" , 
-  storageBucket : "santecnika-e3374.firebasestorage.app" , 
-  messagingSenderId : "1083870527516" , 
-  appId : "1:1083870527516:web:3e93947251cdfb6ce6dfd9" , 
-  measurementId : "G-M0LSESGTMS" 
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
+        authDomain: "santecnika-e3374.firebaseapp.com",
+        databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "santecnika-e3374",
+        storageBucket: "santecnika-e3374.firebasestorage.app",
+        messagingSenderId: "1083870527516",
+        appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
+        measurementId: "G-M0LSESGTMS"
+    };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
@@ -818,16 +818,44 @@
     }
 
     // =====================================================
-    // 5. ОТКРЫТИЕ ПРОЕКТА (ИСПРАВЛЕНО!)
+    // 5. ОТКРЫТИЕ ПРОЕКТА (ИСПРАВЛЕНО)
     // =====================================================
     async function openProject(docId) {
         try {
-            const doc = await db.collection('portfolio').doc(docId).get();
-            if (!doc.exists) {
-                alert('Проект не найден');
+            if (!docId) {
+                alert('Ошибка: ID проекта не указан');
                 return;
             }
-            const project = { id: doc.id, ...doc.data() };
+            
+            // Ищем проект по firebaseId или по ID документа
+            let project = null;
+            let realDocId = docId;
+            
+            try {
+                const doc = await db.collection('portfolio').doc(docId).get();
+                if (doc.exists) {
+                    project = { id: doc.id, ...doc.data() };
+                    realDocId = doc.id;
+                }
+            } catch (e) {}
+            
+            // Если не нашли по ID, ищем по полю firebaseId
+            if (!project) {
+                try {
+                    const snapshot = await db.collection('portfolio').where('firebaseId', '==', docId).get();
+                    if (!snapshot.empty) {
+                        snapshot.forEach(doc => {
+                            project = { id: doc.id, ...doc.data() };
+                            realDocId = doc.id;
+                        });
+                    }
+                } catch (e) {}
+            }
+            
+            if (!project) {
+                alert('❌ Проект не найден');
+                return;
+            }
             
             const modal = document.getElementById('projectModal');
             document.body.style.overflow = 'hidden';
@@ -843,7 +871,7 @@
             ).join('');
         } catch (e) {
             console.error('Ошибка открытия проекта:', e);
-            alert('Ошибка загрузки проекта');
+            alert('❌ Ошибка загрузки проекта');
         }
     }
 
