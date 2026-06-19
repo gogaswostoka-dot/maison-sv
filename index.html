@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== ВЕСЬ ТВОЙ СТАРЫЙ CSS (без изменений) ===== */
+        /* ===== ВЕСЬ ТВОЙ СТАРЫЙ CSS (БЕЗ ИЗМЕНЕНИЙ) ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f8f6f3; color: #2c2c2c; }
@@ -563,17 +563,16 @@
     // =====================================================
     // 1. НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
     // =====================================================
-    const firebaseConfig = {
-  apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
-  authDomain: "santecnika-e3374.firebaseapp.com",
-  databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "santecnika-e3374",
-  storageBucket: "santecnika-e3374.firebasestorage.app",
-  messagingSenderId: "1083870527516",
-  appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
-  measurementId: "G-M0LSESGTMS"
+      const firebaseConfig = { 
+  apiKey : "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU" , 
+  authDomain : "santecnika-e3374.firebaseapp.com" , 
+  databaseURL : "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app" , 
+  projectId : "santecnika-e3374" , 
+  storageBucket : "santecnika-e3374.firebasestorage.app" , 
+  messagingSenderId : "1083870527516" , 
+  appId : "1:1083870527516:web:3e93947251cdfb6ce6dfd9" , 
+  measurementId : "G-M0LSESGTMS" 
 };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
@@ -774,7 +773,7 @@
     // =====================================================
     async function loadPortfolio() {
         try {
-            const snapshot = await db.collection('portfolio').orderBy('id').get();
+            const snapshot = await db.collection('portfolio').get();
             portfolioData = [];
             snapshot.forEach(doc => {
                 portfolioData.push({ id: doc.id, ...doc.data() });
@@ -789,14 +788,7 @@
     }
 
     // =====================================================
-    // 4. ЗАГРУЗКА ОТЗЫВОВ ИЗ FIREBASE
-    // =====================================================
-    async function loadLeads() {
-        // Функция для админки, на сайте не нужна
-    }
-
-    // =====================================================
-    // 5. ОТРИСОВКА ПОРТФОЛИО
+    // 4. ОТРИСОВКА ПОРТФОЛИО
     // =====================================================
     function renderPortfolio(filter) {
         const grid = document.getElementById('portfolioGrid');
@@ -826,11 +818,11 @@
     }
 
     // =====================================================
-    // 6. ОТКРЫТИЕ ПРОЕКТА
+    // 5. ОТКРЫТИЕ ПРОЕКТА (ИСПРАВЛЕНО!)
     // =====================================================
-    async function openProject(id) {
+    async function openProject(docId) {
         try {
-            const doc = await db.collection('portfolio').doc(id).get();
+            const doc = await db.collection('portfolio').doc(docId).get();
             if (!doc.exists) {
                 alert('Проект не найден');
                 return;
@@ -861,7 +853,7 @@
     }
 
     // =====================================================
-    // 7. ОТПРАВКА ЗАЯВКИ В FIREBASE
+    // 6. ОТПРАВКА ЗАЯВКИ В FIREBASE
     // =====================================================
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -903,7 +895,7 @@
     });
 
     // =====================================================
-    // 8. ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
+    // 7. ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
     // =====================================================
     function setLanguage(lang) {
         currentLang = lang;
@@ -933,7 +925,7 @@
     }
 
     // =====================================================
-    // 9. СОБЫТИЯ
+    // 8. СОБЫТИЯ
     // =====================================================
     document.querySelectorAll('.lang-selector button').forEach(btn => {
         btn.addEventListener('click', function() { setLanguage(this.dataset.lang); });
@@ -973,7 +965,7 @@
     });
 
     // =====================================================
-    // 10. ЗАПУСК
+    // 9. ЗАПУСК
     // =====================================================
     const savedLang = localStorage.getItem('designer_lang');
     if (savedLang && translations[savedLang]) {
