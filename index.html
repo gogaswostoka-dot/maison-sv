@@ -13,13 +13,14 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .section-title, .about-text h3, .project-title, .hero-slogan { font-family: 'Cormorant Garamond', serif; }
 
+        /* ===== ШАПКА ===== */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 80px;
-            z-index: 100;
+            z-index: 1000;
             background: #f5f0eb;
             box-shadow: 0 2px 20px rgba(0,0,0,0.06);
             transition: 0.3s;
@@ -36,7 +37,9 @@
             padding: 0 20px;
             gap: 20px;
         }
-        .logo img { height: 150px; width: auto; display: block; }
+        .logo img { height: 70px; width: auto; display: block; }
+
+        /* ===== ДЕСКТОПНОЕ МЕНЮ ===== */
         .nav-menu {
             display: flex;
             align-items: center;
@@ -65,6 +68,7 @@
             transition: 0.3s;
         }
         .nav-menu a:hover::after { width: 100%; }
+
         .lang-selector {
             display: flex;
             gap: 4px;
@@ -89,6 +93,73 @@
         .lang-selector button:hover { background: rgba(196,149,106,0.2); color: #c4956a; }
         .lang-selector button.active { background: #c4956a; color: white; }
 
+        /* ===== БУРГЕР-МЕНЮ (СКРЫТО НА ДЕСКТОПЕ) ===== */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 1001;
+        }
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #2c2c2c;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        /* ===== МОБИЛЬНОЕ МЕНЮ (выезжающее) ===== */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background: #f5f0eb;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+            border-bottom: 2px solid #e8e0d8;
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 0;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #eeeae5;
+        }
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+        .mobile-menu .lang-selector {
+            margin: 10px 0 0 0;
+            background: rgba(255,255,255,0.8);
+        }
+
+        /* ===== ГЕРОЙ И ОСТАЛЬНЫЕ СЕКЦИИ (БЕЗ ИЗМЕНЕНИЙ) ===== */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -391,15 +462,15 @@
         footer { background: #2c2c2c; color: #b0a094; text-align: center; padding: 30px 0; }
         footer span { color: #c4956a; }
 
+        /* ===== АДАПТИВ ===== */
         @media (max-width: 768px) {
+            .burger { display: flex; }
+            .nav-menu { display: none; }
             .hero-slogan { font-size: 32px; }
             .hero-content h1 { font-size: 28px; }
             .about-grid { grid-template-columns: 1fr; }
             .contact-grid { grid-template-columns: 1fr; }
             .portfolio-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-            header .container { flex-wrap: wrap; }
-            .nav-menu { flex-wrap: wrap; justify-content: center; gap: 12px; }
-            .lang-selector button { font-size: 10px; padding: 2px 8px; }
             .project-modal { padding: 20px; }
             .project-modal .project-images { grid-template-columns: 1fr; }
             .project-modal .project-images img:first-child { max-height: 200px; }
@@ -417,7 +488,6 @@
             .hero-content h1 { font-size: 22px; }
             .about-text .stats { flex-direction: column; gap: 10px; }
             .portfolio-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .nav-menu a { font-size: 12px; }
             .project-modal .project-details { grid-template-columns: 1fr; }
             .success-modal { padding: 25px 18px; }
             .success-modal .icon { font-size: 42px; }
@@ -427,7 +497,6 @@
             .success-modal .btn-ok { padding: 12px 30px; font-size: 15px; }
             .logo img { height: 40px; }
             header { height: 60px; }
-            .nav-menu { gap: 8px; }
         }
     </style>
 </head>
@@ -436,6 +505,8 @@
 <header>
     <div class="container">
         <div class="logo"><img src="logo.png" alt="Maison SV"></div>
+        
+        <!-- ===== ДЕСКТОПНОЕ МЕНЮ ===== -->
         <div class="nav-menu">
             <a href="#about" data-lang="about">Обо мне</a>
             <a href="#portfolio" data-lang="portfolio">Портфолио</a>
@@ -448,9 +519,31 @@
                 <button data-lang="uk">UA</button>
             </div>
         </div>
+
+        <!-- ===== БУРГЕР-МЕНЮ (ТОЛЬКО НА ТЕЛЕФОНАХ) ===== -->
+        <button class="burger" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 </header>
 
+<!-- ===== МОБИЛЬНОЕ МЕНЮ (ВЫЕЗЖАЕТ) ===== -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about" data-lang="about" onclick="closeMobileMenu()">Обо мне</a>
+    <a href="#portfolio" data-lang="portfolio" onclick="closeMobileMenu()">Портфолио</a>
+    <a href="#contact" data-lang="contact" onclick="closeMobileMenu()">Контакты</a>
+    <div class="lang-selector">
+        <button class="active" data-lang="ru">RU</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="fr">FR</button>
+        <button data-lang="de">DE</button>
+        <button data-lang="uk">UA</button>
+    </div>
+</div>
+
+<!-- ===== ОСТАЛЬНЫЕ СЕКЦИИ ===== -->
 <section class="hero" id="home">
     <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Интерьер">
     <div class="hero-overlay"></div>
@@ -552,25 +645,21 @@
     </div>
 </footer>
 
-<!-- ===================================================== -->
-<!-- ПОДКЛЮЧЕНИЕ FIREBASE -->
-<!-- ===================================================== -->
+<!-- ===== FIREBASE ===== -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
 <script>
     // =====================================================
-    // 1. НАСТРОЙКИ FIREBASE (ТВОИ КЛЮЧИ)
+    // НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
     // =====================================================
     const firebaseConfig = {
-        apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
-        authDomain: "santecnika-e3374.firebaseapp.com",
-        databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
-        projectId: "santecnika-e3374",
-        storageBucket: "santecnika-e3374.firebasestorage.app",
-        messagingSenderId: "1083870527516",
-        appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
-        measurementId: "G-M0LSESGTMS"
+        apiKey: "AIzaSyDummyKey12345",          // <-- ЗАМЕНИ
+        authDomain: "maison-sv.firebaseapp.com", // <-- ЗАМЕНИ
+        projectId: "maison-sv",                  // <-- ЗАМЕНИ
+        storageBucket: "maison-sv.appspot.com",  // <-- ЗАМЕНИ
+        messagingSenderId: "123456789",          // <-- ЗАМЕНИ
+        appId: "1:123456789:web:abcdef"          // <-- ЗАМЕНИ
     };
 
     firebase.initializeApp(firebaseConfig);
@@ -579,7 +668,7 @@
     console.log('🔥 Firebase подключён!');
 
     // =====================================================
-    // 2. ПЕРЕВОДЫ
+    // ПЕРЕВОДЫ
     // =====================================================
     const translations = {
         ru: {
@@ -769,7 +858,7 @@
     let portfolioData = [];
 
     // =====================================================
-    // 3. ЗАГРУЗКА ПОРТФОЛИО ИЗ FIREBASE
+    // ЗАГРУЗКА ПОРТФОЛИО
     // =====================================================
     async function loadPortfolio() {
         try {
@@ -788,7 +877,7 @@
     }
 
     // =====================================================
-    // 4. ОТРИСОВКА ПОРТФОЛИО
+    // ОТРИСОВКА ПОРТФОЛИО
     // =====================================================
     function renderPortfolio(filter) {
         const grid = document.getElementById('portfolioGrid');
@@ -818,44 +907,16 @@
     }
 
     // =====================================================
-    // 5. ОТКРЫТИЕ ПРОЕКТА (ИСПРАВЛЕНО)
+    // ОТКРЫТИЕ ПРОЕКТА
     // =====================================================
     async function openProject(docId) {
         try {
-            if (!docId) {
-                alert('Ошибка: ID проекта не указан');
-                return;
-            }
-            
-            // Ищем проект по firebaseId или по ID документа
-            let project = null;
-            let realDocId = docId;
-            
-            try {
-                const doc = await db.collection('portfolio').doc(docId).get();
-                if (doc.exists) {
-                    project = { id: doc.id, ...doc.data() };
-                    realDocId = doc.id;
-                }
-            } catch (e) {}
-            
-            // Если не нашли по ID, ищем по полю firebaseId
-            if (!project) {
-                try {
-                    const snapshot = await db.collection('portfolio').where('firebaseId', '==', docId).get();
-                    if (!snapshot.empty) {
-                        snapshot.forEach(doc => {
-                            project = { id: doc.id, ...doc.data() };
-                            realDocId = doc.id;
-                        });
-                    }
-                } catch (e) {}
-            }
-            
-            if (!project) {
+            const doc = await db.collection('portfolio').doc(docId).get();
+            if (!doc.exists) {
                 alert('❌ Проект не найден');
                 return;
             }
+            const project = { id: doc.id, ...doc.data() };
             
             const modal = document.getElementById('projectModal');
             document.body.style.overflow = 'hidden';
@@ -881,7 +942,7 @@
     }
 
     // =====================================================
-    // 6. ОТПРАВКА ЗАЯВКИ В FIREBASE
+    // ОТПРАВКА ЗАЯВКИ
     // =====================================================
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -923,11 +984,16 @@
     });
 
     // =====================================================
-    // 7. ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
+    // ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
     // =====================================================
     function setLanguage(lang) {
         currentLang = lang;
-        document.querySelectorAll('.lang-selector button').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+        
+        // Обновляем десктопный и мобильный селекторы
+        document.querySelectorAll('.lang-selector button').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        
         document.querySelectorAll('[data-lang]').forEach(el => {
             const key = el.dataset.lang;
             if (translations[lang] && translations[lang][key] !== undefined) {
@@ -943,20 +1009,51 @@
                 }
             }
         });
+        
         document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
             const filterKey = 'filter-' + btn.dataset.filter;
             if (translations[lang] && translations[lang][filterKey]) {
                 btn.textContent = translations[lang][filterKey];
             }
         });
+        
         localStorage.setItem('designer_lang', lang);
     }
 
     // =====================================================
-    // 8. СОБЫТИЯ
+    // БУРГЕР-МЕНЮ
+    // =====================================================
+    const burgerBtn = document.getElementById('burgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    burgerBtn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobileMenu() {
+        burgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('open');
+    }
+
+    // Закрываем меню при клике вне его
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('header') && !e.target.closest('.mobile-menu')) {
+            closeMobileMenu();
+        }
+    });
+
+    // =====================================================
+    // СОБЫТИЯ
     // =====================================================
     document.querySelectorAll('.lang-selector button').forEach(btn => {
-        btn.addEventListener('click', function() { setLanguage(this.dataset.lang); });
+        btn.addEventListener('click', function() { 
+            setLanguage(this.dataset.lang); 
+            // Обновляем оба селектора
+            document.querySelectorAll('.lang-selector button').forEach(b => {
+                b.classList.toggle('active', b.dataset.lang === this.dataset.lang);
+            });
+        });
     });
 
     document.querySelectorAll('.portfolio-filter button').forEach(btn => {
@@ -980,6 +1077,7 @@
                 document.getElementById('successModal').classList.remove('active');
                 document.body.style.overflow = '';
             }
+            closeMobileMenu();
         }
     });
 
@@ -993,7 +1091,7 @@
     });
 
     // =====================================================
-    // 9. ЗАПУСК
+    // ЗАПУСК
     // =====================================================
     const savedLang = localStorage.getItem('designer_lang');
     if (savedLang && translations[savedLang]) {
