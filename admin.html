@@ -6,7 +6,6 @@
     <title>Админка - Maison SV</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ===== ВЕСЬ ТВОЙ СТАРЫЙ CSS ===== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f8f6f3; color: #2c2c2c; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -229,18 +228,18 @@
 
 <script>
     // =====================================================
-    // 1. НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
+    // 1. НАСТРОЙКИ FIREBASE (ТВОИ КЛЮЧИ)
     // =====================================================
     const firebaseConfig = {
-  apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
-  authDomain: "santecnika-e3374.firebaseapp.com",
-  databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "santecnika-e3374",
-  storageBucket: "santecnika-e3374.firebasestorage.app",
-  messagingSenderId: "1083870527516",
-  appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
-  measurementId: "G-M0LSESGTMS"
-};
+        apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
+        authDomain: "santecnika-e3374.firebaseapp.com",
+        databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "santecnika-e3374",
+        storageBucket: "santecnika-e3374.firebasestorage.app",
+        messagingSenderId: "1083870527516",
+        appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
+        measurementId: "G-M0LSESGTMS"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
@@ -317,7 +316,7 @@
     // =====================================================
     async function loadProjects() {
         try {
-            const snapshot = await db.collection('portfolio').orderBy('id').get();
+            const snapshot = await db.collection('portfolio').get();
             const tbody = document.getElementById('projectTableBody');
             if (snapshot.empty) {
                 tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#7f8c8d;">Проектов пока нет</td></tr>';
@@ -461,21 +460,18 @@
         try {
             if (editId) {
                 await db.collection('portfolio').doc(editId).update(projectData);
+                alert('✅ Проект обновлён!');
             } else {
-                const snapshot = await db.collection('portfolio').orderBy('id', 'desc').limit(1).get();
-                let newId = 1;
-                if (!snapshot.empty) {
-                    newId = snapshot.docs[0].data().id + 1;
-                }
-                projectData.id = newId;
-                await db.collection('portfolio').add(projectData);
+                const docRef = await db.collection('portfolio').add(projectData);
+                // Сохраняем Firebase ID как поле firebaseId
+                await db.collection('portfolio').doc(docRef.id).update({ firebaseId: docRef.id });
+                alert('✅ Проект добавлен!');
             }
             hideForm();
             loadProjects();
-            alert('✅ Проект сохранён!');
         } catch (e) {
             console.error('Ошибка сохранения:', e);
-            alert('❌ Ошибка сохранения');
+            alert('❌ Ошибка сохранения: ' + e.message);
         }
     }
 
