@@ -653,14 +653,16 @@
     // =====================================================
     // НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
     // =====================================================
-    const firebaseConfig = {
-        apiKey: "AIzaSyDummyKey12345",          // <-- ЗАМЕНИ
-        authDomain: "maison-sv.firebaseapp.com", // <-- ЗАМЕНИ
-        projectId: "maison-sv",                  // <-- ЗАМЕНИ
-        storageBucket: "maison-sv.appspot.com",  // <-- ЗАМЕНИ
-        messagingSenderId: "123456789",          // <-- ЗАМЕНИ
-        appId: "1:123456789:web:abcdef"          // <-- ЗАМЕНИ
-    };
+    const firebaseConfig = { 
+  apiKey : "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU" , 
+  authDomain : "santecnika-e3374.firebaseapp.com" , 
+  databaseURL : "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app" , 
+  projectId : "santecnika-e3374" , 
+  storageBucket : "santecnika-e3374.firebasestorage.app" , 
+  messagingSenderId : "1083870527516" , 
+  appId : "1:1083870527516:web:3e93947251cdfb6ce6dfd9" , 
+  measurementId : "G-M0LSESGTMS" 
+};
 
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
