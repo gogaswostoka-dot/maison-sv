@@ -776,11 +776,12 @@
         }
 
         // =====================================================
-        // CRUD ПРОЕКТЫ
+        // CRUD ПРОЕКТЫ (ИСПРАВЛЕНО!)
         // =====================================================
         async function loadProjects() {
             try {
-                const snapshot = await db.collection('portfolio').orderBy('id').get();
+                // УБИРАЕМ .orderBy('id') - это было причиной проблемы
+                const snapshot = await db.collection('portfolio').get();
                 const tbody = document.getElementById('projectTableBody');
                 if (snapshot.empty) {
                     tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:30px; color:#7f8c8d;">Проектов пока нет</td></tr>';
@@ -789,17 +790,18 @@
                 let html = '';
                 snapshot.forEach(doc => {
                     const data = doc.data();
+                    const projectId = doc.id;
                     const imgSrc = data.images && data.images.length > 0 ? data.images[0] :
                         'https://via.placeholder.com/60/0b2a4a/ffffff?text=?';
                     html += `
                             <tr>
                                 <td><img src="${imgSrc}" class="project-img" onerror="this.src='https://via.placeholder.com/60/0b2a4a/ffffff?text=?'"></td>
-                                <td><strong>${data.title}</strong></td>
-                                <td><span class="category-badge">${data.category}</span></td>
+                                <td><strong>${data.title || 'Без названия'}</strong></td>
+                                <td><span class="category-badge">${data.category || 'Без категории'}</span></td>
                                 <td>
                                     <div class="actions">
-                                        <button class="btn-edit" onclick="editProject('${doc.id}')"><i class="fas fa-edit"></i></button>
-                                        <button class="btn-danger" onclick="deleteProject('${doc.id}')"><i class="fas fa-trash"></i></button>
+                                        <button class="btn-edit" onclick="editProject('${projectId}')"><i class="fas fa-edit"></i></button>
+                                        <button class="btn-danger" onclick="deleteProject('${projectId}')"><i class="fas fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
