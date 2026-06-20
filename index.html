@@ -743,6 +743,25 @@
             transform: scale(1.02);
         }
 
+        /* ===== МОДАЛКА УСПЕШНОГО ОТЗЫВА ===== */
+        .review-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3001;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .review-success-modal.active {
+            display: flex;
+        }
+
         /* ===== КОНТАКТЫ ===== */
         .contact-grid {
             display: grid;
@@ -875,6 +894,59 @@
             background: #3d3d3d;
             transform: scale(1.02);
         }
+
+        .review-success-modal .success-modal {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 60px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .review-success-modal .success-modal .icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 16px;
+            animation: scaleIn 0.6s ease 0.2s both;
+        }
+        .review-success-modal .success-modal .icon i {
+            background: #e8f8f0;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        .review-success-modal .success-modal h2 {
+            font-size: 28px;
+            color: #1e2a3a;
+            margin-bottom: 12px;
+            animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .review-success-modal .success-modal p {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            animation: fadeUp 0.5s ease 0.4s both;
+        }
+        .review-success-modal .success-modal .btn-ok {
+            background: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+        .review-success-modal .success-modal .btn-ok:hover {
+            background: #3d3d3d;
+            transform: scale(1.02);
+        }
+
         @keyframes popIn {
             0% {
                 transform: scale(0.7);
@@ -977,6 +1049,15 @@
                 height: 34px;
                 font-size: 14px;
             }
+            .review-success-modal .success-modal {
+                padding: 35px 25px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 52px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 22px;
+            }
         }
         @media (max-width: 480px) {
             .hero-slogan {
@@ -1028,6 +1109,25 @@
                 width: 30px;
                 height: 30px;
                 font-size: 12px;
+            }
+            .review-success-modal .success-modal {
+                padding: 25px 18px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 42px;
+            }
+            .review-success-modal .success-modal .icon i {
+                padding: 14px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 19px;
+            }
+            .review-success-modal .success-modal p {
+                font-size: 14px;
+            }
+            .review-success-modal .success-modal .btn-ok {
+                padding: 12px 30px;
+                font-size: 15px;
             }
         }
     </style>
@@ -1139,7 +1239,7 @@
             <h2 class="section-title" data-lang="reviews-title">Отзывы <span>клиентов</span></h2>
             <p class="section-subtitle" data-lang="reviews-subtitle">Что говорят о моей работе</p>
 
-            <!-- КАРУСЕЛЬ ОТЗЫВОВ (только одобренные) -->
+            <!-- КАРУСЕЛЬ ОТЗЫВОВ -->
             <div class="reviews-carousel" id="reviewsCarousel">
                 <div class="carousel-track" id="carouselTrack">
                     <!-- JS вставит отзывы -->
@@ -1154,7 +1254,7 @@
                 <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Оставить отзыв</h3>
                 <div class="form-group">
                     <label data-lang="review-form-name">Ваше имя *</label>
-                    <input type="text" id="reviewName" placeholder="Иван Иванов">
+                    <input type="text" id="reviewName" placeholder="Иван Иванов" data-lang="review-name-placeholder">
                 </div>
                 <div class="form-group">
                     <label data-lang="review-form-rating">Оценка</label>
@@ -1168,12 +1268,22 @@
                 </div>
                 <div class="form-group">
                     <label data-lang="review-form-text">Ваш отзыв *</label>
-                    <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлением о работе..."></textarea>
+                    <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлением о работе..." data-lang="review-text-placeholder"></textarea>
                 </div>
                 <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Отправить отзыв</button>
             </div>
         </div>
     </section>
+
+    <!-- ===== МОДАЛКА УСПЕШНОГО ОТЗЫВА ===== -->
+    <div class="review-success-modal" id="reviewSuccessModal">
+        <div class="success-modal">
+            <div class="icon"><i class="fas fa-check-circle"></i></div>
+            <h2 data-lang="review-success-title">Спасибо за ваш отзыв! ⭐</h2>
+            <p data-lang="review-success-text">Отзыв отправлен на проверку. После одобрения он появится в карусели.</p>
+            <button class="btn-ok" id="reviewSuccessOkBtn" data-lang="review-success-btn">Хорошо</button>
+        </div>
+    </div>
 
     <section class="section" id="contact">
         <div class="container">
@@ -1193,9 +1303,18 @@
                 </div>
                 <div class="contact-form">
                     <form id="contactForm">
-                        <div class="form-group"><label data-lang="form-name">Ваше имя *</label><input type="text" id="clientName" placeholder="Иван Иванов" required></div>
-                        <div class="form-group"><label data-lang="form-phone">Телефон *</label><input type="tel" id="clientPhone" placeholder="+7 (999) 123-45-67" required></div>
-                        <div class="form-group"><label data-lang="form-message">Сообщение</label><textarea id="clientMessage" rows="4" placeholder="Расскажите о вашем проекте..."></textarea></div>
+                        <div class="form-group">
+                            <label data-lang="form-name">Ваше имя *</label>
+                            <input type="text" id="clientName" placeholder="Иван Иванов" data-lang="form-name-placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-phone">Телефон *</label>
+                            <input type="tel" id="clientPhone" placeholder="+7 (999) 123-45-67" data-lang="form-phone-placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-message">Сообщение</label>
+                            <textarea id="clientMessage" rows="4" placeholder="Расскажите о вашем проекте..." data-lang="form-message-placeholder"></textarea>
+                        </div>
                         <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Отправить</button>
                     </form>
                 </div>
@@ -1215,7 +1334,7 @@
         </div>
     </div>
 
-    <!-- ===== МОДАЛКА УСПЕШНОЙ ОТПРАВКИ ===== -->
+    <!-- ===== МОДАЛКА УСПЕШНОЙ ОТПРАВКИ ЗАЯВКИ ===== -->
     <div class="success-modal-overlay" id="successModal">
         <div class="success-modal">
             <div class="icon"><i class="fas fa-check-circle"></i></div>
@@ -1238,18 +1357,19 @@
 
     <script>
         // =====================================================
-        // НАСТРОЙКИ FIREBASE (ВСТАВЬ СВОИ КЛЮЧИ!)
+        // НАСТРОЙКИ FIREBASE
         // =====================================================
-        const firebaseConfig = { 
-  apiKey : "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU" , 
-  authDomain : "santecnika-e3374.firebaseapp.com" , 
-  databaseURL : "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app" , 
-  projectId : "santecnika-e3374" , 
-  storageBucket : "santecnika-e3374.firebasestorage.app" , 
-  messagingSenderId : "1083870527516" , 
-  appId : "1:1083870527516:web:3e93947251cdfb6ce6dfd9" , 
-  measurementId : "G-M0LSESGTMS" 
-};
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
+            authDomain: "santecnika-e3374.firebaseapp.com",
+            databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "santecnika-e3374",
+            storageBucket: "santecnika-e3374.firebasestorage.app",
+            messagingSenderId: "1083870527516",
+            appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
+            measurementId: "G-M0LSESGTMS"
+        };
+
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
@@ -1268,9 +1388,14 @@
                 'reviews-subtitle': 'Что говорят о моей работе',
                 'review-form-title': 'Оставить отзыв',
                 'review-form-name': 'Ваше имя *',
+                'review-name-placeholder': 'Иван Иванов',
                 'review-form-rating': 'Оценка',
                 'review-form-text': 'Ваш отзыв *',
+                'review-text-placeholder': 'Поделитесь впечатлением о работе...',
                 'review-form-submit': 'Отправить отзыв',
+                'review-success-title': 'Спасибо за ваш отзыв! ⭐',
+                'review-success-text': 'Отзыв отправлен на проверку. После одобрения он появится в карусели.',
+                'review-success-btn': 'Хорошо',
                 'slogan': 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
                 'hero-title': 'Интерьеры, в которых <br>хочется <span>жить</span>',
                 'hero-desc': 'Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.',
@@ -1294,8 +1419,11 @@
                 'contact-subtitle': 'Оставьте заявку, и я свяжусь с вами в ближайшее время',
                 'contact-info-title': 'Контакты',
                 'form-name': 'Ваше имя *',
+                'form-name-placeholder': 'Иван Иванов',
                 'form-phone': 'Телефон *',
+                'form-phone-placeholder': '+7 (999) 123-45-67',
                 'form-message': 'Сообщение',
+                'form-message-placeholder': 'Расскажите о вашем проекте...',
                 'form-submit': 'Отправить',
                 'success-title': 'Спасибо за вашу заявку! 🎉',
                 'success-text': 'В ближайшее время я свяжусь с вами для обсуждения проекта.',
@@ -1312,9 +1440,14 @@
                 'reviews-subtitle': 'What they say about my work',
                 'review-form-title': 'Leave a review',
                 'review-form-name': 'Your name *',
+                'review-name-placeholder': 'Ivan Ivanov',
                 'review-form-rating': 'Rating',
                 'review-form-text': 'Your review *',
+                'review-text-placeholder': 'Share your experience...',
                 'review-form-submit': 'Send review',
+                'review-success-title': 'Thank you for your review! ⭐',
+                'review-success-text': 'Your review has been sent for moderation. It will appear after approval.',
+                'review-success-btn': 'OK',
                 'slogan': 'CREATING SPACE <br>FOR LIFE',
                 'hero-title': 'Interiors you\'ll <br>want to <span>live in</span>',
                 'hero-desc': 'Design projects for apartments, houses and offices. Creating spaces that reflect your personality.',
@@ -1338,8 +1471,11 @@
                 'contact-subtitle': 'Leave a request and I will contact you soon',
                 'contact-info-title': 'Contacts',
                 'form-name': 'Your name *',
+                'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Phone *',
+                'form-phone-placeholder': '+7 (999) 123-45-67',
                 'form-message': 'Message',
+                'form-message-placeholder': 'Tell about your project...',
                 'form-submit': 'Send',
                 'success-title': 'Thank you for your request! 🎉',
                 'success-text': 'I will contact you soon to discuss the project.',
@@ -1356,9 +1492,14 @@
                 'reviews-subtitle': 'Ce qu\'ils disent de mon travail',
                 'review-form-title': 'Laisser un avis',
                 'review-form-name': 'Votre nom *',
+                'review-name-placeholder': 'Ivan Ivanov',
                 'review-form-rating': 'Note',
                 'review-form-text': 'Votre avis *',
+                'review-text-placeholder': 'Partagez votre expérience...',
                 'review-form-submit': 'Envoyer l\'avis',
+                'review-success-title': 'Merci pour votre avis ! ⭐',
+                'review-success-text': 'Votre avis a été envoyé pour modération. Il apparaîtra après approbation.',
+                'review-success-btn': 'OK',
                 'slogan': 'CRÉER UN ESPACE <br>POUR LA VIE',
                 'hero-title': 'Des intérieurs où <br>on a envie de <span>vivre</span>',
                 'hero-desc': 'Projets de design pour appartements, maisons et bureaux. Créer des espaces qui reflètent votre personnalité.',
@@ -1382,8 +1523,11 @@
                 'contact-subtitle': 'Laissez une demande et je vous contacterai bientôt',
                 'contact-info-title': 'Contacts',
                 'form-name': 'Votre nom *',
+                'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Téléphone *',
+                'form-phone-placeholder': '+7 (999) 123-45-67',
                 'form-message': 'Message',
+                'form-message-placeholder': 'Parlez de votre projet...',
                 'form-submit': 'Envoyer',
                 'success-title': 'Merci pour votre demande ! 🎉',
                 'success-text': 'Je vous contacterai bientôt pour discuter du projet.',
@@ -1400,9 +1544,14 @@
                 'reviews-subtitle': 'Was sie über meine Arbeit sagen',
                 'review-form-title': 'Bewertung hinterlassen',
                 'review-form-name': 'Ihr Name *',
+                'review-name-placeholder': 'Ivan Ivanov',
                 'review-form-rating': 'Bewertung',
                 'review-form-text': 'Ihre Bewertung *',
+                'review-text-placeholder': 'Teilen Sie Ihre Erfahrung...',
                 'review-form-submit': 'Bewertung senden',
+                'review-success-title': 'Vielen Dank für Ihre Bewertung! ⭐',
+                'review-success-text': 'Ihre Bewertung wurde zur Moderation gesendet. Sie wird nach der Genehmigung angezeigt.',
+                'review-success-btn': 'OK',
                 'slogan': 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
                 'hero-title': 'Innenräume, in denen <br>man <span>leben</span> möchte',
                 'hero-desc': 'Designprojekte für Wohnungen, Häuser und Büros. Schaffung von Räumen, die Ihre Persönlichkeit widerspiegeln.',
@@ -1426,8 +1575,11 @@
                 'contact-subtitle': 'Hinterlassen Sie eine Anfrage und ich melde mich bald bei Ihnen',
                 'contact-info-title': 'Kontakte',
                 'form-name': 'Ihr Name *',
+                'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Telefon *',
+                'form-phone-placeholder': '+7 (999) 123-45-67',
                 'form-message': 'Nachricht',
+                'form-message-placeholder': 'Erzählen Sie von Ihrem Projekt...',
                 'form-submit': 'Senden',
                 'success-title': 'Vielen Dank für Ihre Anfrage! 🎉',
                 'success-text': 'Ich werde mich bald mit Ihnen in Verbindung setzen, um das Projekt zu besprechen.',
@@ -1444,9 +1596,14 @@
                 'reviews-subtitle': 'Що говорять про мою роботу',
                 'review-form-title': 'Залишити відгук',
                 'review-form-name': 'Ваше ім\'я *',
+                'review-name-placeholder': 'Іван Іванов',
                 'review-form-rating': 'Оцінка',
                 'review-form-text': 'Ваш відгук *',
+                'review-text-placeholder': 'Поділіться враженням про роботу...',
                 'review-form-submit': 'Надіслати відгук',
+                'review-success-title': 'Дякуємо за ваш відгук! ⭐',
+                'review-success-text': 'Відгук надіслано на перевірку. Після схвалення він з\'явиться в каруселі.',
+                'review-success-btn': 'Добре',
                 'slogan': 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
                 'hero-title': 'Інтер\'єри, в яких <br>хочеться <span>жити</span>',
                 'hero-desc': 'Дизайн-проекти для квартир, будинків та офісів. Створюю простір, який відображає вашу індивідуальність.',
@@ -1470,8 +1627,11 @@
                 'contact-subtitle': 'Залиште заявку, і я зв\'яжуся з вами найближчим часом',
                 'contact-info-title': 'Контакти',
                 'form-name': 'Ваше ім\'я *',
+                'form-name-placeholder': 'Іван Іванов',
                 'form-phone': 'Телефон *',
+                'form-phone-placeholder': '+7 (999) 123-45-67',
                 'form-message': 'Повідомлення',
+                'form-message-placeholder': 'Розкажіть про ваш проект...',
                 'form-submit': 'Відправити',
                 'success-title': 'Дякуємо за вашу заявку! 🎉',
                 'success-text': 'Найближчим часом я зв\'яжуся з вами для обговорення проекту.',
@@ -1515,7 +1675,7 @@
                 grid.innerHTML =
                     `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#6a6a6a;">
                 <i class="fas fa-images" style="font-size:48px; opacity:0.3; margin-bottom:12px;"></i>
-                <p>Проектов пока нет</p>
+                <p data-lang="no-projects">Проектов пока нет</p>
             </div>`;
                 return;
             }
@@ -1526,7 +1686,7 @@
                 return `
                 <div class="portfolio-item" onclick="openProject('${p.id}')">
                     <img src="${imgSrc}" alt="${p.title}" loading="lazy">
-                    <div class="view-btn"><i class="fas fa-eye"></i> Смотреть</div>
+                    <div class="view-btn" data-lang="view-btn">Смотреть</div>
                     <div class="overlay">
                         <h4>${p.title}</h4>
                         <p>${p.category}</p>
@@ -1576,7 +1736,7 @@
         }
 
         // =====================================================
-        // ЗАГРУЗКА ОТЗЫВОВ (только одобренные)
+        // ЗАГРУЗКА ОТЗЫВОВ
         // =====================================================
         async function loadReviews() {
             try {
@@ -1607,8 +1767,8 @@
                     `<div class="carousel-slide" style="min-width:100%;">
                     <div style="padding:40px; text-align:center; color:#7f8c8d;">
                         <i class="fas fa-comment-dots" style="font-size:48px; opacity:0.3; margin-bottom:16px;"></i>
-                        <p style="font-size:18px;">Отзывов пока нет</p>
-                        <p style="font-size:14px;margin-top:6px;">Будьте первым!</p>
+                        <p style="font-size:18px;" data-lang="no-reviews">Отзывов пока нет</p>
+                        <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Будьте первым!</p>
                     </div>
                 </div>`;
                 dots.innerHTML = '';
@@ -1626,7 +1786,7 @@
                         <div class="review-stars">${stars}</div>
                         <div class="review-text">"${r.text}"</div>
                         <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
-                        <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
+                        <div class="review-verified" data-lang="verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
                     </div>
                 `;
             });
@@ -1711,13 +1871,31 @@
                     date: new Date().toISOString(),
                     status: 'pending'
                 });
-                alert('✅ Спасибо за отзыв! Он будет опубликован после проверки.');
                 document.getElementById('reviewName').value = '';
                 document.getElementById('reviewText').value = '';
                 document.getElementById('reviewRating').value = '5';
+
+                // ПОКАЗЫВАЕМ МОДАЛКУ УСПЕШНОГО ОТЗЫВА
+                document.getElementById('reviewSuccessModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
             } catch (e) {
                 console.error('Ошибка отправки отзыва:', e);
                 alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+            }
+        });
+
+        // =====================================================
+        // ЗАКРЫТИЕ МОДАЛКИ УСПЕШНОГО ОТЗЫВА
+        // =====================================================
+        document.getElementById('reviewSuccessOkBtn').addEventListener('click', function() {
+            document.getElementById('reviewSuccessModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('reviewSuccessModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
 
@@ -1769,10 +1947,12 @@
         function setLanguage(lang) {
             currentLang = lang;
 
+            // Обновляем десктопный и мобильный селекторы
             document.querySelectorAll('.lang-selector button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
+            // Обновляем все элементы с data-lang
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.dataset.lang;
                 if (translations[lang] && translations[lang][key] !== undefined) {
@@ -1789,12 +1969,41 @@
                 }
             });
 
+            // Обновляем кнопки фильтра отдельно
             document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
                 const filterKey = 'filter-' + btn.dataset.filter;
                 if (translations[lang] && translations[lang][filterKey]) {
                     btn.textContent = translations[lang][filterKey];
                 }
             });
+
+            // Обновляем кнопку "Смотреть" в портфолио
+            document.querySelectorAll('.portfolio-item .view-btn').forEach(el => {
+                const key = 'view-btn';
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            // Обновляем тексты "Отзывов пока нет" и "Будьте первым"
+            const noReviews = document.querySelector('[data-lang="no-reviews"]');
+            const beFirst = document.querySelector('[data-lang="be-first"]');
+            const verified = document.querySelector('[data-lang="verified"]');
+            if (noReviews && translations[lang]['no-reviews']) {
+                noReviews.textContent = translations[lang]['no-reviews'];
+            }
+            if (beFirst && translations[lang]['be-first']) {
+                beFirst.textContent = translations[lang]['be-first'];
+            }
+            if (verified && translations[lang]['verified']) {
+                verified.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[lang]['verified']}`;
+            }
+
+            // Обновляем "Проектов пока нет"
+            const noProjects = document.querySelector('[data-lang="no-projects"]');
+            if (noProjects && translations[lang]['no-projects']) {
+                noProjects.textContent = translations[lang]['no-projects'];
+            }
 
             localStorage.setItem('designer_lang', lang);
         }
@@ -1853,6 +2062,10 @@
                 closeProject();
                 if (document.getElementById('successModal').classList.contains('active')) {
                     document.getElementById('successModal').classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                if (document.getElementById('reviewSuccessModal').classList.contains('active')) {
+                    document.getElementById('reviewSuccessModal').classList.remove('active');
                     document.body.style.overflow = '';
                 }
                 closeMobileMenu();
