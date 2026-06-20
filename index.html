@@ -56,7 +56,7 @@
             gap: 20px;
         }
         .logo img {
-            height: 70px;
+            height: 150px;
             width: auto;
             display: block;
         }
@@ -586,12 +586,14 @@
             transition: transform 0.5s ease;
             padding: 30px 20px;
         }
+
+        /* ===== ИСПРАВЛЕННАЯ КАРУСЕЛЬ — ТЕКСТ ПЕРЕНЕСЁН ===== */
         .carousel-slide {
             min-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
+            text-align: left;
             padding: 10px 20px;
         }
         .carousel-slide .avatar-placeholder {
@@ -612,29 +614,40 @@
             font-size: 20px;
             font-weight: 700;
             color: #1e2a3a;
+            margin-bottom: 4px;
+            text-align: center;
         }
         .carousel-slide .review-stars {
             font-size: 22px;
             margin: 4px 0 8px;
             color: #f39c12;
+            text-align: center;
         }
         .carousel-slide .review-text {
             font-size: 16px;
             color: #5a6e7e;
             line-height: 1.7;
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
             font-style: italic;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            text-align: left;
+            padding: 0 10px;
+            width: 100%;
         }
         .carousel-slide .review-date {
             font-size: 13px;
             color: #95a5a6;
             margin-top: 6px;
+            text-align: center;
         }
         .carousel-slide .review-verified {
             font-size: 13px;
             color: #27ae60;
             margin-top: 4px;
+            text-align: center;
         }
 
         .carousel-btn {
@@ -1029,13 +1042,14 @@
                 font-size: 22px;
             }
             .logo img {
-                height: 50px;
+                height: 150px;
             }
             header {
                 height: 70px;
             }
             .carousel-slide .review-text {
                 font-size: 14px;
+                padding: 0 5px;
             }
             .carousel-btn {
                 width: 34px;
@@ -1090,13 +1104,14 @@
                 font-size: 15px;
             }
             .logo img {
-                height: 40px;
+                height: 150px;
             }
             header {
                 height: 60px;
             }
             .carousel-slide .review-text {
                 font-size: 13px;
+                padding: 0 5px;
             }
             .carousel-btn {
                 width: 30px;
@@ -1735,7 +1750,7 @@
         }
 
         // =====================================================
-        // ЗАГРУЗКА ОТЗЫВОВ (ИСПРАВЛЕНО!)
+        // ЗАГРУЗКА ОТЗЫВОВ
         // =====================================================
         async function loadReviews() {
             try {
@@ -1759,9 +1774,6 @@
             }
         }
 
-        // =====================================================
-        // ОТРИСОВКА КАРУСЕЛИ (С ПРИНУДИТЕЛЬНЫМ ОБНОВЛЕНИЕМ)
-        // =====================================================
         function renderCarousel(reviews) {
             const track = document.getElementById('carouselTrack');
             const dots = document.getElementById('carouselDots');
@@ -1799,7 +1811,6 @@
             });
             track.innerHTML = html;
 
-            // Обновляем перевод для "Подтверждённый клиент"
             const verifiedEl = document.querySelector('[data-lang="verified"]');
             if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
                 verifiedEl.innerHTML =
@@ -1982,7 +1993,6 @@
                 }
             });
 
-            // Обновляем "Смотреть"
             document.querySelectorAll('.portfolio-item .view-btn').forEach(el => {
                 const key = 'view-btn';
                 if (translations[lang] && translations[lang][key]) {
@@ -1990,7 +2000,6 @@
                 }
             });
 
-            // Обновляем тексты в карусели
             const noReviews = document.querySelector('[data-lang="no-reviews"]');
             const beFirst = document.querySelector('[data-lang="be-first"]');
             const verified = document.querySelector('[data-lang="verified"]');
@@ -2097,7 +2106,6 @@
 
         loadPortfolio();
 
-        // Загружаем отзывы с задержкой, чтобы точно обновить кеш
         setTimeout(() => {
             loadReviews();
         }, 500);
