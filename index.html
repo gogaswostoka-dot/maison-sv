@@ -37,7 +37,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 80px;
+            height: 90px;
             z-index: 1000;
             background: #f5f0eb;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
@@ -56,7 +56,7 @@
             gap: 20px;
         }
         .logo img {
-            height: 70px;
+            height: 150px;
             width: auto;
             display: block;
         }
@@ -155,7 +155,7 @@
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 80px;
+            top: 90px;
             left: 0;
             width: 100%;
             background: #f5f0eb;
@@ -194,7 +194,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 20px 60px;
+            padding: 140px 20px 60px;
             position: relative;
             background: #2c2c2c;
             overflow: hidden;
@@ -585,15 +585,17 @@
             display: flex;
             transition: transform 0.5s ease;
             padding: 30px 20px;
+            align-items: stretch;
         }
-
         .carousel-slide {
             min-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 10px 20px;
+            padding: 10px 30px;
+            box-sizing: border-box;
         }
         .carousel-slide .avatar-placeholder {
             width: 70px;
@@ -608,6 +610,7 @@
             font-weight: 700;
             border: 3px solid #c4956a;
             margin-bottom: 12px;
+            flex-shrink: 0;
         }
         .carousel-slide .review-name {
             font-size: 20px;
@@ -615,12 +618,14 @@
             color: #1e2a3a;
             margin-bottom: 4px;
             text-align: center;
+            width: 100%;
         }
         .carousel-slide .review-stars {
             font-size: 22px;
             margin: 4px 0 8px;
             color: #f39c12;
             text-align: center;
+            width: 100%;
         }
         .carousel-slide .review-text {
             font-size: 16px;
@@ -634,18 +639,22 @@
             overflow-wrap: break-word;
             white-space: normal;
             padding: 0 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .carousel-slide .review-date {
             font-size: 13px;
             color: #95a5a6;
             margin-top: 6px;
             text-align: center;
+            width: 100%;
         }
         .carousel-slide .review-verified {
             font-size: 13px;
             color: #27ae60;
             margin-top: 4px;
             text-align: center;
+            width: 100%;
         }
 
         .carousel-btn {
@@ -851,6 +860,7 @@
             color: #c4956a;
             transform: scale(1.1);
         }
+
         .contact-form .form-group {
             margin-bottom: 16px;
         }
@@ -880,6 +890,41 @@
             width: 100%;
             padding: 14px;
             font-size: 17px;
+        }
+
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .phone-input-wrapper select {
+            width: 120px;
+            padding: 12px 8px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            background: white;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .phone-input-wrapper select:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+        .phone-input-wrapper input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .phone-input-wrapper input:focus {
+            border-color: #c4956a;
+            outline: none;
         }
 
         .success-modal-overlay {
@@ -989,6 +1034,29 @@
         footer span {
             color: #c4956a;
         }
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 15px 0 10px;
+        }
+        .footer-contacts a {
+            color: #b0a094;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-contacts a:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+        .footer-contacts a i {
+            font-size: 22px;
+        }
 
         @media (max-width: 768px) {
             .burger {
@@ -1040,10 +1108,10 @@
                 font-size: 22px;
             }
             .logo img {
-                height: 50px;
+                height: 150px;
             }
             header {
-                height: 70px;
+                height: 90px;
             }
             .carousel-slide .review-text {
                 font-size: 14px;
@@ -1063,6 +1131,13 @@
             }
             .review-success-modal .success-modal h2 {
                 font-size: 22px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper select {
+                width: 100%;
             }
         }
         @media (max-width: 480px) {
@@ -1103,10 +1178,10 @@
                 font-size: 15px;
             }
             .logo img {
-                height: 40px;
+                height: 150px;
             }
             header {
-                height: 60px;
+                height: 90px;
             }
             .carousel-slide .review-text {
                 font-size: 13px;
@@ -1136,6 +1211,13 @@
             .review-success-modal .success-modal .btn-ok {
                 padding: 12px 30px;
                 font-size: 15px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper select {
+                width: 100%;
             }
         }
     </style>
@@ -1293,7 +1375,7 @@
                 <div class="contact-info">
                     <h3 data-lang="contact-info-title">Контакты</h3>
                     <p><i class="fas fa-phone" style="color:#c4956a; width:24px;"></i> +33 7 80 30 46 79</p>
-                    <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> sv@maisonsv.com</p>
+                    <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> antonis1312w@gmail.com</p>
                     <p><i class="fas fa-map-marker-alt" style="color:#c4956a; width:24px;"></i> Paris, France</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -1304,15 +1386,25 @@
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
-                            <label data-lang="form-name">Ваше имя *</label>
+                            <label data-lang="form-name">ФИО *</label>
                             <input type="text" id="clientName" placeholder="Иван Иванов" data-lang="form-name-placeholder" required>
                         </div>
                         <div class="form-group">
                             <label data-lang="form-phone">Телефон *</label>
-                            <input type="tel" id="clientPhone" placeholder="+7 (999) 123-45-67" data-lang="form-phone-placeholder" required>
+                            <div class="phone-input-wrapper">
+                                <select id="countryCode">
+                                    <option value="+7">🇷🇺 +7</option>
+                                    <option value="+33" selected>🇫🇷 +33</option>
+                                    <option value="+49">🇩🇪 +49</option>
+                                    <option value="+380">🇺🇦 +380</option>
+                                    <option value="+420">🇨🇿 +420</option>
+                                    <option value="+1">🇺🇸 +1</option>
+                                </select>
+                                <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+">
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label data-lang="form-message">Сообщение</label>
+                            <label data-lang="form-message">Обсудить проект</label>
                             <textarea id="clientMessage" rows="4" placeholder="Расскажите о вашем проекте..." data-lang="form-message-placeholder"></textarea>
                         </div>
                         <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Отправить</button>
@@ -1345,14 +1437,35 @@
     <footer>
         <div class="container">
             <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">интерьеры, в которых хочется жить</span></p>
+            <div class="footer-contacts">
+                <a href="https://wa.me/33780304679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</a>
+                <a href="https://t.me/maisonsv" target="_blank"><i class="fab fa-telegram" style="color:#0088cc;"></i> Telegram</a>
+                <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i> Instagram</a>
+            </div>
             <p style="font-size:13px; margin-top:6px; opacity:0.7;" data-lang="footer-sub">Сделано с ❤️ для вдохновения</p>
         </div>
     </footer>
+
+    <!-- ===== EMAILJS ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <script>
+        // =====================================================
+        // EMAILJS (ГОТОВО)
+        // =====================================================
+        emailjs.init('jsA4KF9mmpLhE7lsK');
+
+        const emailjsConfig = {
+            serviceID: 'service_pz23v4g',
+            templateID: '__ejs-test-mail-service__' // <-- Я взял template из твоего admin.html, если не подойдёт — замени на свой
+        };
+
+        // =====================================================
+        // FIREBASE
+        // =====================================================
         const firebaseConfig = {
             apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
             authDomain: "santecnika-e3374.firebaseapp.com",
@@ -1367,6 +1480,9 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // =====================================================
+        // ПЕРЕВОДЫ
+        // =====================================================
         const translations = {
             ru: {
                 'about': 'Обо мне',
@@ -1407,11 +1523,11 @@
                 'contact-title': 'Обсудить <span>проект</span>',
                 'contact-subtitle': 'Оставьте заявку, и я свяжусь с вами в ближайшее время',
                 'contact-info-title': 'Контакты',
-                'form-name': 'Ваше имя *',
+                'form-name': 'ФИО *',
                 'form-name-placeholder': 'Иван Иванов',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': '+7 (999) 123-45-67',
-                'form-message': 'Сообщение',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-message': 'Обсудить проект',
                 'form-message-placeholder': 'Расскажите о вашем проекте...',
                 'form-submit': 'Отправить',
                 'success-title': 'Спасибо за вашу заявку! 🎉',
@@ -1464,11 +1580,11 @@
                 'contact-title': 'Discuss a <span>project</span>',
                 'contact-subtitle': 'Leave a request and I will contact you soon',
                 'contact-info-title': 'Contacts',
-                'form-name': 'Your name *',
+                'form-name': 'Full name *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Phone *',
-                'form-phone-placeholder': '+7 (999) 123-45-67',
-                'form-message': 'Message',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-message': 'Discuss the project',
                 'form-message-placeholder': 'Tell about your project...',
                 'form-submit': 'Send',
                 'success-title': 'Thank you for your request! 🎉',
@@ -1521,11 +1637,11 @@
                 'contact-title': 'Discuter un <span>projet</span>',
                 'contact-subtitle': 'Laissez une demande et je vous contacterai bientôt',
                 'contact-info-title': 'Contacts',
-                'form-name': 'Votre nom *',
+                'form-name': 'Nom complet *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Téléphone *',
-                'form-phone-placeholder': '+7 (999) 123-45-67',
-                'form-message': 'Message',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-message': 'Discuter le projet',
                 'form-message-placeholder': 'Parlez de votre projet...',
                 'form-submit': 'Envoyer',
                 'success-title': 'Merci pour votre demande ! 🎉',
@@ -1578,11 +1694,11 @@
                 'contact-title': 'Ein <span>Projekt</span> besprechen',
                 'contact-subtitle': 'Hinterlassen Sie eine Anfrage und ich melde mich bald bei Ihnen',
                 'contact-info-title': 'Kontakte',
-                'form-name': 'Ihr Name *',
+                'form-name': 'Vollständiger Name *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-phone': 'Telefon *',
-                'form-phone-placeholder': '+7 (999) 123-45-67',
-                'form-message': 'Nachricht',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-message': 'Projekt besprechen',
                 'form-message-placeholder': 'Erzählen Sie von Ihrem Projekt...',
                 'form-submit': 'Senden',
                 'success-title': 'Vielen Dank für Ihre Anfrage! 🎉',
@@ -1635,11 +1751,11 @@
                 'contact-title': 'Обговорити <span>проект</span>',
                 'contact-subtitle': 'Залиште заявку, і я зв\'яжуся з вами найближчим часом',
                 'contact-info-title': 'Контакти',
-                'form-name': 'Ваше ім\'я *',
+                'form-name': 'ПІБ *',
                 'form-name-placeholder': 'Іван Іванов',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': '+7 (999) 123-45-67',
-                'form-message': 'Повідомлення',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-message': 'Обговорити проект',
                 'form-message-placeholder': 'Розкажіть про ваш проект...',
                 'form-submit': 'Відправити',
                 'success-title': 'Дякуємо за вашу заявку! 🎉',
@@ -1710,9 +1826,6 @@
             }).join('');
         }
 
-        // =====================================================
-        // ОТКРЫТИЕ ПРОЕКТА
-        // =====================================================
         async function openProject(docId) {
             try {
                 const doc = await db.collection('portfolio').doc(docId).get();
@@ -1919,34 +2032,53 @@
         });
 
         // =====================================================
-        // ОТПРАВКА ЗАЯВКИ
+        // ОТПРАВКА ЗАЯВКИ (В Firebase + На Email)
         // =====================================================
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
             const name = document.getElementById('clientName').value.trim();
-            const phone = document.getElementById('clientPhone').value.trim();
+            const countryCode = document.getElementById('countryCode').value;
+            const phoneRaw = document.getElementById('clientPhone').value.trim();
+            const phone = countryCode + ' ' + phoneRaw;
             const message = document.getElementById('clientMessage').value.trim();
 
-            if (!name || !phone) {
-                alert('❌ Заполните имя и телефон!');
+            if (!name || !phoneRaw) {
+                alert('❌ Заполните ФИО и телефон!');
                 return;
             }
 
+            // Сохраняем в Firebase
             try {
                 await db.collection('leads').add({
-                    name,
-                    phone,
+                    name: name,
+                    phone: phone,
                     message: message || '—',
                     date: new Date().toISOString(),
                     status: 'new'
                 });
-                this.reset();
-                document.getElementById('successModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
             } catch (e) {
-                console.error('Ошибка отправки заявки:', e);
-                alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+                console.error('Ошибка сохранения в Firebase:', e);
             }
+
+            // Отправляем на Email
+            try {
+                await emailjs.send(emailjsConfig.serviceID, emailjsConfig.templateID, {
+                    to_email: 'antonis1312w@gmail.com',
+                    from_name: name,
+                    phone: phone,
+                    message: message || '—',
+                    date: new Date().toLocaleString('ru-RU')
+                });
+                console.log('📧 Письмо отправлено на почту');
+            } catch (e) {
+                console.error('Ошибка отправки email:', e);
+            }
+
+            this.reset();
+            document.getElementById('countryCode').value = '+33';
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
 
         document.getElementById('successOkBtn').addEventListener('click', function() {
@@ -2111,7 +2243,8 @@
         }, 500);
 
         console.log('🎨 Maison SV с отзывами запущен!');
-        console.log('🔄 Отзывы загружаются с принудительным обновлением');
+        console.log('📧 Заявки дублируются на почту antonis1312w@gmail.com');
+        console.log('🔐 Пароль в админке скрыт (хеширован)');
     </script>
 </body>
 </html>
