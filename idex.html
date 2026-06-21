@@ -1,0 +1,2390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison SV - Интерьер-дизайн</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f6f3;
+            color: #2c2c2c;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title,
+        .about-text h3,
+        .project-title,
+        .hero-slogan {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: #f5f0eb;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+        .logo img {
+            height: 150px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: nowrap;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .nav-menu a:hover {
+            color: #c4956a;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c4956a;
+            transition: 0.3s;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 8px;
+            border-radius: 30px;
+            margin-left: 5px;
+        }
+        .lang-selector button {
+            background: none;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6a6a6a;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-selector button:hover {
+            background: rgba(196, 149, 106, 0.2);
+            color: #c4956a;
+        }
+        .lang-selector button.active {
+            background: #c4956a;
+            color: white;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 1001;
+        }
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #2c2c2c;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: #f5f0eb;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+            border-bottom: 2px solid #e8e0d8;
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 0;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #eeeae5;
+        }
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+        .mobile-menu .lang-selector {
+            margin: 10px 0 0 0;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 60px;
+            position: relative;
+            background: #2c2c2c;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 44, 44, 0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+        .hero-slogan {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #c4956a;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .hero-content h1 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: white;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .hero-content h1 span {
+            color: #c4956a;
+        }
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            font-weight: 300;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #c4956a;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover {
+            background: #b0855a;
+            transform: scale(1.02);
+        }
+
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #eeeae5;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 38px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+            letter-spacing: 2px;
+        }
+        .section-title span {
+            color: #c4956a;
+            font-weight: 600;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #6a6a6a;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+        .about-text h3 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .about-text .designer-title {
+            color: #c4956a;
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .about-text p {
+            color: #6a6a6a;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        .about-text .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .about-text .stats div {
+            text-align: center;
+        }
+        .about-text .stats .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #c4956a;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .about-text .stats .label {
+            font-size: 13px;
+            color: #6a6a6a;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .portfolio-filter button {
+            padding: 8px 24px;
+            border: 2px solid #dce5ed;
+            border-radius: 30px;
+            background: white;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+            color: #2c2c2c;
+            font-family: 'Inter', sans-serif;
+        }
+        .portfolio-filter button:hover {
+            border-color: #c4956a;
+        }
+        .portfolio-filter button.active {
+            background: #c4956a;
+            color: white;
+            border-color: #c4956a;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: #eeeae5;
+            transition: 0.3s;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        .portfolio-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+            color: white;
+            transform: translateY(100%);
+            transition: 0.4s;
+        }
+        .portfolio-item:hover .overlay {
+            transform: translateY(0);
+        }
+        .portfolio-item .overlay h4 {
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+        }
+        .portfolio-item .overlay p {
+            font-size: 13px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .portfolio-item .view-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(196, 149, 106, 0.9);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .portfolio-item:hover .view-btn {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .project-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .project-modal-overlay.active {
+            display: flex;
+        }
+        .project-modal {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: fadeUp 0.4s ease;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .project-modal .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #888;
+            background: none;
+            border: none;
+            transition: 0.3s;
+        }
+        .project-modal .close-modal:hover {
+            color: #c0392b;
+            transform: rotate(90deg);
+        }
+        .project-modal .project-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .project-modal .project-images img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            max-height: 250px;
+        }
+        .project-modal .project-images img:first-child {
+            grid-column: 1 / -1;
+            max-height: 350px;
+        }
+        .project-modal .project-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .project-modal .project-category {
+            color: #c4956a;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .project-modal .project-description {
+            color: #6a6a6a;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .project-modal .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #f8f6f3;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .project-modal .project-details .detail {
+            text-align: center;
+        }
+        .project-modal .project-details .detail .label {
+            font-size: 12px;
+            color: #6a6a6a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .project-modal .project-details .detail .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c2c2c;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* ===== КАРУСЕЛЬ ОТЗЫВОВ (ИСПРАВЛЕНА) ===== */
+        .reviews-section {
+            background: #f8f6f3;
+            padding: 80px 0;
+        }
+        .reviews-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            border-radius: 20px;
+            background: white;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            min-height: 250px;
+            padding: 0 50px;
+        }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            padding: 30px 0;
+            align-items: stretch;
+            width: 100%;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 20px 30px !important;
+            box-sizing: border-box !important;
+            flex-shrink: 0;
+        }
+        .carousel-slide .avatar-placeholder {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #0b2a4a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            border: 3px solid #c4956a;
+            margin: 0 auto 12px;
+            flex-shrink: 0;
+        }
+        .carousel-slide .review-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e2a3a;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .carousel-slide .review-stars {
+            font-size: 22px;
+            margin: 4px 0 8px;
+            color: #f39c12;
+            text-align: center;
+        }
+        .carousel-slide .review-text {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+            font-style: italic;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .carousel-slide .review-date {
+            font-size: 13px;
+            color: #95a5a6;
+            margin-top: 6px;
+            text-align: center;
+        }
+        .carousel-slide .review-verified {
+            font-size: 13px;
+            color: #27ae60;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(44, 44, 44, 0.8);
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background: #2c2c2c;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-btn.prev {
+            left: 5px;
+        }
+        .carousel-btn.next {
+            right: 5px;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding-bottom: 20px;
+        }
+        .carousel-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dce5ed;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .carousel-dots .dot.active {
+            background: #c4956a;
+            transform: scale(1.2);
+        }
+
+        .review-form {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+        .review-form h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .review-form .form-group {
+            margin-bottom: 14px;
+        }
+        .review-form .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .review-form .form-group input,
+        .review-form .form-group textarea,
+        .review-form .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ed;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+        .review-form .form-group input:focus,
+        .review-form .form-group textarea:focus,
+        .review-form .form-group select:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+        .btn-submit-review {
+            background: #c4956a;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn-submit-review:hover {
+            background: #b0855a;
+            transform: scale(1.02);
+        }
+
+        .review-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3001;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .review-success-modal.active {
+            display: flex;
+        }
+        .review-success-modal .success-modal {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 60px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .review-success-modal .success-modal .icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 16px;
+            animation: scaleIn 0.6s ease 0.2s both;
+        }
+        .review-success-modal .success-modal .icon i {
+            background: #e8f8f0;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        .review-success-modal .success-modal h2 {
+            font-size: 28px;
+            color: #1e2a3a;
+            margin-bottom: 12px;
+            animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .review-success-modal .success-modal p {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            animation: fadeUp 0.5s ease 0.4s both;
+        }
+        .review-success-modal .success-modal .btn-ok {
+            background: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+        .review-success-modal .success-modal .btn-ok:hover {
+            background: #3d3d3d;
+            transform: scale(1.02);
+        }
+
+        /* ===== КОНТАКТЫ ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .contact-info h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+        }
+        .contact-info p {
+            color: #6a6a6a;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        /* ===== КАСТОМНЫЙ СЕЛЕКТОР С ФЛАГАМИ ===== */
+        .custom-select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .custom-select {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            padding: 12px 30px 12px 40px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            background: white;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a6a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        .custom-select:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+        .custom-select option {
+            padding: 6px 8px;
+        }
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .phone-input-wrapper .flag-select {
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .phone-input-wrapper input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .phone-input-wrapper input:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+
+        .email-input-wrapper input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .email-input-wrapper input:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+
+        /* ===== СОЦИАЛЬНЫЕ ИКОНКИ ===== */
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 20px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 22px;
+            color: white;
+            transition: 0.3s;
+            text-decoration: none;
+            background: #2c2c2c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .social-icon.whatsapp {
+            background: #25d366;
+        }
+        .social-icon.whatsapp:hover {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        .social-icon.telegram {
+            background: #0088cc;
+        }
+        .social-icon.telegram:hover {
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+        }
+        .social-icon.instagram {
+            background: #e4405f;
+        }
+        .social-icon.instagram:hover {
+            box-shadow: 0 8px 25px rgba(228, 64, 95, 0.4);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 16px;
+        }
+        .contact-form .form-group label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        .contact-form .form-group input,
+        .contact-form .form-group textarea,
+        .contact-form .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .contact-form .form-group input:focus,
+        .contact-form .form-group textarea:focus,
+        .contact-form .form-group select:focus {
+            border-color: #c4956a;
+            outline: none;
+        }
+        .contact-form .btn-submit {
+            width: 100%;
+            padding: 14px;
+            font-size: 17px;
+        }
+
+        .success-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .success-modal-overlay.active {
+            display: flex;
+        }
+        .success-modal {
+            background: white;
+            border-radius: 30px;
+            padding: 50px 60px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .success-modal .icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 16px;
+            animation: scaleIn 0.6s ease 0.2s both;
+        }
+        .success-modal .icon i {
+            background: #e8f8f0;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        .success-modal h2 {
+            font-size: 28px;
+            color: #1e2a3a;
+            margin-bottom: 12px;
+            animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .success-modal p {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            animation: fadeUp 0.5s ease 0.4s both;
+        }
+        .success-modal .btn-ok {
+            background: #2c2c2c;
+            color: white;
+            border: none;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+        .success-modal .btn-ok:hover {
+            background: #3d3d3d;
+            transform: scale(1.02);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        footer {
+            background: #2c2c2c;
+            color: #b0a094;
+            text-align: center;
+            padding: 30px 0;
+        }
+        footer span {
+            color: #c4956a;
+        }
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 15px 0 10px;
+        }
+        .footer-contacts a {
+            color: #b0a094;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-contacts a:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+        .footer-contacts a i {
+            font-size: 22px;
+        }
+
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .hero-slogan {
+                font-size: 32px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            .project-modal {
+                padding: 20px;
+            }
+            .project-modal .project-images {
+                grid-template-columns: 1fr;
+            }
+            .project-modal .project-images img:first-child {
+                max-height: 200px;
+            }
+            .project-modal .project-images img {
+                max-height: 150px;
+            }
+            .project-modal .project-title {
+                font-size: 24px;
+            }
+            .project-modal .project-details {
+                grid-template-columns: 1fr 1fr;
+            }
+            .success-modal {
+                padding: 35px 25px;
+            }
+            .success-modal .icon {
+                font-size: 52px;
+            }
+            .success-modal h2 {
+                font-size: 22px;
+            }
+            .logo img {
+                height: 150px;
+            }
+            header {
+                height: 90px;
+            }
+            .carousel-slide .review-text {
+                font-size: 14px;
+                max-width: 95%;
+                padding: 0 5px;
+            }
+            .carousel-btn {
+                width: 34px;
+                height: 34px;
+                font-size: 14px;
+            }
+            .review-success-modal .success-modal {
+                padding: 35px 25px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 52px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 22px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper .flag-select {
+                width: 100%;
+            }
+            .custom-select-wrapper {
+                width: 100%;
+            }
+            .reviews-carousel {
+                padding: 0 30px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-slogan {
+                font-size: 22px;
+            }
+            .hero-content h1 {
+                font-size: 22px;
+            }
+            .about-text .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .project-modal .project-details {
+                grid-template-columns: 1fr;
+            }
+            .success-modal {
+                padding: 25px 18px;
+            }
+            .success-modal .icon {
+                font-size: 42px;
+            }
+            .success-modal .icon i {
+                padding: 14px;
+            }
+            .success-modal h2 {
+                font-size: 19px;
+            }
+            .success-modal p {
+                font-size: 14px;
+            }
+            .success-modal .btn-ok {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+            .logo img {
+                height: 150px;
+            }
+            header {
+                height: 90px;
+            }
+            .carousel-slide .review-text {
+                font-size: 13px;
+                max-width: 100%;
+                padding: 0 5px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            .review-success-modal .success-modal {
+                padding: 25px 18px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 42px;
+            }
+            .review-success-modal .success-modal .icon i {
+                padding: 14px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 19px;
+            }
+            .review-success-modal .success-modal p {
+                font-size: 14px;
+            }
+            .review-success-modal .success-modal .btn-ok {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper .flag-select {
+                width: 100%;
+            }
+            .custom-select-wrapper {
+                width: 100%;
+            }
+            .reviews-carousel {
+                padding: 0 15px;
+                min-height: 280px;
+            }
+            .carousel-slide {
+                padding: 15px 10px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="Maison SV">
+            </div>
+            <div class="nav-menu">
+                <a href="#about" data-lang="about">Обо мне</a>
+                <a href="#portfolio" data-lang="portfolio">Портфолио</a>
+                <a href="#reviews" data-lang="reviews">Отзывы</a>
+                <a href="#contact" data-lang="contact">Контакты</a>
+                <div class="lang-selector">
+                    <button class="active" data-lang="ru">RU</button>
+                    <button data-lang="en">EN</button>
+                    <button data-lang="fr">FR</button>
+                    <button data-lang="de">DE</button>
+                    <button data-lang="uk">UA</button>
+                </div>
+            </div>
+            <button class="burger" id="burgerBtn" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#about" data-lang="about" onclick="closeMobileMenu()">Обо мне</a>
+        <a href="#portfolio" data-lang="portfolio" onclick="closeMobileMenu()">Портфолио</a>
+        <a href="#reviews" data-lang="reviews" onclick="closeMobileMenu()">Отзывы</a>
+        <a href="#contact" data-lang="contact" onclick="closeMobileMenu()">Контакты</a>
+        <div class="lang-selector">
+            <button class="active" data-lang="ru">RU</button>
+            <button data-lang="en">EN</button>
+            <button data-lang="fr">FR</button>
+            <button data-lang="de">DE</button>
+            <button data-lang="uk">UA</button>
+        </div>
+    </div>
+
+    <section class="hero" id="home">
+        <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Интерьер">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-slogan" data-lang="slogan">ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ</div>
+            <h1 data-lang="hero-title">Интерьеры, в которых <br>хочется <span>жить</span></h1>
+            <p data-lang="hero-desc">Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.</p>
+            <a href="#contact" class="btn" data-lang="hero-btn">Обсудить проект</a>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title" data-lang="about-title">Обо <span>мне</span></h2>
+            <p class="section-subtitle" data-lang="about-subtitle">Дизайнер интерьеров с 8-летним опытом</p>
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Святослава">
+                </div>
+                <div class="about-text">
+                    <h3 data-lang="designer-name">Святослава</h3>
+                    <div class="designer-title" data-lang="designer-title">Maison SV — интерьер-дизайн</div>
+                    <p data-lang="about-text-1">Я создаю интерьеры, которые становятся отражением характера и образа жизни своих владельцев. Моя философия — в гармонии функциональности и эстетики.</p>
+                    <p data-lang="about-text-2">За 8 лет работы я реализовала более 70 проектов: от уютных студий до просторных загородных домов. Каждый проект — это история, рассказанная через цвет, текстуру и свет.</p>
+                    <div class="stats">
+                        <div>
+                            <div class="number">70+</div>
+                            <div class="label" data-lang="stat-projects">Реализованных проектов</div>
+                        </div>
+                        <div>
+                            <div class="number">8 лет</div>
+                            <div class="label" data-lang="stat-experience">Опыта в дизайне</div>
+                        </div>
+                        <div>
+                            <div class="number">100%</div>
+                            <div class="label" data-lang="stat-clients">Довольных клиентов</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="portfolio">
+        <div class="container">
+            <h2 class="section-title" data-lang="portfolio-title">Мои <span>работы</span></h2>
+            <p class="section-subtitle" data-lang="portfolio-subtitle">Реализованные проекты, вдохновлённые жизнью</p>
+            <div class="portfolio-filter">
+                <button class="active" data-filter="all" data-lang="filter-all">Все</button>
+                <button data-filter="квартиры" data-lang="filter-apartments">Квартиры</button>
+                <button data-filter="дома" data-lang="filter-houses">Дома</button>
+                <button data-filter="офисы" data-lang="filter-offices">Офисы</button>
+            </div>
+            <div class="portfolio-grid" id="portfolioGrid"></div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <h2 class="section-title" data-lang="reviews-title">Отзывы <span>клиентов</span></h2>
+            <p class="section-subtitle" data-lang="reviews-subtitle">Что говорят о моей работе</p>
+
+            <div class="reviews-carousel" id="reviewsCarousel">
+                <div class="carousel-track" id="carouselTrack"></div>
+                <button class="carousel-btn prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+
+            <div class="review-form" id="reviewForm">
+                <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Оставить отзыв</h3>
+                <div class="form-group">
+                    <label data-lang="review-form-name">Ваше имя *</label>
+                    <input type="text" id="reviewName" placeholder="Иван Иванов" data-lang="review-name-placeholder">
+                </div>
+                <div class="form-group">
+                    <label data-lang="review-form-rating">Оценка</label>
+                    <select id="reviewRating">
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang="review-form-text">Ваш отзыв *</label>
+                    <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлением о работе..." data-lang="review-text-placeholder"></textarea>
+                </div>
+                <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Отправить отзыв</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="review-success-modal" id="reviewSuccessModal">
+        <div class="success-modal">
+            <div class="icon"><i class="fas fa-check-circle"></i></div>
+            <h2 data-lang="review-success-title">Спасибо за ваш отзыв! ⭐</h2>
+            <p data-lang="review-success-text">Отзыв отправлен на проверку. После одобрения он появится в карусели.</p>
+            <button class="btn-ok" id="reviewSuccessOkBtn" data-lang="review-success-btn">Хорошо</button>
+        </div>
+    </div>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-lang="contact-title">Обсудить <span>проект</span></h2>
+            <p class="section-subtitle" data-lang="contact-subtitle">Оставьте заявку, и я свяжусь с вами в ближайшее время</p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-lang="contact-info-title">Контакты</h3>
+                    <p><i class="fas fa-phone" style="color:#c4956a; width:24px;"></i> +33 7 80 30 46 79</p>
+                    <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> antonis1312w@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color:#c4956a; width:24px;"></i> Paris, France</p>
+                    <div class="social-links">
+                        <a href="https://wa.me/33780304679" target="_blank" class="social-icon whatsapp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://t.me/maisonsv" target="_blank" class="social-icon telegram" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                        <a href="https://www.instagram.com/maisonsv.design" target="_blank" class="social-icon instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label data-lang="form-name">ФИО *</label>
+                            <input type="text" id="clientName" placeholder="Иван Иванов" data-lang="form-name-placeholder" required>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-contact-type">Способ связи</label>
+                            <select id="contactType" data-lang="form-contact-type-select">
+                                <option value="phone">📞 Телефон</option>
+                                <option value="email">✉️ Email</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="phoneGroup">
+                            <label data-lang="form-phone">Телефон *</label>
+                            <div class="phone-input-wrapper">
+                                <div class="custom-select-wrapper">
+                                    <select class="flag-select" id="countryCode">
+                                        <option value="+7">🇷🇺 +7</option>
+                                        <option value="+33" selected>🇫🇷 +33</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+380">🇺🇦 +380</option>
+                                        <option value="+420">🇨🇿 +420</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                    </select>
+                                </div>
+                                <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+">
+                            </div>
+                        </div>
+                        <div class="form-group" id="emailGroup" style="display:none;">
+                            <label data-lang="form-email">Email *</label>
+                            <div class="email-input-wrapper">
+                                <input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-message">Обсудить проект</label>
+                            <textarea id="clientMessage" rows="4" placeholder="Расскажите о вашем проекте..." data-lang="form-message-placeholder"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Отправить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <button class="close-modal" id="closeProjectModal">&times;</button>
+            <div class="project-images" id="projectImages"></div>
+            <h2 class="project-title" id="projectTitle">Название проекта</h2>
+            <div class="project-category" id="projectCategory">Категория</div>
+            <div class="project-description" id="projectDescription">Описание проекта...</div>
+            <div class="project-details" id="projectDetails"></div>
+        </div>
+    </div>
+
+    <div class="success-modal-overlay" id="successModal">
+        <div class="success-modal">
+            <div class="icon"><i class="fas fa-check-circle"></i></div>
+            <h2 data-lang="success-title">Спасибо за вашу заявку! 🎉</h2>
+            <p data-lang="success-text">В ближайшее время я свяжусь с вами для обсуждения проекта.</p>
+            <button class="btn-ok" id="successOkBtn" data-lang="success-btn">Хорошо</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">интерьеры, в которых хочется жить</span></p>
+            <div class="footer-contacts">
+                <a href="https://wa.me/33780304679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</a>
+                <a href="https://t.me/maisonsv" target="_blank"><i class="fab fa-telegram" style="color:#0088cc;"></i> Telegram</a>
+                <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i> Instagram</a>
+            </div>
+            <p style="font-size:13px; margin-top:6px; opacity:0.7;" data-lang="footer-sub">Сделано с ❤️ для вдохновения</p>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // =====================================================
+        // FIREBASE
+        // =====================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
+            authDomain: "santecnika-e3374.firebaseapp.com",
+            databaseURL: "https://santecnika-e3374-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "santecnika-e3374",
+            storageBucket: "santecnika-e3374.firebasestorage.app",
+            messagingSenderId: "1083870527516",
+            appId: "1:1083870527516:web:3e93947251cdfb6ce6dfd9",
+            measurementId: "G-M0LSESGTMS"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // =====================================================
+        // ПЕРЕВОДЫ
+        // =====================================================
+        const translations = {
+            ru: {
+                'about': 'Обо мне',
+                'portfolio': 'Портфолио',
+                'reviews': 'Отзывы',
+                'contact': 'Контакты',
+                'reviews-title': 'Отзывы <span>клиентов</span>',
+                'reviews-subtitle': 'Что говорят о моей работе',
+                'review-form-title': 'Оставить отзыв',
+                'review-form-name': 'Ваше имя *',
+                'review-name-placeholder': 'Иван Иванов',
+                'review-form-rating': 'Оценка',
+                'review-form-text': 'Ваш отзыв *',
+                'review-text-placeholder': 'Поделитесь впечатлением о работе...',
+                'review-form-submit': 'Отправить отзыв',
+                'review-success-title': 'Спасибо за ваш отзыв! ⭐',
+                'review-success-text': 'Отзыв отправлен на проверку. После одобрения он появится в карусели.',
+                'review-success-btn': 'Хорошо',
+                'slogan': 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
+                'hero-title': 'Интерьеры, в которых <br>хочется <span>жить</span>',
+                'hero-desc': 'Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.',
+                'hero-btn': 'Обсудить проект',
+                'about-title': 'Обо <span>мне</span>',
+                'about-subtitle': 'Дизайнер интерьеров с 8-летним опытом',
+                'designer-name': 'Святослава',
+                'designer-title': 'Maison SV — интерьер-дизайн',
+                'about-text-1': 'Я создаю интерьеры, которые становятся отражением характера и образа жизни своих владельцев. Моя философия — в гармонии функциональности и эстетики.',
+                'about-text-2': 'За 8 лет работы я реализовала более 70 проектов: от уютных студий до просторных загородных домов. Каждый проект — это история, рассказанная через цвет, текстуру и свет.',
+                'stat-projects': 'Реализованных проектов',
+                'stat-experience': 'Опыта в дизайне',
+                'stat-clients': 'Довольных клиентов',
+                'portfolio-title': 'Мои <span>работы</span>',
+                'portfolio-subtitle': 'Реализованные проекты, вдохновлённые жизнью',
+                'filter-all': 'Все',
+                'filter-apartments': 'Квартиры',
+                'filter-houses': 'Дома',
+                'filter-offices': 'Офисы',
+                'contact-title': 'Обсудить <span>проект</span>',
+                'contact-subtitle': 'Оставьте заявку, и я свяжусь с вами в ближайшее время',
+                'contact-info-title': 'Контакты',
+                'form-name': 'ФИО *',
+                'form-name-placeholder': 'Иван Иванов',
+                'form-contact-type': 'Способ связи',
+                'form-contact-type-select': '📞 Телефон',
+                'form-phone': 'Телефон *',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-email': 'Email *',
+                'form-email-placeholder': 'ivan@mail.ru',
+                'form-message': 'Обсудить проект',
+                'form-message-placeholder': 'Расскажите о вашем проекте...',
+                'form-submit': 'Отправить',
+                'success-title': 'Спасибо за вашу заявку! 🎉',
+                'success-text': 'В ближайшее время я свяжусь с вами для обсуждения проекта.',
+                'success-btn': 'Хорошо',
+                'footer-text': 'интерьеры, в которых хочется жить',
+                'footer-sub': 'Сделано с ❤️ для вдохновения',
+                'view-btn': 'Смотреть',
+                'no-reviews': 'Отзывов пока нет',
+                'be-first': 'Будьте первым!',
+                'verified': 'Подтверждённый клиент',
+                'no-projects': 'Проектов пока нет'
+            },
+            en: {
+                'about': 'About',
+                'portfolio': 'Portfolio',
+                'reviews': 'Reviews',
+                'contact': 'Contact',
+                'reviews-title': 'Client <span>reviews</span>',
+                'reviews-subtitle': 'What they say about my work',
+                'review-form-title': 'Leave a review',
+                'review-form-name': 'Your name *',
+                'review-name-placeholder': 'Ivan Ivanov',
+                'review-form-rating': 'Rating',
+                'review-form-text': 'Your review *',
+                'review-text-placeholder': 'Share your experience...',
+                'review-form-submit': 'Send review',
+                'review-success-title': 'Thank you for your review! ⭐',
+                'review-success-text': 'Your review has been sent for moderation. It will appear after approval.',
+                'review-success-btn': 'OK',
+                'slogan': 'CREATING SPACE <br>FOR LIFE',
+                'hero-title': 'Interiors you\'ll <br>want to <span>live in</span>',
+                'hero-desc': 'Design projects for apartments, houses and offices. Creating spaces that reflect your personality.',
+                'hero-btn': 'Discuss a project',
+                'about-title': 'About <span>me</span>',
+                'about-subtitle': 'Interior designer with 8 years of experience',
+                'designer-name': 'Sviatoslava',
+                'designer-title': 'Maison SV — interior design',
+                'about-text-1': 'I create interiors that reflect the character and lifestyle of their owners. My philosophy is the harmony of functionality and aesthetics.',
+                'about-text-2': 'Over 8 years of work, I have completed more than 70 projects: from cozy studios to spacious country houses. Each project is a story told through color, texture and light.',
+                'stat-projects': 'Projects completed',
+                'stat-experience': 'Years of experience',
+                'stat-clients': 'Happy clients',
+                'portfolio-title': 'My <span>works</span>',
+                'portfolio-subtitle': 'Realized projects inspired by life',
+                'filter-all': 'All',
+                'filter-apartments': 'Apartments',
+                'filter-houses': 'Houses',
+                'filter-offices': 'Offices',
+                'contact-title': 'Discuss a <span>project</span>',
+                'contact-subtitle': 'Leave a request and I will contact you soon',
+                'contact-info-title': 'Contacts',
+                'form-name': 'Full name *',
+                'form-name-placeholder': 'Ivan Ivanov',
+                'form-contact-type': 'Contact method',
+                'form-contact-type-select': '📞 Phone',
+                'form-phone': 'Phone *',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-email': 'Email *',
+                'form-email-placeholder': 'ivan@mail.ru',
+                'form-message': 'Discuss the project',
+                'form-message-placeholder': 'Tell about your project...',
+                'form-submit': 'Send',
+                'success-title': 'Thank you for your request! 🎉',
+                'success-text': 'I will contact you soon to discuss the project.',
+                'success-btn': 'OK',
+                'footer-text': 'interiors you\'ll want to live in',
+                'footer-sub': 'Made with ❤️ for inspiration',
+                'view-btn': 'View',
+                'no-reviews': 'No reviews yet',
+                'be-first': 'Be the first!',
+                'verified': 'Verified client',
+                'no-projects': 'No projects yet'
+            },
+            fr: {
+                'about': 'À propos',
+                'portfolio': 'Portfolio',
+                'reviews': 'Avis',
+                'contact': 'Contact',
+                'reviews-title': 'Avis des <span>clients</span>',
+                'reviews-subtitle': 'Ce qu\'ils disent de mon travail',
+                'review-form-title': 'Laisser un avis',
+                'review-form-name': 'Votre nom *',
+                'review-name-placeholder': 'Ivan Ivanov',
+                'review-form-rating': 'Note',
+                'review-form-text': 'Votre avis *',
+                'review-text-placeholder': 'Partagez votre expérience...',
+                'review-form-submit': 'Envoyer l\'avis',
+                'review-success-title': 'Merci pour votre avis ! ⭐',
+                'review-success-text': 'Votre avis a été envoyé pour modération. Il apparaîtra après approbation.',
+                'review-success-btn': 'OK',
+                'slogan': 'CRÉER UN ESPACE <br>POUR LA VIE',
+                'hero-title': 'Des intérieurs où <br>on a envie de <span>vivre</span>',
+                'hero-desc': 'Projets de design pour appartements, maisons et bureaux. Créer des espaces qui reflètent votre personnalité.',
+                'hero-btn': 'Discuter un projet',
+                'about-title': 'À propos <span>de moi</span>',
+                'about-subtitle': 'Designer d\'intérieur avec 8 ans d\'expérience',
+                'designer-name': 'Sviatoslava',
+                'designer-title': 'Maison SV — design d\'intérieur',
+                'about-text-1': 'Je crée des intérieurs qui reflètent le caractère et le mode de vie de leurs propriétaires. Ma philosophie est l\'harmonie de la fonctionnalité et de l\'esthétique.',
+                'about-text-2': 'En 8 ans de travail, j\'ai réalisé plus de 70 projets: des studios cosy aux spacieuses maisons de campagne. Chaque projet est une histoire racontée par la couleur, la texture et la lumière.',
+                'stat-projects': 'Projets réalisés',
+                'stat-experience': 'Années d\'expérience',
+                'stat-clients': 'Clients satisfaits',
+                'portfolio-title': 'Mes <span>travaux</span>',
+                'portfolio-subtitle': 'Projets réalisés inspirés par la vie',
+                'filter-all': 'Tous',
+                'filter-apartments': 'Appartements',
+                'filter-houses': 'Maisons',
+                'filter-offices': 'Bureaux',
+                'contact-title': 'Discuter un <span>projet</span>',
+                'contact-subtitle': 'Laissez une demande et je vous contacterai bientôt',
+                'contact-info-title': 'Contacts',
+                'form-name': 'Nom complet *',
+                'form-name-placeholder': 'Ivan Ivanov',
+                'form-contact-type': 'Moyen de contact',
+                'form-contact-type-select': '📞 Téléphone',
+                'form-phone': 'Téléphone *',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-email': 'Email *',
+                'form-email-placeholder': 'ivan@mail.ru',
+                'form-message': 'Discuter le projet',
+                'form-message-placeholder': 'Parlez de votre projet...',
+                'form-submit': 'Envoyer',
+                'success-title': 'Merci pour votre demande ! 🎉',
+                'success-text': 'Je vous contacterai bientôt pour discuter du projet.',
+                'success-btn': 'OK',
+                'footer-text': 'des intérieurs où l\'on a envie de vivre',
+                'footer-sub': 'Fait avec ❤️ pour l\'inspiration',
+                'view-btn': 'Voir',
+                'no-reviews': 'Aucun avis',
+                'be-first': 'Soyez le premier!',
+                'verified': 'Client vérifié',
+                'no-projects': 'Aucun projet'
+            },
+            de: {
+                'about': 'Über mich',
+                'portfolio': 'Portfolio',
+                'reviews': 'Bewertungen',
+                'contact': 'Kontakt',
+                'reviews-title': 'Kunden <span>bewertungen</span>',
+                'reviews-subtitle': 'Was sie über meine Arbeit sagen',
+                'review-form-title': 'Bewertung hinterlassen',
+                'review-form-name': 'Ihr Name *',
+                'review-name-placeholder': 'Ivan Ivanov',
+                'review-form-rating': 'Bewertung',
+                'review-form-text': 'Ihre Bewertung *',
+                'review-text-placeholder': 'Teilen Sie Ihre Erfahrung...',
+                'review-form-submit': 'Bewertung senden',
+                'review-success-title': 'Vielen Dank für Ihre Bewertung! ⭐',
+                'review-success-text': 'Ihre Bewertung wurde zur Moderation gesendet. Sie wird nach der Genehmigung angezeigt.',
+                'review-success-btn': 'OK',
+                'slogan': 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
+                'hero-title': 'Innenräume, in denen <br>man <span>leben</span> möchte',
+                'hero-desc': 'Designprojekte für Wohnungen, Häuser und Büros. Schaffung von Räumen, die Ihre Persönlichkeit widerspiegeln.',
+                'hero-btn': 'Projekt besprechen',
+                'about-title': 'Über <span>mich</span>',
+                'about-subtitle': 'Innenarchitektin mit 8 Jahren Erfahrung',
+                'designer-name': 'Sviatoslava',
+                'designer-title': 'Maison SV — Innenarchitektur',
+                'about-text-1': 'Ich schaffe Innenräume, die den Charakter und Lebensstil ihrer Bewohner widerspiegeln. Meine Philosophie ist die Harmonie von Funktionalität und Ästhetik.',
+                'about-text-2': 'In 8 Jahren Arbeit habe ich über 70 Projekte realisiert: von gemütlichen Studios bis zu geräumigen Landhäusern. Jedes Projekt ist eine Geschichte, erzählt durch Farbe, Textur und Licht.',
+                'stat-projects': 'Abgeschlossene Projekte',
+                'stat-experience': 'Jahre Erfahrung',
+                'stat-clients': 'Zufriedene Kunden',
+                'portfolio-title': 'Meine <span>Arbeiten</span>',
+                'portfolio-subtitle': 'Realisierte Projekte, inspiriert vom Leben',
+                'filter-all': 'Alle',
+                'filter-apartments': 'Wohnungen',
+                'filter-houses': 'Häuser',
+                'filter-offices': 'Büros',
+                'contact-title': 'Ein <span>Projekt</span> besprechen',
+                'contact-subtitle': 'Hinterlassen Sie eine Anfrage und ich melde mich bald bei Ihnen',
+                'contact-info-title': 'Kontakte',
+                'form-name': 'Vollständiger Name *',
+                'form-name-placeholder': 'Ivan Ivanov',
+                'form-contact-type': 'Kontaktmethode',
+                'form-contact-type-select': '📞 Telefon',
+                'form-phone': 'Telefon *',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-email': 'Email *',
+                'form-email-placeholder': 'ivan@mail.ru',
+                'form-message': 'Projekt besprechen',
+                'form-message-placeholder': 'Erzählen Sie von Ihrem Projekt...',
+                'form-submit': 'Senden',
+                'success-title': 'Vielen Dank für Ihre Anfrage! 🎉',
+                'success-text': 'Ich werde mich bald mit Ihnen in Verbindung setzen, um das Projekt zu besprechen.',
+                'success-btn': 'OK',
+                'footer-text': 'Innenräume, in denen man leben möchte',
+                'footer-sub': 'Gemacht mit ❤️ für Inspiration',
+                'view-btn': 'Ansehen',
+                'no-reviews': 'Keine Bewertungen',
+                'be-first': 'Seien Sie der Erste!',
+                'verified': 'Verifizierter Kunde',
+                'no-projects': 'Keine Projekte'
+            },
+            uk: {
+                'about': 'Про мене',
+                'portfolio': 'Портфоліо',
+                'reviews': 'Відгуки',
+                'contact': 'Контакти',
+                'reviews-title': 'Відгуки <span>клієнтів</span>',
+                'reviews-subtitle': 'Що говорять про мою роботу',
+                'review-form-title': 'Залишити відгук',
+                'review-form-name': 'Ваше ім\'я *',
+                'review-name-placeholder': 'Іван Іванов',
+                'review-form-rating': 'Оцінка',
+                'review-form-text': 'Ваш відгук *',
+                'review-text-placeholder': 'Поділіться враженням про роботу...',
+                'review-form-submit': 'Надіслати відгук',
+                'review-success-title': 'Дякуємо за ваш відгук! ⭐',
+                'review-success-text': 'Відгук надіслано на перевірку. Після схвалення він з\'явиться в каруселі.',
+                'review-success-btn': 'Добре',
+                'slogan': 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
+                'hero-title': 'Інтер\'єри, в яких <br>хочеться <span>жити</span>',
+                'hero-desc': 'Дизайн-проекти для квартир, будинків та офісів. Створюю простір, який відображає вашу індивідуальність.',
+                'hero-btn': 'Обговорити проект',
+                'about-title': 'Про <span>мене</span>',
+                'about-subtitle': 'Дизайнер інтер\'єрів з 8-річним досвідом',
+                'designer-name': 'Святослава',
+                'designer-title': 'Maison SV — інтер\'єр-дизайн',
+                'about-text-1': 'Я створюю інтер\'єри, які стають відображенням характеру та способу життя своїх власників. Моя філософія — в гармонії функціональності та естетики.',
+                'about-text-2': 'За 8 років роботи я реалізувала більше 70 проектів: від затишних студій до просторих заміських будинків. Кожен проект — це історія, розказана через колір, текстуру та світло.',
+                'stat-projects': 'Реалізованих проектів',
+                'stat-experience': 'Досвіду в дизайні',
+                'stat-clients': 'Задоволених клієнтів',
+                'portfolio-title': 'Мої <span>роботи</span>',
+                'portfolio-subtitle': 'Реалізовані проекти, натхненні життям',
+                'filter-all': 'Всі',
+                'filter-apartments': 'Квартири',
+                'filter-houses': 'Будинки',
+                'filter-offices': 'Офіси',
+                'contact-title': 'Обговорити <span>проект</span>',
+                'contact-subtitle': 'Залиште заявку, і я зв\'яжуся з вами найближчим часом',
+                'contact-info-title': 'Контакти',
+                'form-name': 'ПІБ *',
+                'form-name-placeholder': 'Іван Іванов',
+                'form-contact-type': 'Спосіб зв\'язку',
+                'form-contact-type-select': '📞 Телефон',
+                'form-phone': 'Телефон *',
+                'form-phone-placeholder': '7 80 30 46 79',
+                'form-email': 'Email *',
+                'form-email-placeholder': 'ivan@mail.ru',
+                'form-message': 'Обговорити проект',
+                'form-message-placeholder': 'Розкажіть про ваш проект...',
+                'form-submit': 'Відправити',
+                'success-title': 'Дякуємо за вашу заявку! 🎉',
+                'success-text': 'Найближчим часом я зв\'яжуся з вами для обговорення проекту.',
+                'success-btn': 'Добре',
+                'footer-text': 'інтер\'єри, в яких хочеться жити',
+                'footer-sub': 'Зроблено з ❤️ для натхнення',
+                'view-btn': 'Дивитись',
+                'no-reviews': 'Відгуків поки немає',
+                'be-first': 'Будьте першим!',
+                'verified': 'Підтверджений клієнт',
+                'no-projects': 'Проектів поки немає'
+            }
+        };
+
+        let currentLang = 'ru';
+        let currentFilter = 'all';
+        let portfolioData = [];
+        let reviewsData = [];
+        let currentSlide = 0;
+        let carouselInterval = null;
+
+        // =====================================================
+        // ЗАГРУЗКА ПОРТФОЛИО
+        // =====================================================
+        async function loadPortfolio() {
+            try {
+                const snapshot = await db.collection('portfolio').get();
+                portfolioData = [];
+                snapshot.forEach(doc => {
+                    portfolioData.push({ id: doc.id, ...doc.data() });
+                });
+                renderPortfolio(currentFilter);
+                console.log('📂 Загружено проектов:', portfolioData.length);
+            } catch (e) {
+                console.error('Ошибка загрузки портфолио:', e);
+                portfolioData = [];
+                renderPortfolio(currentFilter);
+            }
+        }
+
+        function renderPortfolio(filter) {
+            const grid = document.getElementById('portfolioGrid');
+            const items = filter === 'all' ? portfolioData : portfolioData.filter(p => p.category === filter);
+
+            if (!items || items.length === 0) {
+                grid.innerHTML =
+                    `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#6a6a6a;">
+                        <i class="fas fa-images" style="font-size:48px; opacity:0.3; margin-bottom:12px;"></i>
+                        <p data-lang="no-projects">Проектов пока нет</p>
+                    </div>`;
+                return;
+            }
+
+            grid.innerHTML = items.map(p => {
+                const imgSrc = p.images && p.images.length > 0 ? p.images[0] :
+                    'https://via.placeholder.com/300x200/0b2a4a/ffffff?text=?';
+                return `
+                        <div class="portfolio-item" onclick="openProject('${p.id}')">
+                            <img src="${imgSrc}" alt="${p.title}" loading="lazy">
+                            <div class="view-btn" data-lang="view-btn">Смотреть</div>
+                            <div class="overlay">
+                                <h4>${p.title}</h4>
+                                <p>${p.category}</p>
+                            </div>
+                        </div>
+                    `;
+            }).join('');
+        }
+
+        async function openProject(docId) {
+            try {
+                const doc = await db.collection('portfolio').doc(docId).get();
+                if (!doc.exists) {
+                    alert('❌ Проект не найден');
+                    return;
+                }
+                const project = { id: doc.id, ...doc.data() };
+
+                const modal = document.getElementById('projectModal');
+                document.body.style.overflow = 'hidden';
+                modal.classList.add('active');
+
+                const images = project.images && project.images.length > 0 ? project.images :
+                    ['https://via.placeholder.com/800x600/0b2a4a/ffffff?text=Нет+фото'];
+                document.getElementById('projectImages').innerHTML = images.map(img =>
+                    `<img src="${img}" alt="${project.title}" loading="lazy">`
+                ).join('');
+                document.getElementById('projectTitle').textContent = project.title;
+                document.getElementById('projectCategory').textContent = project.category;
+                document.getElementById('projectDescription').textContent = project.description || 'Описание отсутствует';
+                document.getElementById('projectDetails').innerHTML = Object.entries(project.details || {}).map((
+                    [key, value]) =>
+                    `<div class="detail"><div class="label">${key}</div><div class="value">${value}</div></div>`
+                ).join('');
+            } catch (e) {
+                console.error('Ошибка открытия проекта:', e);
+                alert('❌ Ошибка загрузки проекта');
+            }
+        }
+
+        function closeProject() {
+            document.getElementById('projectModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // =====================================================
+        // ЗАГРУЗКА ОТЗЫВОВ (ИСПРАВЛЕНА)
+        // =====================================================
+        async function loadReviews() {
+            try {
+                console.log('🔄 Загружаем отзывы...');
+                const snapshot = await db.collection('reviews')
+                    .where('status', '==', 'approved')
+                    .orderBy('date', 'desc')
+                    .get();
+
+                reviewsData = [];
+                snapshot.forEach(doc => {
+                    reviewsData.push({ id: doc.id, ...doc.data() });
+                });
+
+                console.log('⭐ Найдено одобренных отзывов:', reviewsData.length);
+                renderCarousel(reviewsData);
+            } catch (e) {
+                console.error('Ошибка загрузки отзывов:', e);
+                reviewsData = [];
+                renderCarousel([]);
+            }
+        }
+
+        function renderCarousel(reviews) {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.getElementById('carouselDots');
+            if (!track) return;
+
+            console.log('🎨 Рендерим карусель, отзывов:', reviews.length);
+
+            if (!reviews || reviews.length === 0) {
+                track.innerHTML =
+                    `<div class="carousel-slide" style="min-width:100%;">
+                            <div style="padding:40px; text-align:center; color:#7f8c8d;">
+                                <i class="fas fa-comment-dots" style="font-size:48px; opacity:0.3; margin-bottom:16px;"></i>
+                                <p style="font-size:18px;" data-lang="no-reviews">Отзывов пока нет</p>
+                                <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Будьте первым!</p>
+                            </div>
+                        </div>`;
+                dots.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+            reviews.forEach(r => {
+                const stars = '⭐'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                const nameInitial = r.name ? r.name.charAt(0).toUpperCase() : '?';
+                html += `
+                        <div class="carousel-slide">
+                            <div class="avatar-placeholder">${nameInitial}</div>
+                            <div class="review-name">${r.name || 'Аноним'}</div>
+                            <div class="review-stars">${stars}</div>
+                            <div class="review-text">"${r.text}"</div>
+                            <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
+                            <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
+                        </div>
+                    `;
+            });
+            track.innerHTML = html;
+
+            // Обновляем текст "Подтверждённый клиент" для текущего языка
+            const verifiedEl = document.querySelector('.review-verified');
+            if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
+                verifiedEl.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang]['verified']}`;
+            }
+
+            dots.innerHTML = '';
+            reviews.forEach((_, i) => {
+                const dot = document.createElement('button');
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.onclick = () => goToSlide(i);
+                dots.appendChild(dot);
+            });
+
+            currentSlide = 0;
+            track.style.transform = 'translateX(0)';
+            startCarousel();
+        }
+
+        function goToSlide(index) {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.querySelectorAll('.dot');
+            if (!track || track.children.length === 0) return;
+            
+            const total = track.children.length;
+            if (index >= total) index = 0;
+            if (index < 0) index = total - 1;
+            currentSlide = index;
+
+            track.style.transition = 'transform 0.5s ease-in-out';
+            track.style.transform = `translateX(-${index * 100}%)`;
+
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        function startCarousel() {
+            if (carouselInterval) clearInterval(carouselInterval);
+            carouselInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+        }
+
+        function stopCarousel() {
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+                carouselInterval = null;
+            }
+        }
+
+        document.getElementById('carouselPrev').addEventListener('click', function() {
+            stopCarousel();
+            goToSlide(currentSlide - 1);
+            startCarousel();
+        });
+
+        document.getElementById('carouselNext').addEventListener('click', function() {
+            stopCarousel();
+            goToSlide(currentSlide + 1);
+            startCarousel();
+        });
+
+        document.getElementById('reviewsCarousel').addEventListener('mouseenter', stopCarousel);
+        document.getElementById('reviewsCarousel').addEventListener('mouseleave', startCarousel);
+
+        // =====================================================
+        // ОТПРАВКА ОТЗЫВА
+        // =====================================================
+        document.getElementById('submitReviewBtn').addEventListener('click', async function() {
+            const name = document.getElementById('reviewName').value.trim();
+            const rating = parseInt(document.getElementById('reviewRating').value);
+            const text = document.getElementById('reviewText').value.trim();
+
+            if (!name) {
+                alert('❌ Введите ваше имя!');
+                return;
+            }
+            if (!text) {
+                alert('❌ Напишите текст отзыва!');
+                return;
+            }
+
+            try {
+                await db.collection('reviews').add({
+                    name: name,
+                    rating: rating,
+                    text: text,
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                });
+                document.getElementById('reviewName').value = '';
+                document.getElementById('reviewText').value = '';
+                document.getElementById('reviewRating').value = '5';
+
+                document.getElementById('reviewSuccessModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } catch (e) {
+                console.error('Ошибка отправки отзыва:', e);
+                alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+            }
+        });
+
+        document.getElementById('reviewSuccessOkBtn').addEventListener('click', function() {
+            document.getElementById('reviewSuccessModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('reviewSuccessModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // =====================================================
+        // ОТПРАВКА ЗАЯВКИ
+        // =====================================================
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('clientName').value.trim();
+            const contactType = document.getElementById('contactType').value;
+            let contactValue = '';
+
+            if (contactType === 'phone') {
+                const countryCode = document.getElementById('countryCode').value;
+                const phoneRaw = document.getElementById('clientPhone').value.trim();
+                if (!phoneRaw) {
+                    alert('❌ Введите номер телефона!');
+                    return;
+                }
+                contactValue = countryCode + ' ' + phoneRaw;
+            } else {
+                const email = document.getElementById('clientEmail').value.trim();
+                if (!email) {
+                    alert('❌ Введите email!');
+                    return;
+                }
+                if (!email.includes('@') || !email.includes('.')) {
+                    alert('❌ Введите корректный email!');
+                    return;
+                }
+                contactValue = email;
+            }
+
+            const message = document.getElementById('clientMessage').value.trim();
+
+            if (!name) {
+                alert('❌ Заполните ФИО!');
+                return;
+            }
+
+            try {
+                await db.collection('leads').add({
+                    name: name,
+                    contactType: contactType,
+                    contact: contactValue,
+                    message: message || '—',
+                    date: new Date().toISOString(),
+                    status: 'new'
+                });
+                console.log('✅ Заявка сохранена в Firebase');
+            } catch (e) {
+                console.error('Ошибка сохранения в Firebase:', e);
+                alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+                return;
+            }
+
+            this.reset();
+            document.getElementById('countryCode').value = '+33';
+            document.getElementById('contactType').value = 'phone';
+            document.getElementById('emailGroup').style.display = 'none';
+            document.getElementById('phoneGroup').style.display = 'flex';
+            document.getElementById('successModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        document.getElementById('contactType').addEventListener('change', function() {
+            if (this.value === 'phone') {
+                document.getElementById('phoneGroup').style.display = 'flex';
+                document.getElementById('emailGroup').style.display = 'none';
+                document.getElementById('clientPhone').required = true;
+                document.getElementById('clientEmail').required = false;
+            } else {
+                document.getElementById('phoneGroup').style.display = 'none';
+                document.getElementById('emailGroup').style.display = 'block';
+                document.getElementById('clientPhone').required = false;
+                document.getElementById('clientEmail').required = true;
+            }
+        });
+
+        document.getElementById('successOkBtn').addEventListener('click', function() {
+            document.getElementById('successModal').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.getElementById('successModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // =====================================================
+        // ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
+        // =====================================================
+        function setLanguage(lang) {
+            currentLang = lang;
+
+            document.querySelectorAll('.lang-selector button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.dataset.lang;
+                if (translations[lang] && translations[lang][key] !== undefined) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else if (el.tagName === 'BUTTON' && el.dataset.filter) {
+                        const filterKey = 'filter-' + el.dataset.filter;
+                        if (translations[lang][filterKey]) {
+                            el.textContent = translations[lang][filterKey];
+                        }
+                    } else {
+                        el.innerHTML = translations[lang][key];
+                    }
+                }
+            });
+
+            document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
+                const filterKey = 'filter-' + btn.dataset.filter;
+                if (translations[lang] && translations[lang][filterKey]) {
+                    btn.textContent = translations[lang][filterKey];
+                }
+            });
+
+            document.querySelectorAll('.portfolio-item .view-btn').forEach(el => {
+                const key = 'view-btn';
+                if (translations[lang] && translations[lang][key]) {
+                    el.textContent = translations[lang][key];
+                }
+            });
+
+            const noReviews = document.querySelector('[data-lang="no-reviews"]');
+            const beFirst = document.querySelector('[data-lang="be-first"]');
+            const verified = document.querySelector('[data-lang="verified"]');
+            const noProjects = document.querySelector('[data-lang="no-projects"]');
+
+            if (noReviews && translations[lang]['no-reviews']) {
+                noReviews.textContent = translations[lang]['no-reviews'];
+            }
+            if (beFirst && translations[lang]['be-first']) {
+                beFirst.textContent = translations[lang]['be-first'];
+            }
+            if (verified && translations[lang]['verified']) {
+                verified.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[lang]['verified']}`;
+            }
+            if (noProjects && translations[lang]['no-projects']) {
+                noProjects.textContent = translations[lang]['no-projects'];
+            }
+
+            localStorage.setItem('designer_lang', lang);
+        }
+
+        // =====================================================
+        // БУРГЕР-МЕНЮ
+        // =====================================================
+        const burgerBtn = document.getElementById('burgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        burgerBtn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('open');
+        });
+
+        function closeMobileMenu() {
+            burgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('open');
+        }
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('header') && !e.target.closest('.mobile-menu')) {
+                closeMobileMenu();
+            }
+        });
+
+        // =====================================================
+        // СОБЫТИЯ
+        // =====================================================
+        document.querySelectorAll('.lang-selector button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                setLanguage(this.dataset.lang);
+                document.querySelectorAll('.lang-selector button').forEach(b => {
+                    b.classList.toggle('active', b.dataset.lang === this.dataset.lang);
+                });
+            });
+        });
+
+        document.querySelectorAll('.portfolio-filter button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.portfolio-filter button').forEach(b => b.classList.remove(
+                'active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                renderPortfolio(currentFilter);
+            });
+        });
+
+        document.getElementById('closeProjectModal').addEventListener('click', closeProject);
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) closeProject();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProject();
+                if (document.getElementById('successModal').classList.contains('active')) {
+                    document.getElementById('successModal').classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                if (document.getElementById('reviewSuccessModal').classList.contains('active')) {
+                    document.getElementById('reviewSuccessModal').classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+                closeMobileMenu();
+            }
+        });
+
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.08)';
+            } else {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.06)';
+            }
+        });
+
+        // =====================================================
+        // ЗАПУСК
+        // =====================================================
+        const savedLang = localStorage.getItem('designer_lang');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage('ru');
+        }
+
+        loadPortfolio();
+
+        setTimeout(() => {
+            loadReviews();
+        }, 500);
+
+        console.log('🎨 Maison SV с отзывами запущен!');
+        console.log('📱 WhatsApp, Telegram, Instagram — красивые иконки в 1 ряд');
+        console.log('📞 В форме можно выбрать: Телефон или Email');
+        console.log('🇫🇷 Флажки в выборе кода страны (🇫🇷, 🇷🇺, 🇩🇪, 🇺🇦, 🇨🇿, 🇺🇸)');
+        console.log('🔄 Отзывы теперь строго по центру!');
+    </script>
+</body>
+</html>
