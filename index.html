@@ -566,7 +566,7 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* ===== КАРУСЕЛЬ ОТЗЫВОВ ===== */
+        /* ===== КАРУСЕЛЬ ОТЗЫВОВ (ИСПРАВЛЕНА) ===== */
         .reviews-section {
             background: #f8f6f3;
             padding: 80px 0;
@@ -579,56 +579,79 @@
             border-radius: 20px;
             background: white;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            min-height: 220px;
-            padding: 0 10px;
+            min-height: 250px;
+            padding: 0 50px;
         }
         .carousel-track {
             display: flex;
-            transition: transform 0.5s ease;
-            padding: 30px 10px;
-            align-items: flex-start;
+            transition: transform 0.5s ease-in-out;
+            padding: 30px 0;
+            align-items: stretch;
+            width: 100%;
         }
-        /* ЗАМЕНИ весь блок .carousel-slide на этот: */
-.carousel-slide {
-    min-width: 100%;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    padding: 10px 30px !important;
-    box-sizing: border-box !important;
-    margin: 0 auto !important;
-}
-
-.carousel-slide .review-text {
-    font-size: 16px;
-    color: #5a6e7e;
-    line-height: 1.7;
-    max-width: 90% !important;
-    margin: 0 auto !important;
-    font-style: italic;
-    text-align: center !important;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-    padding: 0 10px !important;
-}
-
-.carousel-slide .review-name,
-.carousel-slide .review-stars,
-.carousel-slide .review-date,
-.carousel-slide .review-verified {
-    text-align: center !important;
-    width: 100% !important;
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease;
-    padding: 30px 10px;
-    align-items: flex-start;
-}
+        .carousel-slide {
+            min-width: 100%;
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 20px 30px !important;
+            box-sizing: border-box !important;
+            flex-shrink: 0;
+        }
+        .carousel-slide .avatar-placeholder {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #0b2a4a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            border: 3px solid #c4956a;
+            margin: 0 auto 12px;
+            flex-shrink: 0;
+        }
+        .carousel-slide .review-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e2a3a;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .carousel-slide .review-stars {
+            font-size: 22px;
+            margin: 4px 0 8px;
+            color: #f39c12;
+            text-align: center;
+        }
+        .carousel-slide .review-text {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+            font-style: italic;
+            text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .carousel-slide .review-date {
+            font-size: 13px;
+            color: #95a5a6;
+            margin-top: 6px;
+            text-align: center;
+        }
+        .carousel-slide .review-verified {
+            font-size: 13px;
+            color: #27ae60;
+            margin-top: 4px;
+            text-align: center;
+        }
 
         .carousel-btn {
             position: absolute;
@@ -644,6 +667,9 @@
             cursor: pointer;
             transition: 0.3s;
             z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .carousel-btn:hover {
             background: #2c2c2c;
@@ -851,7 +877,6 @@
         .custom-select option {
             padding: 6px 8px;
         }
-        /* Флаги в опциях — используем Unicode-символы */
         .phone-input-wrapper {
             display: flex;
             gap: 10px;
@@ -876,7 +901,6 @@
             outline: none;
         }
 
-        /* Email поле */
         .email-input-wrapper input {
             width: 100%;
             padding: 12px 16px;
@@ -1185,6 +1209,9 @@
             .custom-select-wrapper {
                 width: 100%;
             }
+            .reviews-carousel {
+                padding: 0 30px;
+            }
         }
         @media (max-width: 480px) {
             .hero-slogan {
@@ -1267,6 +1294,13 @@
             }
             .custom-select-wrapper {
                 width: 100%;
+            }
+            .reviews-carousel {
+                padding: 0 15px;
+                min-height: 280px;
+            }
+            .carousel-slide {
+                padding: 15px 10px !important;
             }
         }
     </style>
@@ -1934,7 +1968,7 @@
         }
 
         // =====================================================
-        // ЗАГРУЗКА ОТЗЫВОВ
+        // ЗАГРУЗКА ОТЗЫВОВ (ИСПРАВЛЕНА)
         // =====================================================
         async function loadReviews() {
             try {
@@ -1989,26 +2023,16 @@
                             <div class="review-stars">${stars}</div>
                             <div class="review-text">"${r.text}"</div>
                             <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
-                            <div class="review-verified" data-lang="verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
+                            <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
                         </div>
                     `;
             });
             track.innerHTML = html;
 
-            // Принудительно центрируем каждый слайд
-            const slides = track.querySelectorAll('.carousel-slide');
-            slides.forEach(slide => {
-                slide.style.display = 'flex';
-                slide.style.flexDirection = 'column';
-                slide.style.alignItems = 'center';
-                slide.style.justifyContent = 'center';
-                slide.style.textAlign = 'center';
-            });
-
-            const verifiedEl = document.querySelector('[data-lang="verified"]');
+            // Обновляем текст "Подтверждённый клиент" для текущего языка
+            const verifiedEl = document.querySelector('.review-verified');
             if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
-                verifiedEl.innerHTML =
-                    `<i class="fas fa-check-circle"></i> ${translations[currentLang]['verified']}`;
+                verifiedEl.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang]['verified']}`;
             }
 
             dots.innerHTML = '';
@@ -2020,7 +2044,7 @@
             });
 
             currentSlide = 0;
-            goToSlide(0);
+            track.style.transform = 'translateX(0)';
             startCarousel();
         }
 
@@ -2028,15 +2052,18 @@
             const track = document.getElementById('carouselTrack');
             const dots = document.querySelectorAll('.dot');
             if (!track || track.children.length === 0) return;
+            
             const total = track.children.length;
             if (index >= total) index = 0;
             if (index < 0) index = total - 1;
             currentSlide = index;
 
-            // Плавное смещение с центрированием
+            track.style.transition = 'transform 0.5s ease-in-out';
             track.style.transform = `translateX(-${index * 100}%)`;
 
-            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
         }
 
         function startCarousel() {
@@ -2116,7 +2143,7 @@
         });
 
         // =====================================================
-        // ОТПРАВКА ЗАЯВКИ (ТОЛЬКО В FIREBASE)
+        // ОТПРАВКА ЗАЯВКИ
         // =====================================================
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -2153,7 +2180,6 @@
                 return;
             }
 
-            // Сохраняем в Firebase
             try {
                 await db.collection('leads').add({
                     name: name,
@@ -2179,7 +2205,6 @@
             document.body.style.overflow = 'hidden';
         });
 
-        // Переключение между телефоном и email
         document.getElementById('contactType').addEventListener('change', function() {
             if (this.value === 'phone') {
                 document.getElementById('phoneGroup').style.display = 'flex';
@@ -2225,15 +2250,6 @@
                         if (translations[lang][filterKey]) {
                             el.textContent = translations[lang][filterKey];
                         }
-                    } else if (el.tagName === 'SELECT') {
-                        // Для select меняем текст опций
-                        const options = el.querySelectorAll('option');
-                        options.forEach(opt => {
-                            const optKey = opt.dataset.langKey || opt.value;
-                            if (translations[lang][optKey]) {
-                                opt.textContent = translations[lang][optKey];
-                            }
-                        });
                     } else {
                         el.innerHTML = translations[lang][key];
                     }
