@@ -676,18 +676,70 @@
             <button data-tab="leads"><i class="fas fa-envelope"></i> Заявки <span class="tab-badge" id="leadsBadge" style="display:none;">0</span></button>
         </div>
 
+        <!-- ===== ПОРТФОЛИО ===== -->
         <div class="tab-content active" id="tabPortfolio">
             <div class="panel">
                 <div class="panel-header">
                     <h2><i class="fas fa-images"></i> Управление проектами</h2>
                     <button class="btn btn-add" id="showAddForm"><i class="fas fa-plus"></i> Добавить проект</button>
                 </div>
+
+                <!-- ===== ФОРМА ДОБАВЛЕНИЯ ПРОЕКТА ===== -->
+                <div class="form-project" id="projectForm" style="display:none;">
+                    <div class="full-width">
+                        <label>Название проекта *</label>
+                        <input type="text" id="projectTitle" placeholder="Например: Квартира на Смоленской">
+                    </div>
+                    <div>
+                        <label>Категория *</label>
+                        <select id="projectCategory">
+                            <option value="квартиры">Квартиры</option>
+                            <option value="дома">Дома</option>
+                            <option value="офисы">Офисы</option>
+                        </select>
+                    </div>
+                    <div class="full-width">
+                        <label>Главное фото</label>
+                        <div class="file-input">
+                            <input type="file" id="projectMainImage" accept="image/*">
+                            <div class="help-text">Выберите главное фото для проекта</div>
+                        </div>
+                    </div>
+                    <div class="full-width">
+                        <label>Дополнительные фото</label>
+                        <div class="file-input">
+                            <input type="file" id="projectExtraImages" accept="image/*" multiple>
+                            <div class="help-text">Выберите несколько фото (до 5 шт.)</div>
+                        </div>
+                        <div class="image-previews" id="imagePreviews"></div>
+                    </div>
+                    <div class="full-width">
+                        <label>Описание</label>
+                        <textarea id="projectDesc" rows="4" placeholder="Подробное описание проекта..."></textarea>
+                    </div>
+                    <div class="full-width">
+                        <label>Детали проекта</label>
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div><label style="font-weight:400; font-size:13px;">Площадь</label><input type="text" id="detailArea" placeholder="85 м²"></div>
+                            <div><label style="font-weight:400; font-size:13px;">Срок реализации</label><input type="text" id="detailTime" placeholder="4 месяца"></div>
+                            <div><label style="font-weight:400; font-size:13px;">Бюджет</label><input type="text" id="detailBudget" placeholder="4 500 000 ₽"></div>
+                            <div><label style="font-weight:400; font-size:13px;">Стиль</label><input type="text" id="detailStyle" placeholder="Современный минимализм"></div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-save" id="saveProjectBtn"><i class="fas fa-save"></i> Сохранить</button>
+                        <button class="btn btn-cancel" id="cancelProjectBtn">Отмена</button>
+                        <input type="hidden" id="editProjectId" value="">
+                    </div>
+                </div>
+
                 <div id="portfolioContent">
                     <p style="text-align:center;padding:20px;color:#7f8c8d;">Загрузка...</p>
                 </div>
             </div>
         </div>
 
+        <!-- ===== ОТЗЫВЫ ===== -->
         <div class="tab-content" id="tabReviews">
             <div class="panel">
                 <div class="panel-header">
@@ -700,6 +752,7 @@
             </div>
         </div>
 
+        <!-- ===== ЗАЯВКИ ===== -->
         <div class="tab-content" id="tabLeads">
             <div class="panel">
                 <div class="panel-header">
@@ -719,6 +772,7 @@
         </div>
     </div>
 
+    <!-- ===== МОДАЛКА ВХОДА ===== -->
     <div class="login-overlay active" id="loginModal">
         <div class="login-box">
             <h2><i class="fas fa-lock"></i> Вход в админку</h2>
@@ -763,6 +817,20 @@
         let editingId = null;
         let imagesToRemove = [];
         let currentLeadFilter = 'all';
+
+        // =====================================================
+        // 🔒 ЗАЩИТА
+        // =====================================================
+        console.log = function() {};
+        console.warn = function() {};
+        console.error = function() {};
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         // =====================================================
         // АВТОРИЗАЦИЯ
@@ -876,7 +944,7 @@
         }
 
         // =====================================================
-        // ПОРТФОЛИО
+        // ПОРТФОЛИО (CRUD)
         // =====================================================
         async function loadProjects() {
             if (!checkAuth()) return;
@@ -890,12 +958,13 @@
                 let html = `<table class="project-table"><thead><tr><th>Фото</th><th>Название</th><th>Категория</th><th>Действия</th></tr></thead><tbody>`;
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    const img = data.images && data.images[0] ? data.images[0] : 'https://via.placeholder.com/60/0b2a4a/ffffff?text=?';
+                    const img = data.images && data.images[0] ? data.images[0] :
+                    'https://via.placeholder.com/60/0b2a4a/ffffff?text=?';
                     html += `
                         <tr>
-                            <td><img src="${img}" class="project-img"></td>
-                            <td><strong>${data.title || 'Без названия'}</strong></td>
-                            <td><span class="category-badge">${data.category || 'Без категории'}</span></td>
+                            <td><img src="${img}" class="project-img" onerror="this.src='https://via.placeholder.com/60/0b2a4a/ffffff?text=?'"></td>
+                            <td><strong>${escapeHtml(data.title || 'Без названия')}</strong></td>
+                            <td><span class="category-badge">${escapeHtml(data.category || 'Без категории')}</span></td>
                             <td>
                                 <div class="actions">
                                     <button class="btn-edit" onclick="editProject('${doc.id}')"><i class="fas fa-edit"></i></button>
@@ -908,12 +977,204 @@
                 html += '</tbody></table>';
                 container.innerHTML = html;
             } catch (e) {
-                document.getElementById('portfolioContent').innerHTML = '<p style="color:red;">Ошибка загрузки: ' + e.message + '</p>';
+                document.getElementById('portfolioContent').innerHTML = '<p style="color:red;">Ошибка загрузки: ' + e.message +
+                '</p>';
             }
         }
 
+        // ===== ФОРМА =====
+        document.getElementById('showAddForm').addEventListener('click', function() {
+            if (!checkAuth()) return;
+            document.getElementById('projectForm').style.display = 'grid';
+            document.getElementById('editProjectId').value = '';
+            document.getElementById('projectTitle').value = '';
+            document.getElementById('projectCategory').value = 'квартиры';
+            document.getElementById('projectDesc').value = '';
+            document.getElementById('detailArea').value = '';
+            document.getElementById('detailTime').value = '';
+            document.getElementById('detailBudget').value = '';
+            document.getElementById('detailStyle').value = '';
+            document.getElementById('projectMainImage').value = '';
+            document.getElementById('projectExtraImages').value = '';
+            document.getElementById('imagePreviews').innerHTML = '';
+            document.getElementById('saveProjectBtn').textContent = '➕ Добавить';
+            document.getElementById('showAddForm').style.display = 'none';
+        });
+
+        document.getElementById('cancelProjectBtn').addEventListener('click', function() {
+            document.getElementById('projectForm').style.display = 'none';
+            document.getElementById('showAddForm').style.display = 'inline-block';
+        });
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
+
+        async function processImages(mainFile, extraFiles) {
+            const images = [];
+            if (mainFile) {
+                const mainData = await fileToBase64(mainFile);
+                images.push(mainData);
+            }
+            if (extraFiles && extraFiles.length > 0) {
+                for (let i = 0; i < Math.min(extraFiles.length, 5); i++) {
+                    const data = await fileToBase64(extraFiles[i]);
+                    images.push(data);
+                }
+            }
+            return images;
+        }
+
+        document.getElementById('saveProjectBtn').addEventListener('click', async function() {
+            if (!checkAuth()) return;
+
+            const title = document.getElementById('projectTitle').value.trim();
+            const category = document.getElementById('projectCategory').value;
+            const description = document.getElementById('projectDesc').value.trim();
+            const area = document.getElementById('detailArea').value.trim();
+            const time = document.getElementById('detailTime').value.trim();
+            const budget = document.getElementById('detailBudget').value.trim();
+            const style = document.getElementById('detailStyle').value.trim();
+            const editId = document.getElementById('editProjectId').value;
+            const mainFile = document.getElementById('projectMainImage').files[0];
+            const extraFiles = document.getElementById('projectExtraImages').files;
+
+            if (!title) {
+                alert('❌ Введите название проекта!');
+                return;
+            }
+
+            let images = [];
+            if (editId) {
+                try {
+                    const doc = await db.collection('portfolio').doc(editId).get();
+                    if (doc.exists && doc.data().images) {
+                        images = doc.data().images;
+                    }
+                } catch (e) {}
+            }
+
+            let newImages = [];
+            if (mainFile || extraFiles.length > 0) {
+                newImages = await processImages(mainFile, extraFiles);
+            }
+
+            const allImages = [...images, ...newImages].slice(0, 6);
+            if (allImages.length === 0) {
+                allImages.push('https://via.placeholder.com/300x200/0b2a4a/ffffff?text=?');
+            }
+
+            const details = {};
+            if (area) details['Площадь'] = area;
+            if (time) details['Срок'] = time;
+            if (budget) details['Бюджет'] = budget;
+            if (style) details['Стиль'] = style;
+
+            const projectData = {
+                title,
+                category,
+                images: allImages,
+                description: description || 'Описание проекта...',
+                details: Object.keys(details).length > 0 ? details : { 'Площадь': '—', 'Срок': '—', 'Бюджет': '—',
+                    'Стиль': '—' }
+            };
+
+            try {
+                if (editId) {
+                    await db.collection('portfolio').doc(editId).update(projectData);
+                    alert('✅ Проект обновлён!');
+                } else {
+                    await db.collection('portfolio').add(projectData);
+                    alert('✅ Проект добавлен!');
+                }
+                document.getElementById('projectForm').style.display = 'none';
+                document.getElementById('showAddForm').style.display = 'inline-block';
+                loadProjects();
+            } catch (e) {
+                alert('❌ Ошибка сохранения: ' + e.message);
+            }
+        });
+
+        async function editProject(id) {
+            if (!checkAuth()) return;
+            try {
+                const doc = await db.collection('portfolio').doc(id).get();
+                if (!doc.exists) return;
+                const data = doc.data();
+                document.getElementById('projectForm').style.display = 'grid';
+                document.getElementById('editProjectId').value = id;
+                document.getElementById('projectTitle').value = data.title;
+                document.getElementById('projectCategory').value = data.category;
+                document.getElementById('projectDesc').value = data.description || '';
+                document.getElementById('detailArea').value = data.details?.['Площадь'] || '';
+                document.getElementById('detailTime').value = data.details?.['Срок'] || '';
+                document.getElementById('detailBudget').value = data.details?.['Бюджет'] || '';
+                document.getElementById('detailStyle').value = data.details?.['Стиль'] || '';
+                document.getElementById('projectMainImage').value = '';
+                document.getElementById('projectExtraImages').value = '';
+                document.getElementById('saveProjectBtn').textContent = '💾 Сохранить';
+                document.getElementById('showAddForm').style.display = 'none';
+            } catch (e) {
+                alert('Ошибка загрузки проекта');
+            }
+        }
+
+        async function deleteProject(id) {
+            if (!checkAuth()) return;
+            if (!confirm('Удалить этот проект?')) return;
+            try {
+                await db.collection('portfolio').doc(id).delete();
+                loadProjects();
+            } catch (e) {
+                alert('Ошибка удаления');
+            }
+        }
+
+        // ===== ПРЕВЬЮ ФОТО =====
+        document.getElementById('projectExtraImages').addEventListener('change', function() {
+            const previews = document.getElementById('imagePreviews');
+            const files = Array.from(this.files).slice(0, 5);
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}">
+                        <button class="remove-img" onclick="this.closest('.preview-item').remove()" title="Удалить фото"><i class="fas fa-times"></i></button>
+                    `;
+                    previews.appendChild(div);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        document.getElementById('projectMainImage').addEventListener('change', function() {
+            const previews = document.getElementById('imagePreviews');
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const existingMain = previews.querySelector('.preview-item:first-child');
+                    if (existingMain) existingMain.remove();
+                    const div = document.createElement('div');
+                    div.className = 'preview-item';
+                    div.innerHTML = `
+                        <img src="${e.target.result}">
+                        <button class="remove-img" onclick="this.closest('.preview-item').remove()" title="Удалить фото"><i class="fas fa-times"></i></button>
+                    `;
+                    previews.prepend(div);
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
         // =====================================================
-        // ОТЗЫВЫ
+        // ОТЗЫВЫ (CRUD)
         // =====================================================
         async function loadReviews() {
             if (!checkAuth()) return;
@@ -932,23 +1193,24 @@
                     count++;
                     const status = data.status || 'pending';
                     const statusMap = { pending: 'На проверке', approved: 'Одобрен', rejected: 'Отклонён' };
-                    const statusClass = { pending: 'status-pending', approved: 'status-approved', rejected: 'status-rejected' };
+                    const statusClass = { pending: 'status-pending', approved: 'status-approved',
+                        rejected: 'status-rejected' };
                     const stars = '⭐'.repeat(data.rating) + '☆'.repeat(5 - data.rating);
                     html += `
                         <div class="review-item">
                             <div class="review-header">
-                                <span class="review-name">${data.name || 'Аноним'}</span>
+                                <span class="review-name">${escapeHtml(data.name || 'Аноним')}</span>
                                 <span class="review-stars">${stars}</span>
                                 <span class="review-date">${data.date ? new Date(data.date).toLocaleDateString('ru-RU') : '—'}</span>
                                 <span class="review-status ${statusClass[status] || 'status-pending'}">${statusMap[status] || 'На проверке'}</span>
                             </div>
-                            <div class="review-text">"${data.text}"</div>
+                            <div class="review-text">"${escapeHtml(data.text)}"</div>
                             <div class="review-actions">
                                 ${status === 'pending' ? `
-                                    <button onclick="approveReview('${doc.id}')" style="background:#27ae60;color:white;">✅ Одобрить</button>
-                                    <button onclick="rejectReview('${doc.id}')" style="background:#e67e22;color:white;">❌ Отклонить</button>
+                                    <button onclick="approveReview('${doc.id}')" style="background:#27ae60;color:white;border:none;padding:5px 16px;border-radius:20px;cursor:pointer;font-weight:600;">✅ Одобрить</button>
+                                    <button onclick="rejectReview('${doc.id}')" style="background:#e67e22;color:white;border:none;padding:5px 16px;border-radius:20px;cursor:pointer;font-weight:600;">❌ Отклонить</button>
                                 ` : ''}
-                                <button onclick="deleteReview('${doc.id}')" style="background:#e74c3c;color:white;">🗑 Удалить</button>
+                                <button onclick="deleteReview('${doc.id}')" style="background:#e74c3c;color:white;border:none;padding:5px 16px;border-radius:20px;cursor:pointer;font-weight:600;">🗑 Удалить</button>
                             </div>
                         </div>
                     `;
@@ -963,22 +1225,25 @@
 
         async function approveReview(id) {
             if (!checkAuth()) return;
-            try { await db.collection('reviews').doc(id).update({ status: 'approved' }); loadReviews(); } catch (e) { alert('Ошибка'); }
+            try { await db.collection('reviews').doc(id).update({ status: 'approved' });
+                loadReviews(); } catch (e) { alert('Ошибка'); }
         }
 
         async function rejectReview(id) {
             if (!checkAuth()) return;
-            try { await db.collection('reviews').doc(id).update({ status: 'rejected' }); loadReviews(); } catch (e) { alert('Ошибка'); }
+            try { await db.collection('reviews').doc(id).update({ status: 'rejected' });
+                loadReviews(); } catch (e) { alert('Ошибка'); }
         }
 
         async function deleteReview(id) {
             if (!checkAuth()) return;
             if (!confirm('Удалить отзыв?')) return;
-            try { await db.collection('reviews').doc(id).delete(); loadReviews(); } catch (e) { alert('Ошибка'); }
+            try { await db.collection('reviews').doc(id).delete();
+                loadReviews(); } catch (e) { alert('Ошибка'); }
         }
 
         // =====================================================
-        // ЗАЯВКИ
+        // ЗАЯВКИ (CRUD)
         // =====================================================
         async function loadLeads(filter = 'all') {
             if (!checkAuth()) return;
@@ -995,7 +1260,8 @@
                 else if (filter === 'email') leads = leads.filter(l => l.contactType === 'email');
                 else if (filter === 'new') leads = leads.filter(l => (l.status || 'new') === 'new');
                 if (leads.length === 0) {
-                    container.innerHTML = `<p style="color:#7f8c8d;text-align:center;padding:20px;">Заявок с фильтром "${filter}" нет</p>`;
+                    container.innerHTML =
+                        `<p style="color:#7f8c8d;text-align:center;padding:20px;">Заявок с фильтром "${filter}" нет</p>`;
                     return;
                 }
                 let html = '';
@@ -1013,16 +1279,16 @@
                     html += `
                         <div class="lead-item">
                             <div class="lead-header">
-                                <span class="lead-name">${lead.name || 'Без имени'}</span>
-                                <span class="lead-contact ${contactClass}"><i class="fas ${icon}"></i> ${contactDisplay}</span>
+                                <span class="lead-name">${escapeHtml(lead.name || 'Без имени')}</span>
+                                <span class="lead-contact ${contactClass}"><i class="fas ${icon}"></i> ${escapeHtml(contactDisplay)}</span>
                                 <span class="lead-date">${lead.date ? new Date(lead.date).toLocaleDateString('ru-RU') : '—'}</span>
                                 <span class="lead-status ${statusClass[status] || 'status-new'}">${statusMap[status] || 'Новая'}</span>
                             </div>
-                            ${lead.message && lead.message !== '—' ? `<div class="lead-message">💬 ${lead.message}</div>` : ''}
+                            ${lead.message && lead.message !== '—' ? `<div class="lead-message">💬 ${escapeHtml(lead.message)}</div>` : ''}
                             <div class="lead-actions">
-                                <button onclick="updateLeadStatus('${lead.id}','viewed')" style="background:#27ae60;color:white;">Просмотрено</button>
-                                <button onclick="updateLeadStatus('${lead.id}','closed')" style="background:#e74c3c;color:white;">Закрыть</button>
-                                <button onclick="deleteLead('${lead.id}')" style="background:#95a5a6;color:white;">Удалить</button>
+                                <button onclick="updateLeadStatus('${lead.id}','viewed')" style="background:#27ae60;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-weight:600;">Просмотрено</button>
+                                <button onclick="updateLeadStatus('${lead.id}','closed')" style="background:#e74c3c;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-weight:600;">Закрыть</button>
+                                <button onclick="deleteLead('${lead.id}')" style="background:#95a5a6;color:white;border:none;padding:4px 16px;border-radius:20px;cursor:pointer;font-weight:600;">Удалить</button>
                             </div>
                         </div>
                     `;
@@ -1036,13 +1302,15 @@
 
         async function updateLeadStatus(id, status) {
             if (!checkAuth()) return;
-            try { await db.collection('leads').doc(id).update({ status }); loadLeads(currentLeadFilter); } catch (e) { alert('Ошибка'); }
+            try { await db.collection('leads').doc(id).update({ status });
+                loadLeads(currentLeadFilter); } catch (e) { alert('Ошибка'); }
         }
 
         async function deleteLead(id) {
             if (!checkAuth()) return;
             if (!confirm('Удалить заявку?')) return;
-            try { await db.collection('leads').doc(id).delete(); loadLeads(currentLeadFilter); } catch (e) { alert('Ошибка'); }
+            try { await db.collection('leads').doc(id).delete();
+                loadLeads(currentLeadFilter); } catch (e) { alert('Ошибка'); }
         }
 
         async function clearLeads() {
@@ -1084,7 +1352,8 @@
                 this.classList.add('active');
                 document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
                 const tabId = this.dataset.tab;
-                document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1)).classList.add('active');
+                document.getElementById('tab' + tabId.charAt(0).toUpperCase() + tabId.slice(1)).classList.add(
+                'active');
                 if (tabId === 'reviews') loadReviews();
                 if (tabId === 'leads') loadLeads(currentLeadFilter);
             });
@@ -1101,17 +1370,11 @@
         });
 
         // =====================================================
-        // ДОБАВЛЕНИЕ/РЕДАКТИРОВАНИЕ ПРОЕКТА
-        // =====================================================
-        document.getElementById('showAddForm').addEventListener('click', function() {
-            if (!checkAuth()) return;
-            document.getElementById('projectForm').style.display = 'grid';
-        });
-
-        // =====================================================
         // ЗАПУСК
         // =====================================================
-        console.log('🛡️ Админка Maison SV загружена!');
+        console.log('🛡️ Админка Maison SV (ПОЛНАЯ) загружена!');
+        console.log('✅ Форма добавления проекта есть');
+        console.log('✅ Всё работает!');
     </script>
 </body>
 </html>
