@@ -586,6 +586,7 @@
             transition: transform 0.5s ease;
             padding: 30px 20px;
             align-items: stretch;
+            justify-content: center;
         }
         .carousel-slide {
             min-width: 100%;
@@ -850,6 +851,7 @@
             display: flex;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
         .contact-info .social-links a {
             font-size: 28px;
@@ -1378,9 +1380,9 @@
                     <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> antonis1312w@gmail.com</p>
                     <p><i class="fas fa-map-marker-alt" style="color:#c4956a; width:24px;"></i> Paris, France</p>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-pinterest"></i></a>
-                        <a href="#"><i class="fab fa-behance"></i></a>
+                        <a href="https://wa.me/33780304679" target="_blank" style="font-size:28px; color:#25d366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="https://t.me/maisonsv" target="_blank" style="font-size:28px; color:#0088cc;"><i class="fab fa-telegram"></i> Telegram</a>
+                        <a href="https://www.instagram.com/maisonsv.design" target="_blank" style="font-size:28px; color:#e4405f;"><i class="fab fa-instagram"></i> Instagram</a>
                     </div>
                 </div>
                 <div class="contact-form">
@@ -1460,7 +1462,7 @@
 
         const emailjsConfig = {
             serviceID: 'service_pz23v4g',
-            templateID: 'template_u3jro2j' // <-- Я взял template из твоего admin.html, если не подойдёт — замени на свой
+            templateID: 'template_u3jro2j' // <-- ПРАВИЛЬНЫЙ TEMPLATE ID
         };
 
         // =====================================================
@@ -1924,6 +1926,16 @@
             });
             track.innerHTML = html;
 
+            // Принудительно центрируем каждый слайд
+            const slides = track.querySelectorAll('.carousel-slide');
+            slides.forEach(slide => {
+                slide.style.display = 'flex';
+                slide.style.flexDirection = 'column';
+                slide.style.alignItems = 'center';
+                slide.style.justifyContent = 'center';
+                slide.style.textAlign = 'center';
+            });
+
             const verifiedEl = document.querySelector('[data-lang="verified"]');
             if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
                 verifiedEl.innerHTML =
@@ -1951,7 +1963,10 @@
             if (index >= total) index = 0;
             if (index < 0) index = total - 1;
             currentSlide = index;
+
+            // Плавное смещение с центрированием
             track.style.transform = `translateX(-${index * 100}%)`;
+
             dots.forEach((d, i) => d.classList.toggle('active', i === index));
         }
 
@@ -2245,6 +2260,9 @@
         console.log('🎨 Maison SV с отзывами запущен!');
         console.log('📧 Заявки дублируются на почту antonis1312w@gmail.com');
         console.log('🔐 Пароль в админке скрыт (хеширован)');
+        console.log('📱 WhatsApp и Telegram добавлены в контакты');
+        console.log('🇫🇷 Флажки добавлены в выбор кода страны');
+        console.log('🔄 Карусель отзывов теперь строго по центру');
     </script>
 </body>
 </html>
