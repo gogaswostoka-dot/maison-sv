@@ -6,6 +6,8 @@
     <title>Maison SV - Интерьер-дизайн</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- ===== БИБЛИОТЕКА ФЛАГОВ (РАБОТАЕТ НА КОМПЕ И ТЕЛЕФОНЕ) ===== -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.0.0/css/flag-icons.min.css">
     <style>
         * {
             margin: 0;
@@ -566,7 +568,7 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        /* ===== КАРУСЕЛЬ ОТЗЫВОВ (ИСПРАВЛЕНА) ===== */
+        /* ===== КАРУСЕЛЬ ОТЗЫВОВ ===== */
         .reviews-section {
             background: #f8f6f3;
             padding: 80px 0;
@@ -575,30 +577,33 @@
             position: relative;
             max-width: 800px;
             margin: 0 auto 30px;
-            overflow: hidden;
-            border-radius: 20px;
             background: white;
+            border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-            min-height: 250px;
-            padding: 0 50px;
-        }
-        .carousel-track {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            padding: 30px 0;
-            align-items: stretch;
-            width: 100%;
+            min-height: 280px;
+            overflow: hidden;
         }
         .carousel-slide {
-            min-width: 100%;
+            display: none;
+            padding: 40px 60px;
+            text-align: center;
+            animation: fadeSlide 0.5s ease;
+        }
+        .carousel-slide.active {
             display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            text-align: center !important;
-            padding: 20px 30px !important;
-            box-sizing: border-box !important;
-            flex-shrink: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
         .carousel-slide .avatar-placeholder {
             width: 70px;
@@ -613,20 +618,17 @@
             font-weight: 700;
             border: 3px solid #c4956a;
             margin: 0 auto 12px;
-            flex-shrink: 0;
         }
         .carousel-slide .review-name {
             font-size: 20px;
             font-weight: 700;
             color: #1e2a3a;
             margin-bottom: 4px;
-            text-align: center;
         }
         .carousel-slide .review-stars {
             font-size: 22px;
             margin: 4px 0 8px;
             color: #f39c12;
-            text-align: center;
         }
         .carousel-slide .review-text {
             font-size: 16px;
@@ -635,24 +637,17 @@
             max-width: 90%;
             margin: 0 auto;
             font-style: italic;
-            text-align: center;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
         }
         .carousel-slide .review-date {
             font-size: 13px;
             color: #95a5a6;
             margin-top: 6px;
-            text-align: center;
         }
         .carousel-slide .review-verified {
             font-size: 13px;
             color: #27ae60;
             margin-top: 4px;
-            text-align: center;
         }
-
         .carousel-btn {
             position: absolute;
             top: 50%;
@@ -666,7 +661,7 @@
             font-size: 20px;
             cursor: pointer;
             transition: 0.3s;
-            z-index: 5;
+            z-index: 10;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -676,17 +671,16 @@
             transform: translateY(-50%) scale(1.05);
         }
         .carousel-btn.prev {
-            left: 5px;
+            left: 10px;
         }
         .carousel-btn.next {
-            right: 5px;
+            right: 10px;
         }
-
         .carousel-dots {
             display: flex;
             justify-content: center;
             gap: 8px;
-            padding-bottom: 20px;
+            padding: 0 0 20px 0;
         }
         .carousel-dots .dot {
             width: 12px;
@@ -847,18 +841,19 @@
             font-weight: 300;
         }
 
-        /* ===== КАСТОМНЫЙ СЕЛЕКТОР С ФЛАГАМИ ===== */
+        /* ===== КАСТОМНЫЙ СЕЛЕКТОР С ФЛАГАМИ (РАБОТАЕТ ВЕЗДЕ) ===== */
         .custom-select-wrapper {
             position: relative;
             display: inline-block;
             width: 140px;
             flex-shrink: 0;
         }
-        .custom-select {
+
+        .flag-select {
             appearance: none;
             -webkit-appearance: none;
             width: 100%;
-            padding: 12px 30px 12px 40px;
+            padding: 12px 30px 12px 44px;
             border: 2px solid #dce5ed;
             border-radius: 12px;
             background: white;
@@ -870,13 +865,26 @@
             background-repeat: no-repeat;
             background-position: right 12px center;
         }
-        .custom-select:focus {
+
+        .flag-select:focus {
             border-color: #c4956a;
             outline: none;
         }
-        .custom-select option {
-            padding: 6px 8px;
+
+        .flag-select option {
+            padding: 6px 8px 6px 36px;
         }
+
+        .fi {
+            display: inline-block;
+            width: 22px;
+            height: 16px;
+            margin-right: 6px;
+            vertical-align: middle;
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+        }
+
         .phone-input-wrapper {
             display: flex;
             gap: 10px;
@@ -1180,16 +1188,6 @@
             header {
                 height: 90px;
             }
-            .carousel-slide .review-text {
-                font-size: 14px;
-                max-width: 95%;
-                padding: 0 5px;
-            }
-            .carousel-btn {
-                width: 34px;
-                height: 34px;
-                font-size: 14px;
-            }
             .review-success-modal .success-modal {
                 padding: 35px 25px;
             }
@@ -1210,7 +1208,19 @@
                 width: 100%;
             }
             .reviews-carousel {
-                padding: 0 30px;
+                min-height: 320px;
+            }
+            .carousel-slide {
+                padding: 30px 40px;
+            }
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .carousel-slide .review-text {
+                font-size: 14px;
+                max-width: 95%;
             }
         }
         @media (max-width: 480px) {
@@ -1256,16 +1266,6 @@
             header {
                 height: 90px;
             }
-            .carousel-slide .review-text {
-                font-size: 13px;
-                max-width: 100%;
-                padding: 0 5px;
-            }
-            .carousel-btn {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-            }
             .review-success-modal .success-modal {
                 padding: 25px 18px;
             }
@@ -1296,11 +1296,25 @@
                 width: 100%;
             }
             .reviews-carousel {
-                padding: 0 15px;
-                min-height: 280px;
+                min-height: 360px;
             }
             .carousel-slide {
-                padding: 15px 10px !important;
+                padding: 20px 15px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            .carousel-btn.prev {
+                left: 3px;
+            }
+            .carousel-btn.next {
+                right: 3px;
+            }
+            .carousel-slide .review-text {
+                font-size: 13px;
+                max-width: 100%;
             }
         }
     </style>
@@ -1410,7 +1424,9 @@
             <p class="section-subtitle" data-lang="reviews-subtitle">Что говорят о моей работе</p>
 
             <div class="reviews-carousel" id="reviewsCarousel">
-                <div class="carousel-track" id="carouselTrack"></div>
+                <div id="carouselSlides">
+                    <!-- Слайды будут вставляться через JS -->
+                </div>
                 <button class="carousel-btn prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
                 <button class="carousel-btn next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-dots" id="carouselDots"></div>
@@ -1474,7 +1490,7 @@
                         </div>
                         <div class="form-group">
                             <label data-lang="form-contact-type">Способ связи</label>
-                            <select id="contactType" data-lang="form-contact-type-select">
+                            <select id="contactType">
                                 <option value="phone">📞 Телефон</option>
                                 <option value="email">✉️ Email</option>
                             </select>
@@ -1484,12 +1500,12 @@
                             <div class="phone-input-wrapper">
                                 <div class="custom-select-wrapper">
                                     <select class="flag-select" id="countryCode">
-                                        <option value="+7">🇷🇺 +7</option>
-                                        <option value="+33" selected>🇫🇷 +33</option>
-                                        <option value="+49">🇩🇪 +49</option>
-                                        <option value="+380">🇺🇦 +380</option>
-                                        <option value="+420">🇨🇿 +420</option>
-                                        <option value="+1">🇺🇸 +1</option>
+                                        <option value="+7"><span class="fi fi-ru"></span> +7</option>
+                                        <option value="+33" selected><span class="fi fi-fr"></span> +33</option>
+                                        <option value="+49"><span class="fi fi-de"></span> +49</option>
+                                        <option value="+380"><span class="fi fi-ua"></span> +380</option>
+                                        <option value="+420"><span class="fi fi-cz"></span> +420</option>
+                                        <option value="+1"><span class="fi fi-us"></span> +1</option>
                                     </select>
                                 </div>
                                 <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+">
@@ -1611,7 +1627,8 @@
                 'form-name': 'ФИО *',
                 'form-name-placeholder': 'Иван Иванов',
                 'form-contact-type': 'Способ связи',
-                'form-contact-type-select': '📞 Телефон',
+                'form-contact-phone': '📞 Телефон',
+                'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
                 'form-phone-placeholder': '7 80 30 46 79',
                 'form-email': 'Email *',
@@ -1672,7 +1689,8 @@
                 'form-name': 'Full name *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-contact-type': 'Contact method',
-                'form-contact-type-select': '📞 Phone',
+                'form-contact-phone': '📞 Phone',
+                'form-contact-email': '✉️ Email',
                 'form-phone': 'Phone *',
                 'form-phone-placeholder': '7 80 30 46 79',
                 'form-email': 'Email *',
@@ -1733,7 +1751,8 @@
                 'form-name': 'Nom complet *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-contact-type': 'Moyen de contact',
-                'form-contact-type-select': '📞 Téléphone',
+                'form-contact-phone': '📞 Téléphone',
+                'form-contact-email': '✉️ Email',
                 'form-phone': 'Téléphone *',
                 'form-phone-placeholder': '7 80 30 46 79',
                 'form-email': 'Email *',
@@ -1794,7 +1813,8 @@
                 'form-name': 'Vollständiger Name *',
                 'form-name-placeholder': 'Ivan Ivanov',
                 'form-contact-type': 'Kontaktmethode',
-                'form-contact-type-select': '📞 Telefon',
+                'form-contact-phone': '📞 Telefon',
+                'form-contact-email': '✉️ Email',
                 'form-phone': 'Telefon *',
                 'form-phone-placeholder': '7 80 30 46 79',
                 'form-email': 'Email *',
@@ -1855,7 +1875,8 @@
                 'form-name': 'ПІБ *',
                 'form-name-placeholder': 'Іван Іванов',
                 'form-contact-type': 'Спосіб зв\'язку',
-                'form-contact-type-select': '📞 Телефон',
+                'form-contact-phone': '📞 Телефон',
+                'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
                 'form-phone-placeholder': '7 80 30 46 79',
                 'form-email': 'Email *',
@@ -1880,8 +1901,9 @@
         let currentFilter = 'all';
         let portfolioData = [];
         let reviewsData = [];
-        let currentSlide = 0;
-        let carouselInterval = null;
+        let currentSlideIndex = 0;
+        let slidesArray = [];
+        let autoSlideInterval = null;
 
         // =====================================================
         // ЗАГРУЗКА ПОРТФОЛИО
@@ -1968,7 +1990,7 @@
         }
 
         // =====================================================
-        // ЗАГРУЗКА ОТЗЫВОВ (ИСПРАВЛЕНА)
+        // КАРУСЕЛЬ ОТЗЫВОВ
         // =====================================================
         async function loadReviews() {
             try {
@@ -1993,105 +2015,106 @@
         }
 
         function renderCarousel(reviews) {
-            const track = document.getElementById('carouselTrack');
-            const dots = document.getElementById('carouselDots');
-            if (!track) return;
-
-            console.log('🎨 Рендерим карусель, отзывов:', reviews.length);
+            const container = document.getElementById('carouselSlides');
+            const dotsContainer = document.getElementById('carouselDots');
+            if (!container) return;
 
             if (!reviews || reviews.length === 0) {
-                track.innerHTML =
-                    `<div class="carousel-slide" style="min-width:100%;">
-                            <div style="padding:40px; text-align:center; color:#7f8c8d;">
-                                <i class="fas fa-comment-dots" style="font-size:48px; opacity:0.3; margin-bottom:16px;"></i>
-                                <p style="font-size:18px;" data-lang="no-reviews">Отзывов пока нет</p>
-                                <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Будьте первым!</p>
-                            </div>
-                        </div>`;
-                dots.innerHTML = '';
+                container.innerHTML = `
+                    <div class="carousel-slide active">
+                        <div style="padding:40px; text-align:center; color:#7f8c8d;">
+                            <i class="fas fa-comment-dots" style="font-size:48px; opacity:0.3; margin-bottom:16px;"></i>
+                            <p style="font-size:18px;" data-lang="no-reviews">Отзывов пока нет</p>
+                            <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Будьте первым!</p>
+                        </div>
+                    </div>
+                `;
+                dotsContainer.innerHTML = '';
                 return;
             }
 
-            let html = '';
-            reviews.forEach(r => {
+            let slidesHTML = '';
+            reviews.forEach((r, index) => {
                 const stars = '⭐'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
                 const nameInitial = r.name ? r.name.charAt(0).toUpperCase() : '?';
-                html += `
-                        <div class="carousel-slide">
-                            <div class="avatar-placeholder">${nameInitial}</div>
-                            <div class="review-name">${r.name || 'Аноним'}</div>
-                            <div class="review-stars">${stars}</div>
-                            <div class="review-text">"${r.text}"</div>
-                            <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
-                            <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
-                        </div>
-                    `;
+                const activeClass = index === 0 ? 'active' : '';
+                slidesHTML += `
+                    <div class="carousel-slide ${activeClass}" data-index="${index}">
+                        <div class="avatar-placeholder">${nameInitial}</div>
+                        <div class="review-name">${r.name || 'Аноним'}</div>
+                        <div class="review-stars">${stars}</div>
+                        <div class="review-text">"${r.text}"</div>
+                        <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
+                        <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
+                    </div>
+                `;
             });
-            track.innerHTML = html;
+            container.innerHTML = slidesHTML;
 
-            // Обновляем текст "Подтверждённый клиент" для текущего языка
             const verifiedEl = document.querySelector('.review-verified');
             if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
                 verifiedEl.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang]['verified']}`;
             }
 
-            dots.innerHTML = '';
+            dotsContainer.innerHTML = '';
             reviews.forEach((_, i) => {
                 const dot = document.createElement('button');
                 dot.className = `dot ${i === 0 ? 'active' : ''}`;
+                dot.dataset.index = i;
                 dot.onclick = () => goToSlide(i);
-                dots.appendChild(dot);
+                dotsContainer.appendChild(dot);
             });
 
-            currentSlide = 0;
-            track.style.transform = 'translateX(0)';
-            startCarousel();
+            slidesArray = reviews;
+            currentSlideIndex = 0;
+            startAutoSlide();
         }
 
         function goToSlide(index) {
-            const track = document.getElementById('carouselTrack');
+            const slides = document.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.dot');
-            if (!track || track.children.length === 0) return;
-            
-            const total = track.children.length;
-            if (index >= total) index = 0;
-            if (index < 0) index = total - 1;
-            currentSlide = index;
-
-            track.style.transition = 'transform 0.5s ease-in-out';
-            track.style.transform = `translateX(-${index * 100}%)`;
-
-            dots.forEach((d, i) => {
-                d.classList.toggle('active', i === index);
+            if (!slides.length) return;
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            currentSlideIndex = index;
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
             });
         }
 
-        function startCarousel() {
-            if (carouselInterval) clearInterval(carouselInterval);
-            carouselInterval = setInterval(() => goToSlide(currentSlide + 1), 5000);
+        function startAutoSlide() {
+            if (autoSlideInterval) clearInterval(autoSlideInterval);
+            if (slidesArray.length > 1) {
+                autoSlideInterval = setInterval(() => {
+                    goToSlide(currentSlideIndex + 1);
+                }, 5000);
+            }
         }
 
-        function stopCarousel() {
-            if (carouselInterval) {
-                clearInterval(carouselInterval);
-                carouselInterval = null;
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
             }
         }
 
         document.getElementById('carouselPrev').addEventListener('click', function() {
-            stopCarousel();
-            goToSlide(currentSlide - 1);
-            startCarousel();
+            stopAutoSlide();
+            goToSlide(currentSlideIndex - 1);
+            startAutoSlide();
         });
 
         document.getElementById('carouselNext').addEventListener('click', function() {
-            stopCarousel();
-            goToSlide(currentSlide + 1);
-            startCarousel();
+            stopAutoSlide();
+            goToSlide(currentSlideIndex + 1);
+            startAutoSlide();
         });
 
-        document.getElementById('reviewsCarousel').addEventListener('mouseenter', stopCarousel);
-        document.getElementById('reviewsCarousel').addEventListener('mouseleave', startCarousel);
+        document.getElementById('reviewsCarousel').addEventListener('mouseenter', stopAutoSlide);
+        document.getElementById('reviewsCarousel').addEventListener('mouseleave', startAutoSlide);
 
         // =====================================================
         // ОТПРАВКА ОТЗЫВА
@@ -2256,6 +2279,18 @@
                 }
             });
 
+            // Обновляем select "Способ связи"
+            const contactSelect = document.getElementById('contactType');
+            if (contactSelect) {
+                const options = contactSelect.querySelectorAll('option');
+                options.forEach(opt => {
+                    const key = opt.value === 'phone' ? 'form-contact-phone' : 'form-contact-email';
+                    if (translations[lang] && translations[lang][key]) {
+                        opt.textContent = translations[lang][key];
+                    }
+                });
+            }
+
             document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
                 const filterKey = 'filter-' + btn.dataset.filter;
                 if (translations[lang] && translations[lang][filterKey]) {
@@ -2380,11 +2415,10 @@
             loadReviews();
         }, 500);
 
-        console.log('🎨 Maison SV с отзывами запущен!');
-        console.log('📱 WhatsApp, Telegram, Instagram — красивые иконки в 1 ряд');
+        console.log('🎨 Maison SV запущен!');
         console.log('📞 В форме можно выбрать: Телефон или Email');
-        console.log('🇫🇷 Флажки в выборе кода страны (🇫🇷, 🇷🇺, 🇩🇪, 🇺🇦, 🇨🇿, 🇺🇸)');
-        console.log('🔄 Отзывы теперь строго по центру!');
+        console.log('🔄 Отзывы работают!');
+        console.log('🇫🇷 Флаги работают на компе и телефоне!');
     </script>
 </body>
 </html>
