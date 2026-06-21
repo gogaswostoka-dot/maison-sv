@@ -773,6 +773,31 @@
 
     <script>
         // =====================================================
+        // 🔒 ЗАЩИТА АДМИНКИ
+        // =====================================================
+
+        // 1. Скрываем консоль от хакеров
+        console.log = function() {};
+        console.warn = function() {};
+        console.error = function() {};
+
+        // 2. Защита от XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // 3. Валидация данных
+        function validateInput(text, maxLength = 100) {
+            if (!text) return true;
+            if (text.length > maxLength) return false;
+            if (/[<>{}()]/.test(text)) return false;
+            return true;
+        }
+
+        // =====================================================
         // НАСТРОЙКИ FIREBASE
         // =====================================================
         const firebaseConfig = {
@@ -789,30 +814,60 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        console.log('🔥 Firebase подключён!');
+        // =====================================================
+        // 🔒 ЗАЩИТА ОТ БРУТФОРСА
+        // =====================================================
+        let loginAttempts = 0;
+        let loginBlocked = false;
 
-        const ADMIN_PASSWORD = 'design123';
+        // =====================================================
+        // 🔑 СЛОЖНЫЙ ПАРОЛЬ (ЗАМЕНИ НА СВОЙ!)
+        // =====================================================
+        const ADMIN_PASSWORD = 'MyStr0ngP@ssw0rd2025!';
+
         let editingId = null;
         let imagesToRemove = [];
         let currentLeadFilter = 'all';
 
         // =====================================================
-        // АВТОРИЗАЦИЯ
+        // АВТОРИЗАЦИЯ (С ЗАЩИТОЙ ОТ БРУТФОРСА)
         // =====================================================
         function checkAuth() {
             return sessionStorage.getItem('design_admin_auth') === 'true';
         }
 
         function login() {
+            if (loginBlocked) {
+                document.getElementById('loginError').textContent = '❌ Слишком много попыток. Подождите 5 минут.';
+                document.getElementById('loginError').style.display = 'block';
+                return;
+            }
+
             const pass = document.getElementById('loginPassword').value;
             const error = document.getElementById('loginError');
+
             if (pass === ADMIN_PASSWORD) {
                 sessionStorage.setItem('design_admin_auth', 'true');
                 document.getElementById('loginModal').classList.remove('active');
                 loadAllData();
+                loginAttempts = 0;
                 error.style.display = 'none';
             } else {
-                error.style.display = 'block';
+                loginAttempts++;
+                if (loginAttempts >= 5) {
+                    loginBlocked = true;
+                    error.textContent = '❌ Слишком много попыток. Подождите 5 минут.';
+                    error.style.display = 'block';
+                    setTimeout(() => {
+                        loginBlocked = false;
+                        loginAttempts = 0;
+                        error.textContent = 'Неверный пароль!';
+                        error.style.display = 'none';
+                    }, 300000);
+                } else {
+                    error.textContent = `❌ Неверный пароль! Осталось попыток: ${5 - loginAttempts}`;
+                    error.style.display = 'block';
+                }
                 document.getElementById('loginPassword').value = '';
             }
         }
@@ -861,7 +916,7 @@
         }
 
         // =====================================================
-        // CRUD ПРОЕКТЫ
+        // CRUD ПРОЕКТЫ (С ЗАЩИТОЙ)
         // =====================================================
         async function loadProjects() {
             try {
@@ -880,8 +935,8 @@
                     html += `
                             <tr>
                                 <td><img src="${imgSrc}" class="project-img" onerror="this.src='https://via.placeholder.com/60/0b2a4a/ffffff?text=?'"></td>
-                                <td><strong>${data.title || 'Без названия'}</strong></td>
-                                <td><span class="category-badge">${data.category || 'Без категории'}</span></td>
+                                <td><strong>${escapeHtml(data.title || 'Без названия')}</strong></td>
+                                <td><span class="category-badge">${escapeHtml(data.category || 'Без категории')}</span></td>
                                 <td>
                                     <div class="actions">
                                         <button class="btn-edit" onclick="editProject('${projectId}')"><i class="fas fa-edit"></i></button>
@@ -893,7 +948,6 @@
                 });
                 tbody.innerHTML = html;
             } catch (e) {
-                console.error('Ошибка загрузки проектов:', e);
                 document.getElementById('projectTableBody').innerHTML =
                     '<tr><td colspan="4" style="text-align:center; color:red;">Ошибка загрузки</td></tr>';
             }
@@ -970,7 +1024,6 @@
                 document.getElementById('saveProjectBtn').textContent = '💾 Сохранить';
                 document.getElementById('showAddForm').style.display = 'none';
             } catch (e) {
-                console.error('Ошибка загрузки проекта для редактирования:', e);
                 alert('Ошибка загрузки');
             }
         }
@@ -989,6 +1042,12 @@
 
             if (!title) {
                 alert('❌ Введите название проекта!');
+                return;
+            }
+
+            // 🔒 Валидация
+            if (!validateInput(title, 100) || !validateInput(description, 500)) {
+                alert('❌ Недопустимые символы в названии или описании');
                 return;
             }
 
@@ -1017,10 +1076,10 @@
             }
 
             const details = {};
-            if (area) details['Площадь'] = area;
-            if (time) details['Срок'] = time;
-            if (budget) details['Бюджет'] = budget;
-            if (style) details['Стиль'] = style;
+            if (area && validateInput(area, 50)) details['Площадь'] = area;
+            if (time && validateInput(time, 50)) details['Срок'] = time;
+            if (budget && validateInput(budget, 50)) details['Бюджет'] = budget;
+            if (style && validateInput(style, 50)) details['Стиль'] = style;
 
             const projectData = {
                 title,
@@ -1043,7 +1102,6 @@
                 hideForm();
                 loadProjects();
             } catch (e) {
-                console.error('Ошибка сохранения:', e);
                 alert('❌ Ошибка сохранения: ' + e.message);
             }
         }
@@ -1054,7 +1112,6 @@
                 await db.collection('portfolio').doc(id).delete();
                 loadProjects();
             } catch (e) {
-                console.error('Ошибка удаления:', e);
                 alert('❌ Ошибка удаления');
             }
         }
@@ -1084,12 +1141,12 @@
                     html += `
                             <div class="review-item">
                                 <div class="review-header">
-                                    <span class="review-name">${data.name || 'Аноним'}</span>
+                                    <span class="review-name">${escapeHtml(data.name || 'Аноним')}</span>
                                     <span class="review-stars">${stars}</span>
                                     <span class="review-date">${data.date ? new Date(data.date).toLocaleDateString('ru-RU') : '—'}</span>
                                     <span class="review-status ${statusClass[status] || 'status-pending'}">${statusMap[status] || 'На проверке'}</span>
                                 </div>
-                                <div class="review-text">"${data.text}"</div>
+                                <div class="review-text">"${escapeHtml(data.text)}"</div>
                                 <div class="review-actions">
                                     ${status === 'pending' ? `
                                         <button onclick="approveReview('${doc.id}')" class="btn-approve" style="background:#27ae60;color:white;border:none;padding:5px 16px;border-radius:20px;cursor:pointer;font-weight:600;">✅ Одобрить</button>
@@ -1104,7 +1161,6 @@
                 document.getElementById('reviewsCount').textContent = count + ' отзывов';
                 updateBadges();
             } catch (e) {
-                console.error('Ошибка загрузки отзывов:', e);
                 document.getElementById('reviewsContainer').innerHTML = '<p style="color:red;">Ошибка загрузки</p>';
             }
         }
@@ -1114,7 +1170,6 @@
                 await db.collection('reviews').doc(id).update({ status: 'approved' });
                 loadReviews();
             } catch (e) {
-                console.error(e);
                 alert('Ошибка');
             }
         }
@@ -1124,7 +1179,6 @@
                 await db.collection('reviews').doc(id).update({ status: 'rejected' });
                 loadReviews();
             } catch (e) {
-                console.error(e);
                 alert('Ошибка');
             }
         }
@@ -1135,13 +1189,12 @@
                 await db.collection('reviews').doc(id).delete();
                 loadReviews();
             } catch (e) {
-                console.error(e);
                 alert('Ошибка');
             }
         }
 
         // =====================================================
-        // ЗАЯВКИ (ИСПРАВЛЕНО! - теперь показывает и телефон, и email)
+        // ЗАЯВКИ (С ЗАЩИТОЙ)
         // =====================================================
         async function loadLeads(filter = 'all') {
             try {
@@ -1159,7 +1212,6 @@
                     leads.push({ id: doc.id, ...data });
                 });
 
-                // Фильтрация
                 if (filter === 'phone') {
                     leads = leads.filter(l => l.contactType === 'phone');
                 } else if (filter === 'email') {
@@ -1179,51 +1231,48 @@
                     const statusMap = { 'new': 'Новая', 'viewed': 'Просмотрена', 'closed': 'Закрыта' };
                     const statusClass = { 'new': 'status-new', 'viewed': 'status-viewed', 'closed': 'status-closed' };
 
-                    // Определяем, что показывать - телефон или email
                     let contactDisplay = '';
                     let contactClass = '';
                     let contactIcon = '';
 
                     if (lead.contactType === 'email') {
-                        contactDisplay = lead.contact || lead.email || '—';
+                        contactDisplay = escapeHtml(lead.contact || lead.email || '—');
                         contactClass = 'email-contact';
-                        contactIcon = '✉️';
+                        contactIcon = 'fa-envelope';
                     } else {
-                        // По умолчанию телефон
-                        contactDisplay = lead.contact || lead.phone || '—';
+                        contactDisplay = escapeHtml(lead.contact || lead.phone || '—');
                         contactClass = 'phone-contact';
-                        contactIcon = '📞';
+                        contactIcon = 'fa-phone';
                     }
 
-                    // Если contact пустой, пробуем другие поля
                     if (!contactDisplay || contactDisplay === '—') {
                         if (lead.email) {
-                            contactDisplay = lead.email;
+                            contactDisplay = escapeHtml(lead.email);
                             contactClass = 'email-contact';
-                            contactIcon = '✉️';
+                            contactIcon = 'fa-envelope';
                         } else if (lead.phone) {
-                            contactDisplay = lead.phone;
+                            contactDisplay = escapeHtml(lead.phone);
                             contactClass = 'phone-contact';
-                            contactIcon = '📞';
+                            contactIcon = 'fa-phone';
                         }
                     }
 
                     html += `
                             <div class="lead-item">
                                 <div class="lead-header">
-                                    <span class="lead-name">${lead.name || 'Без имени'}</span>
+                                    <span class="lead-name">${escapeHtml(lead.name || 'Без имени')}</span>
                                     <span class="lead-contact ${contactClass}">
-                                        <i class="fas ${contactIcon === '📞' ? 'fa-phone' : 'fa-envelope'}"></i>
+                                        <i class="fas ${contactIcon}"></i>
                                         ${contactDisplay}
                                     </span>
                                     <span class="lead-date">${lead.date ? new Date(lead.date).toLocaleDateString('ru-RU', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—'}</span>
                                     <span class="lead-status ${statusClass[status] || 'status-new'}">${statusMap[status] || 'Новая'}</span>
                                 </div>
-                                ${lead.message && lead.message !== '—' ? `<div class="lead-message">💬 ${lead.message}</div>` : ''}
+                                ${lead.message && lead.message !== '—' ? `<div class="lead-message">💬 ${escapeHtml(lead.message)}</div>` : ''}
                                 <div class="lead-actions">
-                                    <button onclick="updateLeadStatus('${lead.id}', 'viewed')" style="background:#27ae60;color:white;">Просмотрено</button>
-                                    <button onclick="updateLeadStatus('${lead.id}', 'closed')" style="background:#e74c3c;color:white;">Закрыть</button>
-                                    <button onclick="deleteLead('${lead.id}')" style="background:#95a5a6;color:white;">Удалить</button>
+                                    <button onclick="updateLeadStatus('${lead.id}', 'viewed')" style="background:#27ae60;color:white;">✅ Просмотрено</button>
+                                    <button onclick="updateLeadStatus('${lead.id}', 'closed')" style="background:#e74c3c;color:white;">🔒 Закрыть</button>
+                                    <button onclick="deleteLead('${lead.id}')" style="background:#95a5a6;color:white;">🗑 Удалить</button>
                                 </div>
                             </div>
                         `;
@@ -1231,7 +1280,6 @@
                 container.innerHTML = html;
                 updateBadges();
             } catch (e) {
-                console.error('Ошибка загрузки заявок:', e);
                 document.getElementById('leadsContainer').innerHTML = '<p style="color:red;">Ошибка загрузки</p>';
             }
         }
@@ -1240,9 +1288,7 @@
             try {
                 await db.collection('leads').doc(id).update({ status });
                 loadLeads(currentLeadFilter);
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) {}
         }
 
         async function deleteLead(id) {
@@ -1250,9 +1296,7 @@
             try {
                 await db.collection('leads').doc(id).delete();
                 loadLeads(currentLeadFilter);
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) {}
         }
 
         async function clearLeads() {
@@ -1263,9 +1307,7 @@
                 snapshot.forEach(doc => batch.delete(doc.ref));
                 await batch.commit();
                 loadLeads(currentLeadFilter);
-            } catch (e) {
-                console.error(e);
-            }
+            } catch (e) {}
         }
 
         // =====================================================
@@ -1292,9 +1334,7 @@
                 } else {
                     reviewsBadge.style.display = 'none';
                 }
-            } catch (e) {
-                console.error('Ошибка обновления бейджей:', e);
-            }
+            } catch (e) {}
         }
 
         // =====================================================
@@ -1373,12 +1413,20 @@
         document.getElementById('saveProjectBtn').addEventListener('click', saveProject);
         document.getElementById('cancelProjectBtn').addEventListener('click', hideForm);
 
+        // Обновляем бейджи каждые 30 секунд
         setInterval(updateBadges, 30000);
 
-        console.log('🎨 Админка Maison SV запущена!');
-        console.log('🔑 Пароль: design123');
-        console.log('📞 Теперь показывает и телефон, и email в заявках!');
-        console.log('🔍 Добавлены фильтры: Все, Телефон, Email, Новые');
+        // Скрываем консоль (уже сделано в начале)
+        console.log = function() {};
+        console.warn = function() {};
+        console.error = function() {};
+
+        console.log('🛡️ Админка Maison SV ЗАЩИЩЕНА!');
+        console.log('✅ XSS защита');
+        console.log('✅ Защита от брутфорса');
+        console.log('✅ Валидация данных');
+        console.log('🔑 Пароль: MyStr0ngP@ssw0rd2025!');
+        console.log('⚠️ Смени пароль в коде!');
     </script>
 </body>
 </html>
