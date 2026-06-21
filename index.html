@@ -6,8 +6,6 @@
     <title>Maison SV - Интерьер-дизайн</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- ===== БИБЛИОТЕКА ФЛАГОВ (РАБОТАЕТ НА КОМПЕ И ТЕЛЕФОНЕ) ===== -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.0.0/css/flag-icons.min.css">
     <style>
         * {
             margin: 0;
@@ -841,7 +839,7 @@
             font-weight: 300;
         }
 
-        /* ===== КАСТОМНЫЙ СЕЛЕКТОР С ФЛАГАМИ (РАБОТАЕТ ВЕЗДЕ) ===== */
+        /* ===== ВЫБОР СТРАНЫ С ФЛАГАМИ (РАБОТАЕТ ВЕЗДЕ) ===== */
         .custom-select-wrapper {
             position: relative;
             display: inline-block;
@@ -853,7 +851,7 @@
             appearance: none;
             -webkit-appearance: none;
             width: 100%;
-            padding: 12px 30px 12px 44px;
+            padding: 12px 30px 12px 14px;
             border: 2px solid #dce5ed;
             border-radius: 12px;
             background: white;
@@ -872,17 +870,14 @@
         }
 
         .flag-select option {
-            padding: 6px 8px 6px 36px;
+            padding: 4px 8px;
+            font-size: 14px;
         }
 
-        .fi {
-            display: inline-block;
-            width: 22px;
-            height: 16px;
+        /* Флаги-эмодзи в опциях - работают везде, где есть эмодзи */
+        .flag-select option .flag-emoji {
+            font-size: 18px;
             margin-right: 6px;
-            vertical-align: middle;
-            border-radius: 2px;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
         }
 
         .phone-input-wrapper {
@@ -1500,12 +1495,12 @@
                             <div class="phone-input-wrapper">
                                 <div class="custom-select-wrapper">
                                     <select class="flag-select" id="countryCode">
-                                        <option value="+7"><span class="fi fi-ru"></span> +7</option>
-                                        <option value="+33" selected><span class="fi fi-fr"></span> +33</option>
-                                        <option value="+49"><span class="fi fi-de"></span> +49</option>
-                                        <option value="+380"><span class="fi fi-ua"></span> +380</option>
-                                        <option value="+420"><span class="fi fi-cz"></span> +420</option>
-                                        <option value="+1"><span class="fi fi-us"></span> +1</option>
+                                        <option value="+7">🇷🇺 +7</option>
+                                        <option value="+33" selected>🇫🇷 +33</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+380">🇺🇦 +380</option>
+                                        <option value="+420">🇨🇿 +420</option>
+                                        <option value="+1">🇺🇸 +1</option>
                                     </select>
                                 </div>
                                 <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+">
@@ -2418,7 +2413,7 @@
         console.log('🎨 Maison SV запущен!');
         console.log('📞 В форме можно выбрать: Телефон или Email');
         console.log('🔄 Отзывы работают!');
-        console.log('🇫🇷 Флаги работают на компе и телефоне!');
+        console.log('🇫🇷 Флаги работают на компе и телефоне (через эмодзи)');
     </script>
 </body>
 </html>
