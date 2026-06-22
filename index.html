@@ -1417,7 +1417,7 @@
                 <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Leave a review</h3>
                 <div class="form-group">
                     <label data-lang="review-form-name">Your name *</label>
-                    <input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder" />
+                    <input type="text" id="reviewName" placeholder="" data-lang="review-name-placeholder" />
                 </div>
                 <div class="form-group">
                     <label data-lang="review-form-rating">Rating</label>
@@ -1431,7 +1431,7 @@
                 </div>
                 <div class="form-group">
                     <label data-lang="review-form-text">Your review *</label>
-                    <textarea id="reviewText" rows="3" placeholder="Share your experience..." data-lang="review-text-placeholder"></textarea>
+                    <textarea id="reviewText" rows="3" placeholder="" data-lang="review-text-placeholder"></textarea>
                 </div>
                 <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Send review</button>
             </div>
@@ -1467,7 +1467,8 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label data-lang="form-name">Full name *</label>
-                            <input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required />
+                            <!-- УБИРАЕМ ПРИМЕР "Ivan Ivanov" -->
+                            <input type="text" id="clientName" placeholder="" data-lang="form-name-placeholder" required />
                         </div>
                         <div class="form-group">
                             <label data-lang="form-contact-type">Contact method</label>
@@ -1489,14 +1490,14 @@
                                         <option value="+1">🇺🇸 +1</option>
                                     </select>
                                 </div>
-                                <!-- ИСПРАВЛЕННЫЙ ПЛЕЙСХОЛДЕР -->
                                 <input type="tel" id="clientPhone" placeholder="Введите номер телефона" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+" />
                             </div>
                         </div>
                         <div class="form-group" id="emailGroup" style="display:none;">
                             <label data-lang="form-email">Email *</label>
                             <div class="email-input-wrapper">
-                                <input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder" />
+                                <!-- УБИРАЕМ ПРИМЕР "ivan@mail.ru" -->
+                                <input type="email" id="clientEmail" placeholder="" data-lang="form-email-placeholder" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -1565,7 +1566,7 @@
         const db = firebase.firestore();
 
         // ============================================================
-        //  ПЕРЕВОДЫ (С ОБНОВЛЁННЫМ ПЛЕЙСХОЛДЕРОМ)
+        //  ПЕРЕВОДЫ (УБРАНЫ ВСЕ ПРИМЕРЫ)
         // ============================================================
         const translations = {
             ru: {
@@ -1577,10 +1578,10 @@
                 'reviews-subtitle': 'Что говорят о моей работе',
                 'review-form-title': 'Оставить отзыв',
                 'review-form-name': 'Ваше имя *',
-                'review-name-placeholder': 'Иван Иванов',
+                'review-name-placeholder': '',
                 'review-form-rating': 'Оценка',
                 'review-form-text': 'Ваш отзыв *',
-                'review-text-placeholder': 'Поделитесь впечатлением о работе...',
+                'review-text-placeholder': '',
                 'review-form-submit': 'Отправить отзыв',
                 'review-success-title': 'Спасибо за ваш отзыв! ⭐',
                 'review-success-text': 'Отзыв отправлен на проверку. После одобрения он появится в карусели.',
@@ -1608,14 +1609,14 @@
                 'contact-subtitle': 'Оставьте заявку, и я свяжусь с вами в ближайшее время',
                 'contact-info-title': 'Контакты',
                 'form-name': 'ФИО *',
-                'form-name-placeholder': 'Иван Иванов',
+                'form-name-placeholder': '',
                 'form-contact-type': 'Способ связи',
                 'form-contact-phone': '📞 Телефон',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': 'Введите номер телефона', // ИСПРАВЛЕНО
+                'form-phone-placeholder': 'Введите номер телефона',
                 'form-email': 'Email *',
-                'form-email-placeholder': 'ivan@mail.ru',
+                'form-email-placeholder': '',
                 'form-message': 'Обсудить проект',
                 'form-message-placeholder': 'Расскажите о вашем проекте...',
                 'form-submit': 'Отправить',
@@ -1639,10 +1640,10 @@
                 'reviews-subtitle': 'What they say about my work',
                 'review-form-title': 'Leave a review',
                 'review-form-name': 'Your name *',
-                'review-name-placeholder': 'Ivan Ivanov',
+                'review-name-placeholder': '',
                 'review-form-rating': 'Rating',
                 'review-form-text': 'Your review *',
-                'review-text-placeholder': 'Share your experience...',
+                'review-text-placeholder': '',
                 'review-form-submit': 'Send review',
                 'review-success-title': 'Thank you for your review! ⭐',
                 'review-success-text': 'Your review has been sent for moderation. It will appear after approval.',
@@ -1670,14 +1671,14 @@
                 'contact-subtitle': 'Leave a request and I will contact you soon',
                 'contact-info-title': 'Contacts',
                 'form-name': 'Full name *',
-                'form-name-placeholder': 'Ivan Ivanov',
+                'form-name-placeholder': '',
                 'form-contact-type': 'Contact method',
                 'form-contact-phone': '📞 Phone',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Phone *',
-                'form-phone-placeholder': 'Enter phone number', // ИСПРАВЛЕНО
+                'form-phone-placeholder': 'Enter phone number',
                 'form-email': 'Email *',
-                'form-email-placeholder': 'ivan@mail.ru',
+                'form-email-placeholder': '',
                 'form-message': 'Discuss the project',
                 'form-message-placeholder': 'Tell about your project...',
                 'form-submit': 'Send',
@@ -1701,10 +1702,10 @@
                 'reviews-subtitle': 'Ce qu\'ils disent de mon travail',
                 'review-form-title': 'Laisser un avis',
                 'review-form-name': 'Votre nom *',
-                'review-name-placeholder': 'Ivan Ivanov',
+                'review-name-placeholder': '',
                 'review-form-rating': 'Note',
                 'review-form-text': 'Votre avis *',
-                'review-text-placeholder': 'Partagez votre expérience...',
+                'review-text-placeholder': '',
                 'review-form-submit': 'Envoyer l\'avis',
                 'review-success-title': 'Merci pour votre avis ! ⭐',
                 'review-success-text': 'Votre avis a été envoyé pour modération. Il apparaîtra après approbation.',
@@ -1732,14 +1733,14 @@
                 'contact-subtitle': 'Laissez une demande et je vous contacterai bientôt',
                 'contact-info-title': 'Contacts',
                 'form-name': 'Nom complet *',
-                'form-name-placeholder': 'Ivan Ivanov',
+                'form-name-placeholder': '',
                 'form-contact-type': 'Moyen de contact',
                 'form-contact-phone': '📞 Téléphone',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Téléphone *',
-                'form-phone-placeholder': 'Entrez le numéro de téléphone', // ИСПРАВЛЕНО
+                'form-phone-placeholder': 'Entrez le numéro de téléphone',
                 'form-email': 'Email *',
-                'form-email-placeholder': 'ivan@mail.ru',
+                'form-email-placeholder': '',
                 'form-message': 'Discuter le projet',
                 'form-message-placeholder': 'Parlez de votre projet...',
                 'form-submit': 'Envoyer',
@@ -1763,10 +1764,10 @@
                 'reviews-subtitle': 'Was sie über meine Arbeit sagen',
                 'review-form-title': 'Bewertung hinterlassen',
                 'review-form-name': 'Ihr Name *',
-                'review-name-placeholder': 'Ivan Ivanov',
+                'review-name-placeholder': '',
                 'review-form-rating': 'Bewertung',
                 'review-form-text': 'Ihre Bewertung *',
-                'review-text-placeholder': 'Teilen Sie Ihre Erfahrung...',
+                'review-text-placeholder': '',
                 'review-form-submit': 'Bewertung senden',
                 'review-success-title': 'Vielen Dank für Ihre Bewertung! ⭐',
                 'review-success-text': 'Ihre Bewertung wurde zur Moderation gesendet. Sie wird nach der Genehmigung angezeigt.',
@@ -1794,14 +1795,14 @@
                 'contact-subtitle': 'Hinterlassen Sie eine Anfrage und ich melde mich bald bei Ihnen',
                 'contact-info-title': 'Kontakte',
                 'form-name': 'Vollständiger Name *',
-                'form-name-placeholder': 'Ivan Ivanov',
+                'form-name-placeholder': '',
                 'form-contact-type': 'Kontaktmethode',
                 'form-contact-phone': '📞 Telefon',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Telefon *',
-                'form-phone-placeholder': 'Telefonnummer eingeben', // ИСПРАВЛЕНО
+                'form-phone-placeholder': 'Telefonnummer eingeben',
                 'form-email': 'Email *',
-                'form-email-placeholder': 'ivan@mail.ru',
+                'form-email-placeholder': '',
                 'form-message': 'Projekt besprechen',
                 'form-message-placeholder': 'Erzählen Sie von Ihrem Projekt...',
                 'form-submit': 'Senden',
@@ -1825,10 +1826,10 @@
                 'reviews-subtitle': 'Що говорять про мою роботу',
                 'review-form-title': 'Залишити відгук',
                 'review-form-name': 'Ваше ім\'я *',
-                'review-name-placeholder': 'Іван Іванов',
+                'review-name-placeholder': '',
                 'review-form-rating': 'Оцінка',
                 'review-form-text': 'Ваш відгук *',
-                'review-text-placeholder': 'Поділіться враженням про роботу...',
+                'review-text-placeholder': '',
                 'review-form-submit': 'Надіслати відгук',
                 'review-success-title': 'Дякуємо за ваш відгук! ⭐',
                 'review-success-text': 'Відгук надіслано на перевірку. Після схвалення він з\'явиться в каруселі.',
@@ -1856,14 +1857,14 @@
                 'contact-subtitle': 'Залиште заявку, і я зв\'яжуся з вами найближчим часом',
                 'contact-info-title': 'Контакти',
                 'form-name': 'ПІБ *',
-                'form-name-placeholder': 'Іван Іванов',
+                'form-name-placeholder': '',
                 'form-contact-type': 'Спосіб зв\'язку',
                 'form-contact-phone': '📞 Телефон',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': 'Введіть номер телефону', // ИСПРАВЛЕНО
+                'form-phone-placeholder': 'Введіть номер телефону',
                 'form-email': 'Email *',
-                'form-email-placeholder': 'ivan@mail.ru',
+                'form-email-placeholder': '',
                 'form-message': 'Обговорити проект',
                 'form-message-placeholder': 'Розкажіть про ваш проект...',
                 'form-submit': 'Відправити',
@@ -1889,7 +1890,7 @@
         let autoSlideInterval = null;
 
         // ============================================================
-        //  🔒 ЗАЩИТА
+        //  ЗАЩИТА
         // ============================================================
         console.log = function() {};
         console.warn = function() {};
@@ -2320,7 +2321,7 @@
         loadPortfolio();
         setTimeout(() => { loadReviews(); }, 500);
         console.log('🎨 Maison SV запущен (основной язык — английский)');
-        console.log('✅ Плейсхолдер телефона исправлен');
+        console.log('✅ Все плейсхолдеры убраны');
     </script>
 </body>
 </html>
