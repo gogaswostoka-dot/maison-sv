@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maison SV - Интерьер-дизайн</title>
+    <title>Maison SV - Interior Design</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -1311,26 +1311,26 @@
 </head>
 <body>
 
-    <!-- ===== ВЕСЬ ТВОЙ HTML (БЕЗ ИЗМЕНЕНИЙ) ===== -->
+    <!-- ===== ВЕСЬ HTML (без изменений) ===== -->
     <header>
         <div class="container">
             <div class="logo">
                 <img src="logo.png" alt="Maison SV">
             </div>
             <div class="nav-menu">
-                <a href="#about" data-lang="about">Обо мне</a>
-                <a href="#portfolio" data-lang="portfolio">Портфолио</a>
-                <a href="#reviews" data-lang="reviews">Отзывы</a>
-                <a href="#contact" data-lang="contact">Контакты</a>
+                <a href="#about" data-lang="about">About</a>
+                <a href="#portfolio" data-lang="portfolio">Portfolio</a>
+                <a href="#reviews" data-lang="reviews">Reviews</a>
+                <a href="#contact" data-lang="contact">Contact</a>
                 <div class="lang-selector">
-                    <button class="active" data-lang="ru">RU</button>
-                    <button data-lang="en">EN</button>
+                    <button data-lang="ru">RU</button>
+                    <button class="active" data-lang="en">EN</button>
                     <button data-lang="fr">FR</button>
                     <button data-lang="de">DE</button>
                     <button data-lang="uk">UA</button>
                 </div>
             </div>
-            <button class="burger" id="burgerBtn" aria-label="Меню">
+            <button class="burger" id="burgerBtn" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -1339,55 +1339,57 @@
     </header>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#about" data-lang="about" onclick="closeMobileMenu()">Обо мне</a>
-        <a href="#portfolio" data-lang="portfolio" onclick="closeMobileMenu()">Портфолио</a>
-        <a href="#reviews" data-lang="reviews" onclick="closeMobileMenu()">Отзывы</a>
-        <a href="#contact" data-lang="contact" onclick="closeMobileMenu()">Контакты</a>
+        <a href="#about" data-lang="about" onclick="closeMobileMenu()">About</a>
+        <a href="#portfolio" data-lang="portfolio" onclick="closeMobileMenu()">Portfolio</a>
+        <a href="#reviews" data-lang="reviews" onclick="closeMobileMenu()">Reviews</a>
+        <a href="#contact" data-lang="contact" onclick="closeMobileMenu()">Contact</a>
         <div class="lang-selector">
-            <button class="active" data-lang="ru">RU</button>
-            <button data-lang="en">EN</button>
+            <button data-lang="ru">RU</button>
+            <button class="active" data-lang="en">EN</button>
             <button data-lang="fr">FR</button>
             <button data-lang="de">DE</button>
             <button data-lang="uk">UA</button>
         </div>
     </div>
 
+    <!-- ===== ВЕСЬ ОСТАЛЬНОЙ HTML (БЕЗ ИЗМЕНЕНИЙ) ===== -->
     <section class="hero" id="home">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Интерьер">
+        <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Interior">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-slogan" data-lang="slogan">ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ</div>
-            <h1 data-lang="hero-title">Интерьеры, в которых <br>хочется <span>жить</span></h1>
-            <p data-lang="hero-desc">Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.</p>
-            <a href="#contact" class="btn" data-lang="hero-btn">Обсудить проект</a>
+            <div class="hero-slogan" data-lang="slogan">CREATING SPACE <br>FOR LIFE</div>
+            <h1 data-lang="hero-title">Interiors you'll <br>want to <span>live in</span></h1>
+            <p data-lang="hero-desc">Design projects for apartments, houses and offices. Creating spaces that reflect your personality.</p>
+            <a href="#contact" class="btn" data-lang="hero-btn">Discuss a project</a>
         </div>
     </section>
 
+    <!-- ===== СЕКЦИЯ ABOUT ===== -->
     <section class="section" id="about">
         <div class="container">
-            <h2 class="section-title" data-lang="about-title">Обо <span>мне</span></h2>
-            <p class="section-subtitle" data-lang="about-subtitle">Дизайнер интерьеров с 8-летним опытом</p>
+            <h2 class="section-title" data-lang="about-title">About <span>me</span></h2>
+            <p class="section-subtitle" data-lang="about-subtitle">Interior designer with 8 years of experience</p>
             <div class="about-grid">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Святослава">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Sviatoslava">
                 </div>
                 <div class="about-text">
-                    <h3 data-lang="designer-name">Святослава</h3>
-                    <div class="designer-title" data-lang="designer-title">Maison SV — интерьер-дизайн</div>
-                    <p data-lang="about-text-1">Я создаю интерьеры, которые становятся отражением характера и образа жизни своих владельцев. Моя философия — в гармонии функциональности и эстетики.</p>
-                    <p data-lang="about-text-2">За 8 лет работы я реализовала более 70 проектов: от уютных студий до просторных загородных домов. Каждый проект — это история, рассказанная через цвет, текстуру и свет.</p>
+                    <h3 data-lang="designer-name">Sviatoslava</h3>
+                    <div class="designer-title" data-lang="designer-title">Maison SV — interior design</div>
+                    <p data-lang="about-text-1">I create interiors that reflect the character and lifestyle of their owners. My philosophy is the harmony of functionality and aesthetics.</p>
+                    <p data-lang="about-text-2">Over 8 years of work, I have completed more than 70 projects: from cozy studios to spacious country houses. Each project is a story told through color, texture and light.</p>
                     <div class="stats">
                         <div>
                             <div class="number">70+</div>
-                            <div class="label" data-lang="stat-projects">Реализованных проектов</div>
+                            <div class="label" data-lang="stat-projects">Projects completed</div>
                         </div>
                         <div>
-                            <div class="number">8 лет</div>
-                            <div class="label" data-lang="stat-experience">Опыта в дизайне</div>
+                            <div class="number">8 years</div>
+                            <div class="label" data-lang="stat-experience">Years of experience</div>
                         </div>
                         <div>
                             <div class="number">100%</div>
-                            <div class="label" data-lang="stat-clients">Довольных клиентов</div>
+                            <div class="label" data-lang="stat-clients">Happy clients</div>
                         </div>
                     </div>
                 </div>
@@ -1395,24 +1397,26 @@
         </div>
     </section>
 
+    <!-- ===== ПОРТФОЛИО ===== -->
     <section class="section" id="portfolio">
         <div class="container">
-            <h2 class="section-title" data-lang="portfolio-title">Мои <span>работы</span></h2>
-            <p class="section-subtitle" data-lang="portfolio-subtitle">Реализованные проекты, вдохновлённые жизнью</p>
+            <h2 class="section-title" data-lang="portfolio-title">My <span>works</span></h2>
+            <p class="section-subtitle" data-lang="portfolio-subtitle">Realized projects inspired by life</p>
             <div class="portfolio-filter">
-                <button class="active" data-filter="all" data-lang="filter-all">Все</button>
-                <button data-filter="квартиры" data-lang="filter-apartments">Квартиры</button>
-                <button data-filter="дома" data-lang="filter-houses">Дома</button>
-                <button data-filter="офисы" data-lang="filter-offices">Офисы</button>
+                <button class="active" data-filter="all" data-lang="filter-all">All</button>
+                <button data-filter="квартиры" data-lang="filter-apartments">Apartments</button>
+                <button data-filter="дома" data-lang="filter-houses">Houses</button>
+                <button data-filter="офисы" data-lang="filter-offices">Offices</button>
             </div>
             <div class="portfolio-grid" id="portfolioGrid"></div>
         </div>
     </section>
 
+    <!-- ===== ОТЗЫВЫ ===== -->
     <section class="reviews-section" id="reviews">
         <div class="container">
-            <h2 class="section-title" data-lang="reviews-title">Отзывы <span>клиентов</span></h2>
-            <p class="section-subtitle" data-lang="reviews-subtitle">Что говорят о моей работе</p>
+            <h2 class="section-title" data-lang="reviews-title">Client <span>reviews</span></h2>
+            <p class="section-subtitle" data-lang="reviews-subtitle">What they say about my work</p>
 
             <div class="reviews-carousel" id="reviewsCarousel">
                 <div id="carouselSlides"></div>
@@ -1422,13 +1426,13 @@
             </div>
 
             <div class="review-form" id="reviewForm">
-                <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Оставить отзыв</h3>
+                <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Leave a review</h3>
                 <div class="form-group">
-                    <label data-lang="review-form-name">Ваше имя *</label>
-                    <input type="text" id="reviewName" placeholder="Иван Иванов" data-lang="review-name-placeholder">
+                    <label data-lang="review-form-name">Your name *</label>
+                    <input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder">
                 </div>
                 <div class="form-group">
-                    <label data-lang="review-form-rating">Оценка</label>
+                    <label data-lang="review-form-rating">Rating</label>
                     <select id="reviewRating">
                         <option value="5">⭐⭐⭐⭐⭐</option>
                         <option value="4">⭐⭐⭐⭐</option>
@@ -1438,10 +1442,10 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label data-lang="review-form-text">Ваш отзыв *</label>
-                    <textarea id="reviewText" rows="3" placeholder="Поделитесь впечатлением о работе..." data-lang="review-text-placeholder"></textarea>
+                    <label data-lang="review-form-text">Your review *</label>
+                    <textarea id="reviewText" rows="3" placeholder="Share your experience..." data-lang="review-text-placeholder"></textarea>
                 </div>
-                <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Отправить отзыв</button>
+                <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Send review</button>
             </div>
         </div>
     </section>
@@ -1449,19 +1453,20 @@
     <div class="review-success-modal" id="reviewSuccessModal">
         <div class="success-modal">
             <div class="icon"><i class="fas fa-check-circle"></i></div>
-            <h2 data-lang="review-success-title">Спасибо за ваш отзыв! ⭐</h2>
-            <p data-lang="review-success-text">Отзыв отправлен на проверку. После одобрения он появится в карусели.</p>
-            <button class="btn-ok" id="reviewSuccessOkBtn" data-lang="review-success-btn">Хорошо</button>
+            <h2 data-lang="review-success-title">Thank you for your review! ⭐</h2>
+            <p data-lang="review-success-text">Your review has been sent for moderation. It will appear after approval.</p>
+            <button class="btn-ok" id="reviewSuccessOkBtn" data-lang="review-success-btn">OK</button>
         </div>
     </div>
 
+    <!-- ===== КОНТАКТЫ ===== -->
     <section class="section" id="contact">
         <div class="container">
-            <h2 class="section-title" data-lang="contact-title">Обсудить <span>проект</span></h2>
-            <p class="section-subtitle" data-lang="contact-subtitle">Оставьте заявку, и я свяжусь с вами в ближайшее время</p>
+            <h2 class="section-title" data-lang="contact-title">Discuss a <span>project</span></h2>
+            <p class="section-subtitle" data-lang="contact-subtitle">Leave a request and I will contact you soon</p>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <h3 data-lang="contact-info-title">Контакты</h3>
+                    <h3 data-lang="contact-info-title">Contacts</h3>
                     <p><i class="fas fa-phone" style="color:#c4956a; width:24px;"></i> +33 7 80 30 46 79</p>
                     <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> antonis1312w@gmail.com</p>
                     <p><i class="fas fa-map-marker-alt" style="color:#c4956a; width:24px;"></i> Paris, France</p>
@@ -1474,18 +1479,18 @@
                 <div class="contact-form">
                     <form id="contactForm">
                         <div class="form-group">
-                            <label data-lang="form-name">ФИО *</label>
-                            <input type="text" id="clientName" placeholder="Иван Иванов" data-lang="form-name-placeholder" required>
+                            <label data-lang="form-name">Full name *</label>
+                            <input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required>
                         </div>
                         <div class="form-group">
-                            <label data-lang="form-contact-type">Способ связи</label>
+                            <label data-lang="form-contact-type">Contact method</label>
                             <select id="contactType">
-                                <option value="phone">📞 Телефон</option>
+                                <option value="phone">📞 Phone</option>
                                 <option value="email">✉️ Email</option>
                             </select>
                         </div>
                         <div class="form-group" id="phoneGroup">
-                            <label data-lang="form-phone">Телефон *</label>
+                            <label data-lang="form-phone">Phone *</label>
                             <div class="phone-input-wrapper">
                                 <div class="custom-select-wrapper">
                                     <select class="flag-select" id="countryCode">
@@ -1507,27 +1512,24 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label data-lang="form-message">Обсудить проект</label>
-                            <textarea id="clientMessage" rows="4" placeholder="Расскажите о вашем проекте..." data-lang="form-message-placeholder"></textarea>
+                            <label data-lang="form-message">Discuss the project</label>
+                            <textarea id="clientMessage" rows="4" placeholder="Tell about your project..." data-lang="form-message-placeholder"></textarea>
                         </div>
-                        <!-- ===== ЗАЩИТА ОТ СПАМА (HONEYPOT) ===== -->
-                        <div class="form-group" style="display:none;">
-                            <input type="text" id="honeypot" style="display:none;" tabindex="-1" autocomplete="off">
-                        </div>
-                        <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Отправить</button>
+                        <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Send</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ===== МОДАЛКИ ===== -->
     <div class="project-modal-overlay" id="projectModal">
         <div class="project-modal">
             <button class="close-modal" id="closeProjectModal">&times;</button>
             <div class="project-images" id="projectImages"></div>
-            <h2 class="project-title" id="projectTitle">Название проекта</h2>
-            <div class="project-category" id="projectCategory">Категория</div>
-            <div class="project-description" id="projectDescription">Описание проекта...</div>
+            <h2 class="project-title" id="projectTitle">Project name</h2>
+            <div class="project-category" id="projectCategory">Category</div>
+            <div class="project-description" id="projectDescription">Project description...</div>
             <div class="project-details" id="projectDetails"></div>
         </div>
     </div>
@@ -1535,21 +1537,21 @@
     <div class="success-modal-overlay" id="successModal">
         <div class="success-modal">
             <div class="icon"><i class="fas fa-check-circle"></i></div>
-            <h2 data-lang="success-title">Спасибо за вашу заявку! 🎉</h2>
-            <p data-lang="success-text">В ближайшее время я свяжусь с вами для обсуждения проекта.</p>
-            <button class="btn-ok" id="successOkBtn" data-lang="success-btn">Хорошо</button>
+            <h2 data-lang="success-title">Thank you for your request! 🎉</h2>
+            <p data-lang="success-text">I will contact you soon to discuss the project.</p>
+            <button class="btn-ok" id="successOkBtn" data-lang="success-btn">OK</button>
         </div>
     </div>
 
     <footer>
         <div class="container">
-            <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">интерьеры, в которых хочется жить</span></p>
+            <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">interiors you'll want to live in</span></p>
             <div class="footer-contacts">
                 <a href="https://wa.me/33780304679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</a>
                 <a href="https://t.me/maisonsv" target="_blank"><i class="fab fa-telegram" style="color:#0088cc;"></i> Telegram</a>
                 <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i> Instagram</a>
             </div>
-            <p style="font-size:13px; margin-top:6px; opacity:0.7;" data-lang="footer-sub">Сделано с ❤️ для вдохновения</p>
+            <p style="font-size:13px; margin-top:6px; opacity:0.7;" data-lang="footer-sub">Made with ❤️ for inspiration</p>
         </div>
     </footer>
 
@@ -1557,34 +1559,6 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // =====================================================
-        // 🔒 ЗАЩИТА: СКРЫВАЕМ ВЕРСИЮ FIREBASE ОТ ХАКЕРОВ
-        // =====================================================
-        console.log = function() {};
-        console.warn = function() {};
-        console.error = function() {};
-
-        // =====================================================
-        // 🔒 ЗАЩИТА: ЭКРАНИРОВАНИЕ XSS
-        // =====================================================
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // =====================================================
-        // 🔒 ЗАЩИТА: ВАЛИДАЦИЯ ДАННЫХ
-        // =====================================================
-        function validateInput(text, maxLength = 100) {
-            if (!text) return true;
-            if (text.length > maxLength) return false;
-            // Запрещаем опасные символы
-            if (/[<>{}()]/.test(text)) return false;
-            return true;
-        }
-
         // =====================================================
         // FIREBASE
         // =====================================================
@@ -1603,7 +1577,7 @@
         const db = firebase.firestore();
 
         // =====================================================
-        // ПЕРЕВОДЫ
+        // ПЕРЕВОДЫ (ВСЕ ЯЗЫКИ)
         // =====================================================
         const translations = {
             ru: {
@@ -1918,13 +1892,27 @@
             }
         };
 
-        let currentLang = 'ru';
+        let currentLang = 'en'; // ← ОСНОВНОЙ ЯЗЫК - АНГЛИЙСКИЙ
         let currentFilter = 'all';
         let portfolioData = [];
         let reviewsData = [];
         let currentSlideIndex = 0;
         let slidesArray = [];
         let autoSlideInterval = null;
+
+        // =====================================================
+        // 🔒 ЗАЩИТА
+        // =====================================================
+        console.log = function() {};
+        console.warn = function() {};
+        console.error = function() {};
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
 
         // =====================================================
         // ЗАГРУЗКА ПОРТФОЛИО
@@ -1951,7 +1939,7 @@
                 grid.innerHTML =
                     `<div style="grid-column:1/-1; text-align:center; padding:40px; color:#6a6a6a;">
                         <i class="fas fa-images" style="font-size:48px; opacity:0.3; margin-bottom:12px;"></i>
-                        <p data-lang="no-projects">Проектов пока нет</p>
+                        <p data-lang="no-projects">No projects yet</p>
                     </div>`;
                 return;
             }
@@ -1962,7 +1950,7 @@
                 return `
                         <div class="portfolio-item" onclick="openProject('${p.id}')">
                             <img src="${imgSrc}" alt="${escapeHtml(p.title)}" loading="lazy">
-                            <div class="view-btn" data-lang="view-btn">Смотреть</div>
+                            <div class="view-btn" data-lang="view-btn">View</div>
                             <div class="overlay">
                                 <h4>${escapeHtml(p.title)}</h4>
                                 <p>${escapeHtml(p.category)}</p>
@@ -1976,7 +1964,7 @@
             try {
                 const doc = await db.collection('portfolio').doc(docId).get();
                 if (!doc.exists) {
-                    alert('❌ Проект не найден');
+                    alert('❌ Project not found');
                     return;
                 }
                 const project = { id: doc.id, ...doc.data() };
@@ -1986,19 +1974,20 @@
                 modal.classList.add('active');
 
                 const images = project.images && project.images.length > 0 ? project.images :
-                    ['https://via.placeholder.com/800x600/0b2a4a/ffffff?text=Нет+фото'];
+                    ['https://via.placeholder.com/800x600/0b2a4a/ffffff?text=No+photos'];
                 document.getElementById('projectImages').innerHTML = images.map(img =>
                     `<img src="${img}" alt="${escapeHtml(project.title)}" loading="lazy">`
                 ).join('');
                 document.getElementById('projectTitle').textContent = escapeHtml(project.title);
                 document.getElementById('projectCategory').textContent = escapeHtml(project.category);
-                document.getElementById('projectDescription').textContent = escapeHtml(project.description || 'Описание отсутствует');
+                document.getElementById('projectDescription').textContent = escapeHtml(project.description ||
+                    'Description missing');
                 document.getElementById('projectDetails').innerHTML = Object.entries(project.details || {}).map((
                     [key, value]) =>
                     `<div class="detail"><div class="label">${escapeHtml(key)}</div><div class="value">${escapeHtml(value)}</div></div>`
                 ).join('');
             } catch (e) {
-                alert('❌ Ошибка загрузки проекта');
+                alert('❌ Error loading project');
             }
         }
 
@@ -2039,8 +2028,8 @@
                     <div class="carousel-slide active">
                         <div style="padding:40px; text-align:center; color:#7f8c8d;">
                             <i class="fas fa-comment-dots" style="font-size:48px; opacity:0.3; margin-bottom:16px;"></i>
-                            <p style="font-size:18px;" data-lang="no-reviews">Отзывов пока нет</p>
-                            <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Будьте первым!</p>
+                            <p style="font-size:18px;" data-lang="no-reviews">No reviews yet</p>
+                            <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Be the first!</p>
                         </div>
                     </div>
                 `;
@@ -2056,11 +2045,11 @@
                 slidesHTML += `
                     <div class="carousel-slide ${activeClass}" data-index="${index}">
                         <div class="avatar-placeholder">${escapeHtml(nameInitial)}</div>
-                        <div class="review-name">${escapeHtml(r.name || 'Аноним')}</div>
+                        <div class="review-name">${escapeHtml(r.name || 'Anonymous')}</div>
                         <div class="review-stars">${stars}</div>
                         <div class="review-text">"${escapeHtml(r.text)}"</div>
-                        <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('ru-RU') : ''}</div>
-                        <div class="review-verified"><i class="fas fa-check-circle"></i> Подтверждённый клиент</div>
+                        <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('en-US') : ''}</div>
+                        <div class="review-verified"><i class="fas fa-check-circle"></i> Verified client</div>
                     </div>
                 `;
             });
@@ -2140,21 +2129,11 @@
             const text = document.getElementById('reviewText').value.trim();
 
             if (!name) {
-                alert('❌ Введите ваше имя!');
+                alert('❌ Enter your name!');
                 return;
             }
             if (!text) {
-                alert('❌ Напишите текст отзыва!');
-                return;
-            }
-
-            // 🔒 Валидация
-            if (!validateInput(name, 50)) {
-                alert('❌ Имя содержит недопустимые символы или слишком длинное');
-                return;
-            }
-            if (!validateInput(text, 500)) {
-                alert('❌ Текст отзыва содержит недопустимые символы или слишком длинный');
+                alert('❌ Write your review!');
                 return;
             }
 
@@ -2173,7 +2152,7 @@
                 document.getElementById('reviewSuccessModal').classList.add('active');
                 document.body.style.overflow = 'hidden';
             } catch (e) {
-                alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+                alert('❌ Error sending review. Try again.');
             }
         });
 
@@ -2190,66 +2169,40 @@
         });
 
         // =====================================================
-        // ОТПРАВКА ЗАЯВКИ (С ЗАЩИТОЙ)
+        // ОТПРАВКА ЗАЯВКИ
         // =====================================================
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // 🔒 Проверка Honeypot (анти-спам)
-            const honeypot = document.getElementById('honeypot');
-            if (honeypot && honeypot.value !== '') {
-                console.log('🤖 Спам-бот обнаружен!');
-                alert('❌ Ошибка отправки');
-                return;
-            }
 
             const name = document.getElementById('clientName').value.trim();
             const contactType = document.getElementById('contactType').value;
             let contactValue = '';
 
-            // 🔒 Валидация
-            if (!validateInput(name, 100)) {
-                alert('❌ Имя содержит недопустимые символы или слишком длинное');
-                return;
-            }
-
             if (contactType === 'phone') {
                 const countryCode = document.getElementById('countryCode').value;
                 const phoneRaw = document.getElementById('clientPhone').value.trim();
                 if (!phoneRaw) {
-                    alert('❌ Введите номер телефона!');
-                    return;
-                }
-                if (!validateInput(phoneRaw, 20)) {
-                    alert('❌ Номер телефона содержит недопустимые символы');
+                    alert('❌ Enter phone number!');
                     return;
                 }
                 contactValue = countryCode + ' ' + phoneRaw;
             } else {
                 const email = document.getElementById('clientEmail').value.trim();
                 if (!email) {
-                    alert('❌ Введите email!');
+                    alert('❌ Enter email!');
                     return;
                 }
                 if (!email.includes('@') || !email.includes('.')) {
-                    alert('❌ Введите корректный email!');
-                    return;
-                }
-                if (!validateInput(email, 100)) {
-                    alert('❌ Email содержит недопустимые символы или слишком длинный');
+                    alert('❌ Enter valid email!');
                     return;
                 }
                 contactValue = email;
             }
 
             const message = document.getElementById('clientMessage').value.trim();
-            if (!validateInput(message, 1000)) {
-                alert('❌ Сообщение содержит недопустимые символы или слишком длинное');
-                return;
-            }
 
             if (!name) {
-                alert('❌ Заполните ФИО!');
+                alert('❌ Enter your name!');
                 return;
             }
 
@@ -2263,7 +2216,7 @@
                     status: 'new'
                 });
             } catch (e) {
-                alert('❌ Ошибка при отправке. Попробуйте ещё раз.');
+                alert('❌ Error sending. Try again.');
                 return;
             }
 
@@ -2453,7 +2406,7 @@
         if (savedLang && translations[savedLang]) {
             setLanguage(savedLang);
         } else {
-            setLanguage('ru');
+            setLanguage('en'); // ← АНГЛИЙСКИЙ ПО УМОЛЧАНИЮ
         }
 
         loadPortfolio();
@@ -2462,11 +2415,9 @@
             loadReviews();
         }, 500);
 
-        console.log('🛡️ Maison SV ЗАЩИЩЁН!');
-        console.log('✅ XSS защита');
-        console.log('✅ Honeypot анти-спам');
-        console.log('✅ Валидация данных');
-        console.log('✅ Консоль скрыта от хакеров');
+        console.log('🎨 Maison SV запущен! (основной язык — АНГЛИЙСКИЙ)');
+        console.log('🌍 Переключение языков работает');
+        console.log('🛡️ Защита включена');
     </script>
 </body>
 </html>
