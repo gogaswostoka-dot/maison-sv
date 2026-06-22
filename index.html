@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Maison SV - Interior Design</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ———— RESET & BASE ———— */
         *{margin:0;padding:0;box-sizing:border-box}
         html{scroll-behavior:smooth}
         body{font-family:'Inter','Segoe UI',sans-serif;background:#f8f6f3;color:#2c2c2c}
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         .section-title,.about-text h3,.project-title,.hero-slogan{font-family:'Cormorant Garamond',serif}
+        /* ———— HEADER ———— */
         header{position:fixed;top:0;left:0;width:100%;height:90px;z-index:1000;background:#f5f0eb;box-shadow:0 2px 20px rgba(0,0,0,.06);transition:.3s;display:flex;align-items:center}
         header .container{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:0 20px;gap:20px}
         .logo img{height:150px;width:auto;display:block}
@@ -34,6 +36,7 @@
         .mobile-menu a{text-decoration:none;color:#2c2c2c;font-weight:600;font-size:18px;padding:8px 0;width:100%;text-align:center;border-bottom:1px solid #eeeae5}
         .mobile-menu a:last-child{border-bottom:0}
         .mobile-menu .lang-selector{margin:10px 0 0}
+        /* ———— HERO ———— */
         .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 20px 60px;position:relative;background:#2c2c2c;overflow:hidden}
         .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.5}
         .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(44,44,44,.4);z-index:1}
@@ -44,11 +47,13 @@
         .hero-content p{font-size:18px;color:rgba(255,255,255,.85);max-width:500px;margin:0 auto 30px;line-height:1.7;font-weight:300;text-shadow:0 2px 20px rgba(0,0,0,.2)}
         .btn{display:inline-block;padding:14px 40px;background:#c4956a;color:#fff;text-decoration:none;border-radius:50px;font-weight:600;transition:.3s;border:0;cursor:pointer;font-size:16px;letter-spacing:.5px}
         .btn:hover{background:#b0855a;transform:scale(1.02)}
+        /* ———— SECTIONS ———— */
         .section{padding:80px 0;border-bottom:1px solid #eeeae5}
         .section:last-child{border-bottom:0}
         .section-title{font-size:38px;font-weight:300;text-align:center;margin-bottom:15px;color:#2c2c2c;letter-spacing:2px}
         .section-title span{color:#c4956a;font-weight:600}
         .section-subtitle{text-align:center;color:#6a6a6a;max-width:500px;margin:0 auto 40px;font-size:16px;font-weight:300}
+        /* ———— ABOUT ———— */
         .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
         .about-image img{width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.08)}
         .about-text h3{font-size:32px;font-weight:400;margin-bottom:8px;letter-spacing:1px}
@@ -58,6 +63,7 @@
         .about-text .stats div{text-align:center}
         .about-text .stats .number{font-size:28px;font-weight:700;color:#c4956a;font-family:'Cormorant Garamond',serif}
         .about-text .stats .label{font-size:13px;color:#6a6a6a}
+        /* ———— PORTFOLIO ———— */
         .portfolio-filter{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
         .portfolio-filter button{padding:8px 24px;border:2px solid #dce5ed;border-radius:30px;background:#fff;cursor:pointer;font-weight:500;font-size:14px;transition:.3s;color:#2c2c2c;font-family:'Inter',sans-serif}
         .portfolio-filter button:hover{border-color:#c4956a}
@@ -89,6 +95,7 @@
         .project-modal .project-details .detail{text-align:center}
         .project-modal .project-details .detail .label{font-size:12px;color:#6a6a6a;text-transform:uppercase;letter-spacing:1px}
         .project-modal .project-details .detail .value{font-size:16px;font-weight:600;color:#2c2c2c;font-family:'Cormorant Garamond',serif}
+        /* ———— REVIEWS CAROUSEL ———— */
         .reviews-section{background:#f8f6f3;padding:80px 0}
         .reviews-carousel{position:relative;max-width:800px;margin:0 auto 30px;background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.08);min-height:280px;overflow:hidden}
         .carousel-slide{display:none;padding:40px 60px;text-align:center;animation:fadeSlide .5s ease}
@@ -107,6 +114,7 @@
         .carousel-dots{display:flex;justify-content:center;gap:8px;padding:0 0 20px}
         .carousel-dots .dot{width:12px;height:12px;border-radius:50%;background:#dce5ed;border:0;cursor:pointer;transition:.3s}
         .carousel-dots .dot.active{background:#c4956a;transform:scale(1.2)}
+        /* ———— REVIEW FORM ———— */
         .review-form{max-width:600px;margin:0 auto 30px;background:#fff;padding:30px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
         .review-form h3{font-size:22px;margin-bottom:15px;font-family:'Cormorant Garamond',serif}
         .review-form .form-group{margin-bottom:14px}
@@ -124,6 +132,7 @@
         .review-success-modal .success-modal p{font-size:16px;color:#5a6e7e;line-height:1.6;margin-bottom:24px;animation:fadeUp .5s ease .4s both}
         .review-success-modal .success-modal .btn-ok{background:#2c2c2c;color:#fff;border:0;padding:14px 50px;border-radius:50px;font-weight:700;font-size:17px;cursor:pointer;transition:.3s;animation:fadeUp .5s ease .5s both}
         .review-success-modal .success-modal .btn-ok:hover{background:#3d3d3d;transform:scale(1.02)}
+        /* ———— CONTACT ———— */
         .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
         .contact-info h3{font-size:24px;font-weight:400;margin-bottom:15px;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
         .contact-info p{color:#6a6a6a;line-height:1.8;margin-bottom:12px;font-weight:300}
@@ -169,6 +178,7 @@
         .footer-contacts a{color:#b0a094;text-decoration:none;font-size:16px;transition:.3s;display:flex;align-items:center;gap:8px}
         .footer-contacts a:hover{color:#fff;transform:scale(1.05)}
         .footer-contacts a i{font-size:22px}
+        /* ———— MEDIA ———— */
         @media(max-width:768px){.burger{display:flex}.nav-menu{display:none}.hero-slogan{font-size:32px}.hero-content h1{font-size:28px}.about-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.portfolio-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.project-modal{padding:20px}.project-modal .project-images{grid-template-columns:1fr}.project-modal .project-images img:first-child{max-height:200px}.project-modal .project-images img{max-height:150px}.project-modal .project-title{font-size:24px}.project-modal .project-details{grid-template-columns:1fr 1fr}.success-modal{padding:35px 25px}.success-modal .icon{font-size:52px}.success-modal h2{font-size:22px}.logo img{height:150px}header{height:90px}.review-success-modal .success-modal{padding:35px 25px}.review-success-modal .success-modal .icon{font-size:52px}.review-success-modal .success-modal h2{font-size:22px}.phone-input-wrapper{flex-direction:column;align-items:stretch}.phone-input-wrapper .flag-select{width:100%}.custom-select-wrapper{width:100%}.reviews-carousel{min-height:320px}.carousel-slide{padding:30px 40px}.carousel-btn{width:36px;height:36px;font-size:16px}.carousel-slide .review-text{font-size:14px;max-width:95%}}
         @media(max-width:480px){.hero-slogan{font-size:22px}.hero-content h1{font-size:22px}.about-text .stats{flex-direction:column;gap:10px}.portfolio-grid{grid-template-columns:1fr 1fr;gap:12px}.project-modal .project-details{grid-template-columns:1fr}.success-modal{padding:25px 18px}.success-modal .icon{font-size:42px}.success-modal .icon i{padding:14px}.success-modal h2{font-size:19px}.success-modal p{font-size:14px}.success-modal .btn-ok{padding:12px 30px;font-size:15px}.logo img{height:150px}header{height:90px}.review-success-modal .success-modal{padding:25px 18px}.review-success-modal .success-modal .icon{font-size:42px}.review-success-modal .success-modal .icon i{padding:14px}.review-success-modal .success-modal h2{font-size:19px}.review-success-modal .success-modal p{font-size:14px}.review-success-modal .success-modal .btn-ok{padding:12px 30px;font-size:15px}.phone-input-wrapper{flex-direction:column;align-items:stretch}.phone-input-wrapper .flag-select{width:100%}.custom-select-wrapper{width:100%}.reviews-carousel{min-height:360px}.carousel-slide{padding:20px 15px}.carousel-btn{width:30px;height:30px;font-size:12px}.carousel-btn.prev{left:3px}.carousel-btn.next{right:3px}.carousel-slide .review-text{font-size:13px;max-width:100%}}
     </style>
@@ -176,7 +186,7 @@
 <body>
     <header>
         <div class="container">
-            <div class="logo"><img src="logo.png" alt="Maison SV"/></div>
+            <div class="logo"><img src="logo.png" alt="Maison SV" /></div>
             <div class="nav-menu">
                 <a href="#about" data-lang="about">About</a>
                 <a href="#portfolio" data-lang="portfolio">Portfolio</a>
@@ -193,6 +203,7 @@
             <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
     </header>
+
     <div class="mobile-menu" id="mobileMenu">
         <a href="#about" data-lang="about" onclick="closeMobileMenu()">About</a>
         <a href="#portfolio" data-lang="portfolio" onclick="closeMobileMenu()">Portfolio</a>
@@ -206,22 +217,24 @@
             <button data-lang="uk">UA</button>
         </div>
     </div>
+
     <section class="hero" id="home">
-        <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Interior"/>
+        <img class="hero-bg" src="https://images.unsplash.com/photo-1618220179428-22790b461013?w=1600&h=900&fit=crop&crop=center" alt="Interior" />
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <div class="hero-slogan" data-lang="slogan">CREATING SPACE <br>FOR LIFE</div>
-            <h1 data-lang="hero-title">Interiors you'll <br>want to <span>live in</span></h1>
+            <div class="hero-slogan" data-lang="slogan">CREATING SPACE <br />FOR LIFE</div>
+            <h1 data-lang="hero-title">Interiors you'll <br />want to <span>live in</span></h1>
             <p data-lang="hero-desc">Design projects for apartments, houses and offices. Creating spaces that reflect your personality.</p>
             <a href="#contact" class="btn" data-lang="hero-btn">Discuss a project</a>
         </div>
     </section>
+
     <section class="section" id="about">
         <div class="container">
             <h2 class="section-title" data-lang="about-title">About <span>me</span></h2>
             <p class="section-subtitle" data-lang="about-subtitle">Interior designer with 8 years of experience</p>
             <div class="about-grid">
-                <div class="about-image"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Sviatoslava"/></div>
+                <div class="about-image"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Sviatoslava" /></div>
                 <div class="about-text">
                     <h3 data-lang="designer-name">Sviatoslava</h3>
                     <div class="designer-title" data-lang="designer-title">Maison SV — interior design</div>
@@ -236,6 +249,7 @@
             </div>
         </div>
     </section>
+
     <section class="section" id="portfolio">
         <div class="container">
             <h2 class="section-title" data-lang="portfolio-title">My <span>works</span></h2>
@@ -249,6 +263,7 @@
             <div class="portfolio-grid" id="portfolioGrid"></div>
         </div>
     </section>
+
     <section class="reviews-section" id="reviews">
         <div class="container">
             <h2 class="section-title" data-lang="reviews-title">Client <span>reviews</span></h2>
@@ -261,13 +276,14 @@
             </div>
             <div class="review-form" id="reviewForm">
                 <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Leave a review</h3>
-                <div class="form-group"><label data-lang="review-form-name">Your name *</label><input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder"/></div>
+                <div class="form-group"><label data-lang="review-form-name">Your name *</label><input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder" /></div>
                 <div class="form-group"><label data-lang="review-form-rating">Rating</label><select id="reviewRating"><option value="5">⭐⭐⭐⭐⭐</option><option value="4">⭐⭐⭐⭐</option><option value="3">⭐⭐⭐</option><option value="2">⭐⭐</option><option value="1">⭐</option></select></div>
                 <div class="form-group"><label data-lang="review-form-text">Your review *</label><textarea id="reviewText" rows="3" placeholder="Share your experience..." data-lang="review-text-placeholder"></textarea></div>
                 <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Send review</button>
             </div>
         </div>
     </section>
+
     <div class="review-success-modal" id="reviewSuccessModal">
         <div class="success-modal">
             <div class="icon"><i class="fas fa-check-circle"></i></div>
@@ -276,6 +292,7 @@
             <button class="btn-ok" id="reviewSuccessOkBtn" data-lang="review-success-btn">OK</button>
         </div>
     </div>
+
     <section class="section" id="contact">
         <div class="container">
             <h2 class="section-title" data-lang="contact-title">Discuss a <span>project</span></h2>
@@ -294,15 +311,15 @@
                 </div>
                 <div class="contact-form">
                     <form id="contactForm">
-                        <div class="form-group"><label data-lang="form-name">Full name *</label><input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required/></div>
+                        <div class="form-group"><label data-lang="form-name">Full name *</label><input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required /></div>
                         <div class="form-group"><label data-lang="form-contact-type">Contact method</label><select id="contactType"><option value="phone">📞 Phone</option><option value="email">✉️ Email</option></select></div>
                         <div class="form-group" id="phoneGroup"><label data-lang="form-phone">Phone *</label>
                             <div class="phone-input-wrapper">
                                 <div class="custom-select-wrapper"><select class="flag-select" id="countryCode"><option value="+7">🇷🇺 +7</option><option value="+33" selected>🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+380">🇺🇦 +380</option><option value="+420">🇨🇿 +420</option><option value="+1">🇺🇸 +1</option></select></div>
-                                <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+"/>
+                                <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+" />
                             </div>
                         </div>
-                        <div class="form-group" id="emailGroup" style="display:none"><label data-lang="form-email">Email *</label><div class="email-input-wrapper"><input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder"/></div></div>
+                        <div class="form-group" id="emailGroup" style="display:none"><label data-lang="form-email">Email *</label><div class="email-input-wrapper"><input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder" /></div></div>
                         <div class="form-group"><label data-lang="form-message">Discuss the project</label><textarea id="clientMessage" rows="4" placeholder="Tell about your project..." data-lang="form-message-placeholder"></textarea></div>
                         <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Send</button>
                     </form>
@@ -310,6 +327,7 @@
             </div>
         </div>
     </section>
+
     <div class="project-modal-overlay" id="projectModal">
         <div class="project-modal">
             <button class="close-modal" id="closeProjectModal">&times;</button>
@@ -320,6 +338,7 @@
             <div class="project-details" id="projectDetails"></div>
         </div>
     </div>
+
     <div class="success-modal-overlay" id="successModal">
         <div class="success-modal">
             <div class="icon"><i class="fas fa-check-circle"></i></div>
@@ -328,6 +347,7 @@
             <button class="btn-ok" id="successOkBtn" data-lang="success-btn">OK</button>
         </div>
     </div>
+
     <footer>
         <div class="container">
             <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">interiors you'll want to live in</span></p>
@@ -339,9 +359,14 @@
             <p style="font-size:13px;margin-top:6px;opacity:.7" data-lang="footer-sub">Made with ❤️ for inspiration</p>
         </div>
     </footer>
+
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
     <script>
+        // ============================================================
+        //  FIREBASE
+        // ============================================================
         const firebaseConfig = {
             apiKey: "AIzaSyC2O66Nk1R9wzsfUf-P-DDXbUA8iVR-QwU",
             authDomain: "santecnika-e3374.firebaseapp.com",
@@ -355,12 +380,15 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // ============================================================
+        //  ПЕРЕВОДЫ
+        // ============================================================
         const translations = {
             ru: {
-                'about': 'Обо мне',
-                'portfolio': 'Портфолио',
-                'reviews': 'Отзывы',
-                'contact': 'Контакты',
+                about: 'Обо мне',
+                portfolio: 'Портфолио',
+                reviews: 'Отзывы',
+                contact: 'Контакты',
                 'reviews-title': 'Отзывы <span>клиентов</span>',
                 'reviews-subtitle': 'Что говорят о моей работе',
                 'review-form-title': 'Оставить отзыв',
@@ -373,7 +401,7 @@
                 'review-success-title': 'Спасибо за ваш отзыв! ⭐',
                 'review-success-text': 'Отзыв отправлен на проверку. После одобрения он появится в карусели.',
                 'review-success-btn': 'Хорошо',
-                'slogan': 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
+                slogan: 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
                 'hero-title': 'Интерьеры, в которых <br>хочется <span>жить</span>',
                 'hero-desc': 'Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.',
                 'hero-btn': 'Обсудить проект',
@@ -415,14 +443,14 @@
                 'view-btn': 'Смотреть',
                 'no-reviews': 'Отзывов пока нет',
                 'be-first': 'Будьте первым!',
-                'verified': 'Подтверждённый клиент',
+                verified: 'Подтверждённый клиент',
                 'no-projects': 'Проектов пока нет'
             },
             en: {
-                'about': 'About',
-                'portfolio': 'Portfolio',
-                'reviews': 'Reviews',
-                'contact': 'Contact',
+                about: 'About',
+                portfolio: 'Portfolio',
+                reviews: 'Reviews',
+                contact: 'Contact',
                 'reviews-title': 'Client <span>reviews</span>',
                 'reviews-subtitle': 'What they say about my work',
                 'review-form-title': 'Leave a review',
@@ -435,7 +463,7 @@
                 'review-success-title': 'Thank you for your review! ⭐',
                 'review-success-text': 'Your review has been sent for moderation. It will appear after approval.',
                 'review-success-btn': 'OK',
-                'slogan': 'CREATING SPACE <br>FOR LIFE',
+                slogan: 'CREATING SPACE <br>FOR LIFE',
                 'hero-title': 'Interiors you\'ll <br>want to <span>live in</span>',
                 'hero-desc': 'Design projects for apartments, houses and offices. Creating spaces that reflect your personality.',
                 'hero-btn': 'Discuss a project',
@@ -477,14 +505,14 @@
                 'view-btn': 'View',
                 'no-reviews': 'No reviews yet',
                 'be-first': 'Be the first!',
-                'verified': 'Verified client',
+                verified: 'Verified client',
                 'no-projects': 'No projects yet'
             },
             fr: {
-                'about': 'À propos',
-                'portfolio': 'Portfolio',
-                'reviews': 'Avis',
-                'contact': 'Contact',
+                about: 'À propos',
+                portfolio: 'Portfolio',
+                reviews: 'Avis',
+                contact: 'Contact',
                 'reviews-title': 'Avis des <span>clients</span>',
                 'reviews-subtitle': 'Ce qu\'ils disent de mon travail',
                 'review-form-title': 'Laisser un avis',
@@ -497,7 +525,7 @@
                 'review-success-title': 'Merci pour votre avis ! ⭐',
                 'review-success-text': 'Votre avis a été envoyé pour modération. Il apparaîtra après approbation.',
                 'review-success-btn': 'OK',
-                'slogan': 'CRÉER UN ESPACE <br>POUR LA VIE',
+                slogan: 'CRÉER UN ESPACE <br>POUR LA VIE',
                 'hero-title': 'Des intérieurs où <br>on a envie de <span>vivre</span>',
                 'hero-desc': 'Projets de design pour appartements, maisons et bureaux. Créer des espaces qui reflètent votre personnalité.',
                 'hero-btn': 'Discuter un projet',
@@ -539,14 +567,14 @@
                 'view-btn': 'Voir',
                 'no-reviews': 'Aucun avis',
                 'be-first': 'Soyez le premier!',
-                'verified': 'Client vérifié',
+                verified: 'Client vérifié',
                 'no-projects': 'Aucun projet'
             },
             de: {
-                'about': 'Über mich',
-                'portfolio': 'Portfolio',
-                'reviews': 'Bewertungen',
-                'contact': 'Kontakt',
+                about: 'Über mich',
+                portfolio: 'Portfolio',
+                reviews: 'Bewertungen',
+                contact: 'Kontakt',
                 'reviews-title': 'Kunden <span>bewertungen</span>',
                 'reviews-subtitle': 'Was sie über meine Arbeit sagen',
                 'review-form-title': 'Bewertung hinterlassen',
@@ -559,7 +587,7 @@
                 'review-success-title': 'Vielen Dank für Ihre Bewertung! ⭐',
                 'review-success-text': 'Ihre Bewertung wurde zur Moderation gesendet. Sie wird nach der Genehmigung angezeigt.',
                 'review-success-btn': 'OK',
-                'slogan': 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
+                slogan: 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
                 'hero-title': 'Innenräume, in denen <br>man <span>leben</span> möchte',
                 'hero-desc': 'Designprojekte für Wohnungen, Häuser und Büros. Schaffung von Räumen, die Ihre Persönlichkeit widerspiegeln.',
                 'hero-btn': 'Projekt besprechen',
@@ -601,14 +629,14 @@
                 'view-btn': 'Ansehen',
                 'no-reviews': 'Keine Bewertungen',
                 'be-first': 'Seien Sie der Erste!',
-                'verified': 'Verifizierter Kunde',
+                verified: 'Verifizierter Kunde',
                 'no-projects': 'Keine Projekte'
             },
             uk: {
-                'about': 'Про мене',
-                'portfolio': 'Портфоліо',
-                'reviews': 'Відгуки',
-                'contact': 'Контакти',
+                about: 'Про мене',
+                portfolio: 'Портфоліо',
+                reviews: 'Відгуки',
+                contact: 'Контакти',
                 'reviews-title': 'Відгуки <span>клієнтів</span>',
                 'reviews-subtitle': 'Що говорять про мою роботу',
                 'review-form-title': 'Залишити відгук',
@@ -621,7 +649,7 @@
                 'review-success-title': 'Дякуємо за ваш відгук! ⭐',
                 'review-success-text': 'Відгук надіслано на перевірку. Після схвалення він з\'явиться в каруселі.',
                 'review-success-btn': 'Добре',
-                'slogan': 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
+                slogan: 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
                 'hero-title': 'Інтер\'єри, в яких <br>хочеться <span>жити</span>',
                 'hero-desc': 'Дизайн-проекти для квартир, будинків та офісів. Створюю простір, який відображає вашу індивідуальність.',
                 'hero-btn': 'Обговорити проект',
@@ -663,7 +691,7 @@
                 'view-btn': 'Дивитись',
                 'no-reviews': 'Відгуків поки немає',
                 'be-first': 'Будьте першим!',
-                'verified': 'Підтверджений клієнт',
+                verified: 'Підтверджений клієнт',
                 'no-projects': 'Проектів поки немає'
             }
         };
@@ -684,7 +712,7 @@
         }
 
         // ============================================================
-        // ПОРТФОЛИО
+        //  ПОРТФОЛИО
         // ============================================================
         async function loadPortfolio() {
             try {
@@ -725,7 +753,9 @@
                 const modal = document.getElementById('projectModal');
                 document.body.style.overflow = 'hidden';
                 modal.classList.add('active');
-                const images = project.images && project.images.length > 0 ? project.images : ['https://via.placeholder.com/800x600/0b2a4a/ffffff?text=No+photos'];
+                const images = project.images && project.images.length > 0 ? project.images : [
+                    'https://via.placeholder.com/800x600/0b2a4a/ffffff?text=No+photos'
+                ];
                 document.getElementById('projectImages').innerHTML = images.map(img =>
                     `<img src="${img}" alt="${escapeHtml(project.title)}" loading="lazy">`).join('');
                 document.getElementById('projectTitle').textContent = escapeHtml(project.title);
@@ -735,7 +765,7 @@
                 document.getElementById('projectDetails').innerHTML = Object.entries(project.details || {}).map((
                     [key, value]) =>
                     `<div class="detail"><div class="label">${escapeHtml(key)}</div><div class="value">${escapeHtml(value)}</div></div>`
-                    ).join('');
+                ).join('');
             } catch (e) { alert('❌ Error loading project'); }
         }
 
@@ -745,11 +775,13 @@
         }
 
         // ============================================================
-        // ОТЗЫВЫ (КАРУСЕЛЬ)
+        //  КАРУСЕЛЬ ОТЗЫВОВ (перевод "Verified client" живёт внутри)
         // ============================================================
         async function loadReviews() {
             try {
-                const snapshot = await db.collection('reviews').where('status', '==', 'approved').orderBy('date', 'desc')
+                const snapshot = await db.collection('reviews')
+                    .where('status', '==', 'approved')
+                    .orderBy('date', 'desc')
                     .get();
                 reviewsData = [];
                 snapshot.forEach(doc => { reviewsData.push({ id: doc.id, ...doc.data() }); });
@@ -764,42 +796,54 @@
             const container = document.getElementById('carouselSlides');
             const dotsContainer = document.getElementById('carouselDots');
             if (!container) return;
+
             if (!reviews || reviews.length === 0) {
                 container.innerHTML =
                     `<div class="carousel-slide active"><div style="padding:40px;text-align:center;color:#7f8c8d;"><i class="fas fa-comment-dots" style="font-size:48px;opacity:.3;margin-bottom:16px"></i><p style="font-size:18px" data-lang="no-reviews">No reviews yet</p><p style="font-size:14px;margin-top:6px" data-lang="be-first">Be the first!</p></div></div>`;
                 dotsContainer.innerHTML = '';
                 return;
             }
+
+            const verifiedText = translations[currentLang]?.verified || 'Verified client';
+
             let slidesHTML = '';
             reviews.forEach((r, index) => {
                 const stars = '⭐'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
                 const nameInitial = r.name ? r.name.charAt(0).toUpperCase() : '?';
                 const activeClass = index === 0 ? 'active' : '';
-                slidesHTML += `<div class="carousel-slide ${activeClass}" data-index="${index}">
+                slidesHTML += `
+                        <div class="carousel-slide ${activeClass}" data-index="${index}">
                             <div class="avatar-placeholder">${escapeHtml(nameInitial)}</div>
                             <div class="review-name">${escapeHtml(r.name || 'Anonymous')}</div>
                             <div class="review-stars">${stars}</div>
                             <div class="review-text">"${escapeHtml(r.text)}"</div>
                             <div class="review-date">${r.date ? new Date(r.date).toLocaleDateString('en-US') : ''}</div>
-                            <div class="review-verified"><i class="fas fa-check-circle"></i> Verified client</div>
-                        </div>`;
+                            <div class="review-verified"><i class="fas fa-check-circle"></i> ${verifiedText}</div>
+                        </div>
+                    `;
             });
             container.innerHTML = slidesHTML;
-            const verifiedEl = document.querySelector('.review-verified');
-            if (verifiedEl && translations[currentLang] && translations[currentLang]['verified']) {
-                verifiedEl.innerHTML = `<i class="fas fa-check-circle"></i> ${translations[currentLang]['verified']}`;
-            }
+
             dotsContainer.innerHTML = '';
             reviews.forEach((_, i) => {
                 const dot = document.createElement('button');
-                dot.className = `dot ${i===0?'active':''}`;
+                dot.className = `dot ${i === 0 ? 'active' : ''}`;
                 dot.dataset.index = i;
                 dot.onclick = () => goToSlide(i);
                 dotsContainer.appendChild(dot);
             });
+
             slidesArray = reviews;
             currentSlideIndex = 0;
             startAutoSlide();
+        }
+
+        // ===== обновление текста в уже отрисованной карусели (без перезагрузки) =====
+        function updateCarouselLanguage() {
+            const verifiedText = translations[currentLang]?.verified || 'Verified client';
+            document.querySelectorAll('.review-verified').forEach(el => {
+                el.innerHTML = `<i class="fas fa-check-circle"></i> ${verifiedText}`;
+            });
         }
 
         function goToSlide(index) {
@@ -824,6 +868,7 @@
             if (autoSlideInterval) { clearInterval(autoSlideInterval);
                 autoSlideInterval = null; }
         }
+
         document.getElementById('carouselPrev').addEventListener('click', function() { stopAutoSlide();
             goToSlide(currentSlideIndex - 1);
             startAutoSlide(); });
@@ -834,7 +879,7 @@
         document.getElementById('reviewsCarousel').addEventListener('mouseleave', startAutoSlide);
 
         // ============================================================
-        // ОТПРАВКА ОТЗЫВА
+        //  ОТПРАВКА ОТЗЫВА
         // ============================================================
         document.getElementById('submitReviewBtn').addEventListener('click', async function() {
             const name = document.getElementById('reviewName').value.trim();
@@ -843,8 +888,13 @@
             if (!name) { alert('❌ Enter your name!'); return; }
             if (!text) { alert('❌ Write your review!'); return; }
             try {
-                await db.collection('reviews').add({ name, rating, text, date: new Date().toISOString(),
-                    status: 'pending' });
+                await db.collection('reviews').add({
+                    name,
+                    rating,
+                    text,
+                    date: new Date().toISOString(),
+                    status: 'pending'
+                });
                 document.getElementById('reviewName').value = '';
                 document.getElementById('reviewText').value = '';
                 document.getElementById('reviewRating').value = '5';
@@ -852,6 +902,7 @@
                 document.body.style.overflow = 'hidden';
             } catch (e) { alert('❌ Error sending review. Try again.'); }
         });
+
         document.getElementById('reviewSuccessOkBtn').addEventListener('click', function() {
             document.getElementById('reviewSuccessModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -862,7 +913,7 @@
         });
 
         // ============================================================
-        // ОТПРАВКА ЗАЯВКИ
+        //  ЗАЯВКА
         // ============================================================
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -883,8 +934,14 @@
             const message = document.getElementById('clientMessage').value.trim();
             if (!name) { alert('❌ Enter your name!'); return; }
             try {
-                await db.collection('leads').add({ name, contactType, contact: contactValue, message: message || '—',
-                    date: new Date().toISOString(), status: 'new' });
+                await db.collection('leads').add({
+                    name,
+                    contactType,
+                    contact: contactValue,
+                    message: message || '—',
+                    date: new Date().toISOString(),
+                    status: 'new'
+                });
             } catch (e) { alert('❌ Error sending. Try again.'); return; }
             this.reset();
             document.getElementById('countryCode').value = '+33';
@@ -894,6 +951,7 @@
             document.getElementById('successModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         });
+
         document.getElementById('contactType').addEventListener('change', function() {
             if (this.value === 'phone') {
                 document.getElementById('phoneGroup').style.display = 'flex';
@@ -907,6 +965,7 @@
                 document.getElementById('clientEmail').required = true;
             }
         });
+
         document.getElementById('successOkBtn').addEventListener('click', function() {
             document.getElementById('successModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -917,13 +976,17 @@
         });
 
         // ============================================================
-        // ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА (ИСПРАВЛЕНО!)
+        //  ПЕРЕКЛЮЧЕНИЕ ЯЗЫКА
         // ============================================================
         function setLanguage(lang) {
             currentLang = lang;
+
+            // активная кнопка языка
             document.querySelectorAll('.lang-selector button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
+
+            // основной перевод по data-lang
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.dataset.lang;
                 if (translations[lang] && translations[lang][key] !== undefined) {
@@ -939,7 +1002,8 @@
                     }
                 }
             });
-            // Обновляем select "Способ связи"
+
+            // select «Способ связи»
             const contactSelect = document.getElementById('contactType');
             if (contactSelect) {
                 const options = contactSelect.querySelectorAll('option');
@@ -950,35 +1014,43 @@
                     }
                 });
             }
-            // Обновляем кнопки фильтров ещё раз (для надёжности)
+
+            // кнопки фильтров (ещё раз для подстраховки)
             document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
                 const filterKey = 'filter-' + btn.dataset.filter;
                 if (translations[lang] && translations[lang][filterKey]) {
                     btn.textContent = translations[lang][filterKey];
                 }
             });
-            // Кнопки "Смотреть"
+
+            // кнопки «Смотреть / View / Voir ...»
             document.querySelectorAll('.portfolio-item .view-btn').forEach(el => {
                 const key = 'view-btn';
                 if (translations[lang] && translations[lang][key]) {
                     el.textContent = translations[lang][key];
                 }
             });
-            // Тексты-заглушки
+
+            // тексты-заглушки
             const noReviews = document.querySelector('[data-lang="no-reviews"]');
             const beFirst = document.querySelector('[data-lang="be-first"]');
             const verified = document.querySelector('[data-lang="verified"]');
             const noProjects = document.querySelector('[data-lang="no-projects"]');
+
             if (noReviews && translations[lang]['no-reviews']) noReviews.textContent = translations[lang]['no-reviews'];
             if (beFirst && translations[lang]['be-first']) beFirst.textContent = translations[lang]['be-first'];
             if (verified && translations[lang]['verified']) verified.innerHTML =
                 `<i class="fas fa-check-circle"></i> ${translations[lang]['verified']}`;
             if (noProjects && translations[lang]['no-projects']) noProjects.textContent = translations[lang]['no-projects'];
+
+            // !!! ОБНОВЛЯЕМ КАРУСЕЛЬ БЕЗ ПЕРЕЗАГРУЗКИ !!!
+            updateCarouselLanguage();
+
             localStorage.setItem('designer_lang', lang);
         }
 
         // ============================================================
-        // БУРГЕР-МЕНЮ
+        //  БУРГЕР-МЕНЮ
         // ============================================================
         const burgerBtn = document.getElementById('burgerBtn');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -996,7 +1068,7 @@
         });
 
         // ============================================================
-        // СОБЫТИЯ
+        //  СОБЫТИЯ
         // ============================================================
         document.querySelectorAll('.lang-selector button').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -1006,6 +1078,7 @@
                 });
             });
         });
+
         document.querySelectorAll('.portfolio-filter button').forEach(btn => {
             btn.addEventListener('click', function() {
                 document.querySelectorAll('.portfolio-filter button').forEach(b => b.classList.remove('active'));
@@ -1014,10 +1087,12 @@
                 renderPortfolio(currentFilter);
             });
         });
+
         document.getElementById('closeProjectModal').addEventListener('click', closeProject);
         document.getElementById('projectModal').addEventListener('click', function(e) {
             if (e.target === this) closeProject();
         });
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeProject();
@@ -1032,6 +1107,7 @@
                 closeMobileMenu();
             }
         });
+
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
             header.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(0,0,0,0.08)' :
@@ -1039,7 +1115,7 @@
         });
 
         // ============================================================
-        // ЗАПУСК
+        //  ЗАПУСК
         // ============================================================
         const savedLang = localStorage.getItem('designer_lang');
         if (savedLang && translations[savedLang]) {
@@ -1049,8 +1125,8 @@
         }
         loadPortfolio();
         setTimeout(() => { loadReviews(); }, 500);
-        console.log('🎨 Maison SV запущен! (основной язык — АНГЛИЙСКИЙ)');
-        console.log('✅ Фильтры переводятся на все языки!');
+        console.log('🎨 Maison SV запущен (основной язык — английский)');
+        console.log('✅ «Verified client» переводится без перезагрузки');
     </script>
 </body>
 </html>
