@@ -7,186 +7,1309 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ———— RESET & BASE ———— */
-        *{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{font-family:'Inter','Segoe UI',sans-serif;background:#f8f6f3;color:#2c2c2c}
-        .container{max-width:1200px;margin:0 auto;padding:0 20px}
-        .section-title,.about-text h3,.project-title,.hero-slogan{font-family:'Cormorant Garamond',serif}
-        /* ———— HEADER ———— */
-        header{position:fixed;top:0;left:0;width:100%;height:90px;z-index:1000;background:#f5f0eb;box-shadow:0 2px 20px rgba(0,0,0,.06);transition:.3s;display:flex;align-items:center}
-        header .container{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1200px;margin:0 auto;padding:0 20px;gap:20px}
-        .logo img{height:150px;width:auto;display:block}
-        .nav-menu{display:flex;align-items:center;gap:25px;flex-wrap:nowrap}
-        .nav-menu a{text-decoration:none;color:#2c2c2c;font-weight:500;font-size:14px;transition:.3s;position:relative;letter-spacing:.5px;white-space:nowrap}
-        .nav-menu a:hover{color:#c4956a}
-        .nav-menu a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:#c4956a;transition:.3s}
-        .nav-menu a:hover::after{width:100%}
-        .lang-selector{display:flex;gap:4px;align-items:center;background:rgba(255,255,255,.6);padding:4px 8px;border-radius:30px;margin-left:5px}
-        .lang-selector button{background:0;border:0;padding:4px 10px;border-radius:20px;cursor:pointer;font-size:11px;font-weight:600;color:#6a6a6a;transition:.3s;font-family:'Inter',sans-serif}
-        .lang-selector button:hover{background:rgba(196,149,106,.2);color:#c4956a}
-        .lang-selector button.active{background:#c4956a;color:#fff}
-        .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:0;border:0;padding:5px;z-index:1001}
-        .burger span{display:block;width:28px;height:3px;background:#2c2c2c;border-radius:3px;transition:.3s}
-        .burger.active span:nth-child(1){transform:rotate(45deg) translate(5px,6px)}
-        .burger.active span:nth-child(2){opacity:0}
-        .burger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-6px)}
-        .mobile-menu{display:none;position:fixed;top:90px;left:0;width:100%;background:#f5f0eb;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.1);flex-direction:column;align-items:center;gap:15px;z-index:999;border-bottom:2px solid #e8e0d8}
-        .mobile-menu.open{display:flex}
-        .mobile-menu a{text-decoration:none;color:#2c2c2c;font-weight:600;font-size:18px;padding:8px 0;width:100%;text-align:center;border-bottom:1px solid #eeeae5}
-        .mobile-menu a:last-child{border-bottom:0}
-        .mobile-menu .lang-selector{margin:10px 0 0}
-        /* ———— HERO ———— */
-        .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:140px 20px 60px;position:relative;background:#2c2c2c;overflow:hidden}
-        .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.5}
-        .hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(44,44,44,.4);z-index:1}
-        .hero-content{position:relative;z-index:2;max-width:700px}
-        .hero-slogan{font-size:48px;font-weight:700;letter-spacing:4px;color:#c4956a;text-shadow:0 4px 30px rgba(0,0,0,.3);margin-bottom:15px;line-height:1.2}
-        .hero-content h1{font-size:36px;font-weight:300;margin-bottom:15px;color:#fff;font-family:'Cormorant Garamond',serif;letter-spacing:2px;text-shadow:0 4px 30px rgba(0,0,0,.3)}
-        .hero-content h1 span{color:#c4956a}
-        .hero-content p{font-size:18px;color:rgba(255,255,255,.85);max-width:500px;margin:0 auto 30px;line-height:1.7;font-weight:300;text-shadow:0 2px 20px rgba(0,0,0,.2)}
-        .btn{display:inline-block;padding:14px 40px;background:#c4956a;color:#fff;text-decoration:none;border-radius:50px;font-weight:600;transition:.3s;border:0;cursor:pointer;font-size:16px;letter-spacing:.5px}
-        .btn:hover{background:#b0855a;transform:scale(1.02)}
-        /* ———— SECTIONS ———— */
-        .section{padding:80px 0;border-bottom:1px solid #eeeae5}
-        .section:last-child{border-bottom:0}
-        .section-title{font-size:38px;font-weight:300;text-align:center;margin-bottom:15px;color:#2c2c2c;letter-spacing:2px}
-        .section-title span{color:#c4956a;font-weight:600}
-        .section-subtitle{text-align:center;color:#6a6a6a;max-width:500px;margin:0 auto 40px;font-size:16px;font-weight:300}
-        /* ———— ABOUT ———— */
-        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
-        .about-image img{width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.08)}
-        .about-text h3{font-size:32px;font-weight:400;margin-bottom:8px;letter-spacing:1px}
-        .about-text .designer-title{color:#c4956a;font-weight:500;font-size:16px;margin-bottom:15px;letter-spacing:1px}
-        .about-text p{color:#6a6a6a;line-height:1.8;margin-bottom:15px;font-weight:300}
-        .about-text .stats{display:flex;gap:30px;margin-top:20px}
-        .about-text .stats div{text-align:center}
-        .about-text .stats .number{font-size:28px;font-weight:700;color:#c4956a;font-family:'Cormorant Garamond',serif}
-        .about-text .stats .label{font-size:13px;color:#6a6a6a}
-        /* ———— PORTFOLIO ———— */
-        .portfolio-filter{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
-        .portfolio-filter button{padding:8px 24px;border:2px solid #dce5ed;border-radius:30px;background:#fff;cursor:pointer;font-weight:500;font-size:14px;transition:.3s;color:#2c2c2c;font-family:'Inter',sans-serif}
-        .portfolio-filter button:hover{border-color:#c4956a}
-        .portfolio-filter button.active{background:#c4956a;color:#fff;border-color:#c4956a}
-        .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:25px}
-        .portfolio-item{position:relative;border-radius:16px;overflow:hidden;cursor:pointer;aspect-ratio:4/3;background:#eeeae5;transition:.3s}
-        .portfolio-item:hover{transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,.1)}
-        .portfolio-item img{width:100%;height:100%;object-fit:cover;transition:.5s}
-        .portfolio-item:hover img{transform:scale(1.05)}
-        .portfolio-item .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,.6));color:#fff;transform:translateY(100%);transition:.4s}
-        .portfolio-item:hover .overlay{transform:translateY(0)}
-        .portfolio-item .overlay h4{font-size:18px;font-weight:600;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
-        .portfolio-item .overlay p{font-size:13px;opacity:.8;font-weight:300}
-        .portfolio-item .view-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);background:rgba(196,149,106,.9);color:#fff;padding:10px 24px;border-radius:30px;font-weight:600;font-size:14px;transition:.3s;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,.2)}
-        .portfolio-item:hover .view-btn{transform:translate(-50%,-50%) scale(1)}
-        .project-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:2000;justify-content:center;align-items:center;padding:20px}
-        .project-modal-overlay.active{display:flex}
-        .project-modal{background:#fff;border-radius:24px;padding:40px;max-width:900px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.4);position:relative;animation:fadeUp .4s ease}
-        @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-        .project-modal .close-modal{position:absolute;top:15px;right:20px;font-size:32px;cursor:pointer;color:#888;background:0;border:0;transition:.3s}
-        .project-modal .close-modal:hover{color:#c0392b;transform:rotate(90deg)}
-        .project-modal .project-images{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-bottom:25px}
-        .project-modal .project-images img{width:100%;border-radius:12px;object-fit:cover;max-height:250px}
-        .project-modal .project-images img:first-child{grid-column:1/-1;max-height:350px}
-        .project-modal .project-title{font-size:32px;font-weight:400;color:#2c2c2c;letter-spacing:1px;margin-bottom:5px}
-        .project-modal .project-category{color:#c4956a;font-weight:500;font-size:14px;letter-spacing:1px;margin-bottom:15px}
-        .project-modal .project-description{color:#6a6a6a;line-height:1.8;font-weight:300;margin-bottom:20px;word-wrap:break-word;overflow-wrap:break-word;white-space:normal}
-        .project-modal .project-details{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:15px;padding:20px;background:#f8f6f3;border-radius:12px;margin-bottom:20px}
-        .project-modal .project-details .detail{text-align:center}
-        .project-modal .project-details .detail .label{font-size:12px;color:#6a6a6a;text-transform:uppercase;letter-spacing:1px}
-        .project-modal .project-details .detail .value{font-size:16px;font-weight:600;color:#2c2c2c;font-family:'Cormorant Garamond',serif}
-        /* ———— REVIEWS CAROUSEL ———— */
-        .reviews-section{background:#f8f6f3;padding:80px 0}
-        .reviews-carousel{position:relative;max-width:800px;margin:0 auto 30px;background:#fff;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.08);min-height:280px;overflow:hidden}
-        .carousel-slide{display:none;padding:40px 60px;text-align:center;animation:fadeSlide .5s ease}
-        .carousel-slide.active{display:flex!important;flex-direction:column;align-items:center;justify-content:center}
-        @keyframes fadeSlide{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-        .carousel-slide .avatar-placeholder{width:70px;height:70px;border-radius:50%;background:#0b2a4a;color:#fff;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;border:3px solid #c4956a;margin:0 auto 12px}
-        .carousel-slide .review-name{font-size:20px;font-weight:700;color:#1e2a3a;margin-bottom:4px}
-        .carousel-slide .review-stars{font-size:22px;margin:4px 0 8px;color:#f39c12}
-        .carousel-slide .review-text{font-size:16px;color:#5a6e7e;line-height:1.7;max-width:90%;margin:0 auto;font-style:italic}
-        .carousel-slide .review-date{font-size:13px;color:#95a5a6;margin-top:6px}
-        .carousel-slide .review-verified{font-size:13px;color:#27ae60;margin-top:4px}
-        .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(44,44,44,.8);color:#fff;border:0;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer;transition:.3s;z-index:10;display:flex;align-items:center;justify-content:center}
-        .carousel-btn:hover{background:#2c2c2c;transform:translateY(-50%) scale(1.05)}
-        .carousel-btn.prev{left:10px}
-        .carousel-btn.next{right:10px}
-        .carousel-dots{display:flex;justify-content:center;gap:8px;padding:0 0 20px}
-        .carousel-dots .dot{width:12px;height:12px;border-radius:50%;background:#dce5ed;border:0;cursor:pointer;transition:.3s}
-        .carousel-dots .dot.active{background:#c4956a;transform:scale(1.2)}
-        /* ———— REVIEW FORM ———— */
-        .review-form{max-width:600px;margin:0 auto 30px;background:#fff;padding:30px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
-        .review-form h3{font-size:22px;margin-bottom:15px;font-family:'Cormorant Garamond',serif}
-        .review-form .form-group{margin-bottom:14px}
-        .review-form .form-group label{font-weight:600;font-size:14px;display:block;margin-bottom:4px}
-        .review-form .form-group input,.review-form .form-group textarea,.review-form .form-group select{width:100%;padding:10px 14px;border:2px solid #dce5ed;border-radius:10px;font-size:14px;font-family:'Inter',sans-serif;transition:.3s}
-        .review-form .form-group input:focus,.review-form .form-group textarea:focus,.review-form .form-group select:focus{border-color:#c4956a;outline:0}
-        .btn-submit-review{background:#c4956a;color:#fff;border:0;padding:12px 30px;border-radius:30px;font-weight:600;cursor:pointer;transition:.3s;font-size:16px;width:100%}
-        .btn-submit-review:hover{background:#b0855a;transform:scale(1.02)}
-        .review-success-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:3001;justify-content:center;align-items:center;animation:fadeIn .3s ease}
-        .review-success-modal.active{display:flex}
-        .review-success-modal .success-modal{background:#fff;border-radius:30px;padding:50px 60px;max-width:480px;width:92%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:popIn .5s cubic-bezier(.175,.885,.32,1.275);position:relative}
-        .review-success-modal .success-modal .icon{font-size:72px;color:#27ae60;margin-bottom:16px;animation:scaleIn .6s ease .2s both}
-        .review-success-modal .success-modal .icon i{background:#e8f8f0;padding:20px;border-radius:50%}
-        .review-success-modal .success-modal h2{font-size:28px;color:#1e2a3a;margin-bottom:12px;animation:fadeUp .5s ease .3s both}
-        .review-success-modal .success-modal p{font-size:16px;color:#5a6e7e;line-height:1.6;margin-bottom:24px;animation:fadeUp .5s ease .4s both}
-        .review-success-modal .success-modal .btn-ok{background:#2c2c2c;color:#fff;border:0;padding:14px 50px;border-radius:50px;font-weight:700;font-size:17px;cursor:pointer;transition:.3s;animation:fadeUp .5s ease .5s both}
-        .review-success-modal .success-modal .btn-ok:hover{background:#3d3d3d;transform:scale(1.02)}
-        /* ———— CONTACT ———— */
-        .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
-        .contact-info h3{font-size:24px;font-weight:400;margin-bottom:15px;font-family:'Cormorant Garamond',serif;letter-spacing:1px}
-        .contact-info p{color:#6a6a6a;line-height:1.8;margin-bottom:12px;font-weight:300}
-        .custom-select-wrapper{position:relative;display:inline-block;width:140px;flex-shrink:0}
-        .flag-select{appearance:none;-webkit-appearance:none;width:100%;padding:12px 30px 12px 14px;border:2px solid #dce5ed;border-radius:12px;background:#fff;font-size:15px;font-family:'Inter',sans-serif;cursor:pointer;transition:.3s;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a6a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
-        .flag-select:focus{border-color:#c4956a;outline:0}
-        .flag-select option{padding:4px 8px;font-size:14px}
-        .phone-input-wrapper{display:flex;gap:10px;align-items:center}
-        .phone-input-wrapper .flag-select{width:140px;flex-shrink:0}
-        .phone-input-wrapper input{flex:1;padding:12px 16px;border:2px solid #dce5ed;border-radius:12px;font-size:15px;transition:.3s;background:#fff;font-family:'Inter',sans-serif}
-        .phone-input-wrapper input:focus{border-color:#c4956a;outline:0}
-        .email-input-wrapper input{width:100%;padding:12px 16px;border:2px solid #dce5ed;border-radius:12px;font-size:15px;transition:.3s;background:#fff;font-family:'Inter',sans-serif}
-        .email-input-wrapper input:focus{border-color:#c4956a;outline:0}
-        .social-links{display:flex;gap:18px;margin-top:20px;justify-content:flex-start;flex-wrap:wrap}
-        .social-icon{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;font-size:22px;color:#fff;transition:.3s;text-decoration:none;background:#2c2c2c;border:1px solid rgba(255,255,255,.1)}
-        .social-icon:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 8px 25px rgba(0,0,0,.15)}
-        .social-icon.whatsapp{background:#25d366}
-        .social-icon.whatsapp:hover{box-shadow:0 8px 25px rgba(37,211,102,.4)}
-        .social-icon.telegram{background:#0088cc}
-        .social-icon.telegram:hover{box-shadow:0 8px 25px rgba(0,136,204,.4)}
-        .social-icon.instagram{background:#e4405f}
-        .social-icon.instagram:hover{box-shadow:0 8px 25px rgba(228,64,95,.4)}
-        .contact-form .form-group{margin-bottom:16px}
-        .contact-form .form-group label{font-weight:500;display:block;margin-bottom:4px;font-size:14px}
-        .contact-form .form-group input,.contact-form .form-group textarea,.contact-form .form-group select{width:100%;padding:12px 16px;border:2px solid #dce5ed;border-radius:12px;font-size:15px;transition:.3s;background:#fff;font-family:'Inter',sans-serif}
-        .contact-form .form-group input:focus,.contact-form .form-group textarea:focus,.contact-form .form-group select:focus{border-color:#c4956a;outline:0}
-        .contact-form .btn-submit{width:100%;padding:14px;font-size:17px}
-        .success-modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:3000;justify-content:center;align-items:center;animation:fadeIn .3s ease}
-        .success-modal-overlay.active{display:flex}
-        .success-modal{background:#fff;border-radius:30px;padding:50px 60px;max-width:480px;width:92%;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4);animation:popIn .5s cubic-bezier(.175,.885,.32,1.275);position:relative}
-        .success-modal .icon{font-size:72px;color:#27ae60;margin-bottom:16px;animation:scaleIn .6s ease .2s both}
-        .success-modal .icon i{background:#e8f8f0;padding:20px;border-radius:50%}
-        .success-modal h2{font-size:28px;color:#1e2a3a;margin-bottom:12px;animation:fadeUp .5s ease .3s both}
-        .success-modal p{font-size:16px;color:#5a6e7e;line-height:1.6;margin-bottom:24px;animation:fadeUp .5s ease .4s both}
-        .success-modal .btn-ok{background:#2c2c2c;color:#fff;border:0;padding:14px 50px;border-radius:50px;font-weight:700;font-size:17px;cursor:pointer;transition:.3s;animation:fadeUp .5s ease .5s both}
-        .success-modal .btn-ok:hover{background:#3d3d3d;transform:scale(1.02)}
-        @keyframes popIn{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
-        @keyframes scaleIn{0%{transform:scale(0);opacity:0}100%{transform:scale(1);opacity:1}}
-        @keyframes fadeIn{0%{opacity:0}100%{opacity:1}}
-        footer{background:#2c2c2c;color:#b0a094;text-align:center;padding:30px 0}
-        footer span{color:#c4956a}
-        .footer-contacts{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:15px 0 10px}
-        .footer-contacts a{color:#b0a094;text-decoration:none;font-size:16px;transition:.3s;display:flex;align-items:center;gap:8px}
-        .footer-contacts a:hover{color:#fff;transform:scale(1.05)}
-        .footer-contacts a i{font-size:22px}
-        /* ———— MEDIA ———— */
-        @media(max-width:768px){.burger{display:flex}.nav-menu{display:none}.hero-slogan{font-size:32px}.hero-content h1{font-size:28px}.about-grid{grid-template-columns:1fr}.contact-grid{grid-template-columns:1fr}.portfolio-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.project-modal{padding:20px}.project-modal .project-images{grid-template-columns:1fr}.project-modal .project-images img:first-child{max-height:200px}.project-modal .project-images img{max-height:150px}.project-modal .project-title{font-size:24px}.project-modal .project-details{grid-template-columns:1fr 1fr}.success-modal{padding:35px 25px}.success-modal .icon{font-size:52px}.success-modal h2{font-size:22px}.logo img{height:150px}header{height:90px}.review-success-modal .success-modal{padding:35px 25px}.review-success-modal .success-modal .icon{font-size:52px}.review-success-modal .success-modal h2{font-size:22px}.phone-input-wrapper{flex-direction:column;align-items:stretch}.phone-input-wrapper .flag-select{width:100%}.custom-select-wrapper{width:100%}.reviews-carousel{min-height:320px}.carousel-slide{padding:30px 40px}.carousel-btn{width:36px;height:36px;font-size:16px}.carousel-slide .review-text{font-size:14px;max-width:95%}}
-        @media(max-width:480px){.hero-slogan{font-size:22px}.hero-content h1{font-size:22px}.about-text .stats{flex-direction:column;gap:10px}.portfolio-grid{grid-template-columns:1fr 1fr;gap:12px}.project-modal .project-details{grid-template-columns:1fr}.success-modal{padding:25px 18px}.success-modal .icon{font-size:42px}.success-modal .icon i{padding:14px}.success-modal h2{font-size:19px}.success-modal p{font-size:14px}.success-modal .btn-ok{padding:12px 30px;font-size:15px}.logo img{height:150px}header{height:90px}.review-success-modal .success-modal{padding:25px 18px}.review-success-modal .success-modal .icon{font-size:42px}.review-success-modal .success-modal .icon i{padding:14px}.review-success-modal .success-modal h2{font-size:19px}.review-success-modal .success-modal p{font-size:14px}.review-success-modal .success-modal .btn-ok{padding:12px 30px;font-size:15px}.phone-input-wrapper{flex-direction:column;align-items:stretch}.phone-input-wrapper .flag-select{width:100%}.custom-select-wrapper{width:100%}.reviews-carousel{min-height:360px}.carousel-slide{padding:20px 15px}.carousel-btn{width:30px;height:30px;font-size:12px}.carousel-btn.prev{left:3px}.carousel-btn.next{right:3px}.carousel-slide .review-text{font-size:13px;max-width:100%}}
+        /* ============================================================
+               ВЕСЬ ТВОЙ CSS (НИЧЕГО НЕ ВЫРЕЗАНО)
+               ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8f6f3;
+            color: #2c2c2c;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section-title,
+        .about-text h3,
+        .project-title,
+        .hero-slogan {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            z-index: 1000;
+            background: #f5f0eb;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            gap: 20px;
+        }
+        .logo img {
+            height: 150px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: nowrap;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+            position: relative;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .nav-menu a:hover {
+            color: #c4956a;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #c4956a;
+            transition: 0.3s;
+        }
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .lang-selector {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 8px;
+            border-radius: 30px;
+            margin-left: 5px;
+        }
+        .lang-selector button {
+            background: 0;
+            border: 0;
+            padding: 4px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            color: #6a6a6a;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .lang-selector button:hover {
+            background: rgba(196, 149, 106, 0.2);
+            color: #c4956a;
+        }
+        .lang-selector button.active {
+            background: #c4956a;
+            color: #fff;
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: 0;
+            border: 0;
+            padding: 5px;
+            z-index: 1001;
+        }
+        .burger span {
+            display: block;
+            width: 28px;
+            height: 3px;
+            background: #2c2c2c;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+        .burger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+        .burger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 0;
+            width: 100%;
+            background: #f5f0eb;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+            border-bottom: 2px solid #e8e0d8;
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        .mobile-menu a {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-weight: 600;
+            font-size: 18px;
+            padding: 8px 0;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #eeeae5;
+        }
+        .mobile-menu a:last-child {
+            border-bottom: 0;
+        }
+        .mobile-menu .lang-selector {
+            margin: 10px 0 0;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 140px 20px 60px;
+            position: relative;
+            background: #2c2c2c;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(44, 44, 44, 0.4);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+        .hero-slogan {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            color: #c4956a;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        .hero-content h1 {
+            font-size: 36px;
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: #fff;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        .hero-content h1 span {
+            color: #c4956a;
+        }
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 500px;
+            margin: 0 auto 30px;
+            line-height: 1.7;
+            font-weight: 300;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 40px;
+            background: #c4956a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: 0;
+            cursor: pointer;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        .btn:hover {
+            background: #b0855a;
+            transform: scale(1.02);
+        }
+
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid #eeeae5;
+        }
+        .section:last-child {
+            border-bottom: 0;
+        }
+        .section-title {
+            font-size: 38px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #2c2c2c;
+            letter-spacing: 2px;
+        }
+        .section-title span {
+            color: #c4956a;
+            font-weight: 600;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #6a6a6a;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+        .about-text h3 {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        .about-text .designer-title {
+            color: #c4956a;
+            font-weight: 500;
+            font-size: 16px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .about-text p {
+            color: #6a6a6a;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        .about-text .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .about-text .stats div {
+            text-align: center;
+        }
+        .about-text .stats .number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #c4956a;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .about-text .stats .label {
+            font-size: 13px;
+            color: #6a6a6a;
+        }
+
+        .portfolio-filter {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .portfolio-filter button {
+            padding: 8px 24px;
+            border: 2px solid #dce5ed;
+            border-radius: 30px;
+            background: #fff;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+            color: #2c2c2c;
+            font-family: 'Inter', sans-serif;
+        }
+        .portfolio-filter button:hover {
+            border-color: #c4956a;
+        }
+        .portfolio-filter button.active {
+            background: #c4956a;
+            color: #fff;
+            border-color: #c4956a;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .portfolio-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: #eeeae5;
+            transition: 0.3s;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        .portfolio-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.6));
+            color: #fff;
+            transform: translateY(100%);
+            transition: 0.4s;
+        }
+        .portfolio-item:hover .overlay {
+            transform: translateY(0);
+        }
+        .portfolio-item .overlay h4 {
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+        }
+        .portfolio-item .overlay p {
+            font-size: 13px;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+        .portfolio-item .view-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: rgba(196, 149, 106, 0.9);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .portfolio-item:hover .view-btn {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .project-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .project-modal-overlay.active {
+            display: flex;
+        }
+        .project-modal {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+            animation: fadeUp 0.4s ease;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .project-modal .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #888;
+            background: 0;
+            border: 0;
+            transition: 0.3s;
+        }
+        .project-modal .close-modal:hover {
+            color: #c0392b;
+            transform: rotate(90deg);
+        }
+        .project-modal .project-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .project-modal .project-images img {
+            width: 100%;
+            border-radius: 12px;
+            object-fit: cover;
+            max-height: 250px;
+        }
+        .project-modal .project-images img:first-child {
+            grid-column: 1 / -1;
+            max-height: 350px;
+        }
+        .project-modal .project-title {
+            font-size: 32px;
+            font-weight: 400;
+            color: #2c2c2c;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        .project-modal .project-category {
+            color: #c4956a;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .project-modal .project-description {
+            color: #6a6a6a;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        .project-modal .project-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #f8f6f3;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+        .project-modal .project-details .detail {
+            text-align: center;
+        }
+        .project-modal .project-details .detail .label {
+            font-size: 12px;
+            color: #6a6a6a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .project-modal .project-details .detail .value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c2c2c;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .reviews-section {
+            background: #f8f6f3;
+            padding: 80px 0;
+        }
+        .reviews-carousel {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            min-height: 280px;
+            overflow: hidden;
+        }
+        .carousel-slide {
+            display: none;
+            padding: 40px 60px;
+            text-align: center;
+            animation: fadeSlide 0.5s ease;
+        }
+        .carousel-slide.active {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .carousel-slide .avatar-placeholder {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #0b2a4a;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            border: 3px solid #c4956a;
+            margin: 0 auto 12px;
+        }
+        .carousel-slide .review-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e2a3a;
+            margin-bottom: 4px;
+        }
+        .carousel-slide .review-stars {
+            font-size: 22px;
+            margin: 4px 0 8px;
+            color: #f39c12;
+        }
+        .carousel-slide .review-text {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.7;
+            max-width: 90%;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        .carousel-slide .review-date {
+            font-size: 13px;
+            color: #95a5a6;
+            margin-top: 6px;
+        }
+        .carousel-slide .review-verified {
+            font-size: 13px;
+            color: #27ae60;
+            margin-top: 4px;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(44, 44, 44, 0.8);
+            color: #fff;
+            border: 0;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background: #2c2c2c;
+            transform: translateY(-50%) scale(1.05);
+        }
+        .carousel-btn.prev {
+            left: 10px;
+        }
+        .carousel-btn.next {
+            right: 10px;
+        }
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 0 20px;
+        }
+        .carousel-dots .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dce5ed;
+            border: 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .carousel-dots .dot.active {
+            background: #c4956a;
+            transform: scale(1.2);
+        }
+
+        .review-form {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+        }
+        .review-form h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .review-form .form-group {
+            margin-bottom: 14px;
+        }
+        .review-form .form-group label {
+            font-weight: 600;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .review-form .form-group input,
+        .review-form .form-group textarea,
+        .review-form .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid #dce5ed;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+        .review-form .form-group input:focus,
+        .review-form .form-group textarea:focus,
+        .review-form .form-group select:focus {
+            border-color: #c4956a;
+            outline: 0;
+        }
+        .btn-submit-review {
+            background: #c4956a;
+            color: #fff;
+            border: 0;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            width: 100%;
+        }
+        .btn-submit-review:hover {
+            background: #b0855a;
+            transform: scale(1.02);
+        }
+
+        .review-success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3001;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .review-success-modal.active {
+            display: flex;
+        }
+        .review-success-modal .success-modal {
+            background: #fff;
+            border-radius: 30px;
+            padding: 50px 60px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .review-success-modal .success-modal .icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 16px;
+            animation: scaleIn 0.6s ease 0.2s both;
+        }
+        .review-success-modal .success-modal .icon i {
+            background: #e8f8f0;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        .review-success-modal .success-modal h2 {
+            font-size: 28px;
+            color: #1e2a3a;
+            margin-bottom: 12px;
+            animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .review-success-modal .success-modal p {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            animation: fadeUp 0.5s ease 0.4s both;
+        }
+        .review-success-modal .success-modal .btn-ok {
+            background: #2c2c2c;
+            color: #fff;
+            border: 0;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+        .review-success-modal .success-modal .btn-ok:hover {
+            background: #3d3d3d;
+            transform: scale(1.02);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .contact-info h3 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 15px;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 1px;
+        }
+        .contact-info p {
+            color: #6a6a6a;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .custom-select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .flag-select {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 100%;
+            padding: 12px 30px 12px 14px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            background: #fff;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: 0.3s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236a6a6a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+        .flag-select:focus {
+            border-color: #c4956a;
+            outline: 0;
+        }
+        .flag-select option {
+            padding: 4px 8px;
+            font-size: 14px;
+        }
+
+        .phone-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .phone-input-wrapper .flag-select {
+            width: 140px;
+            flex-shrink: 0;
+        }
+        .phone-input-wrapper input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .phone-input-wrapper input:focus {
+            border-color: #c4956a;
+            outline: 0;
+        }
+
+        .email-input-wrapper input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .email-input-wrapper input:focus {
+            border-color: #c4956a;
+            outline: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 18px;
+            margin-top: 20px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            font-size: 22px;
+            color: #fff;
+            transition: 0.3s;
+            text-decoration: none;
+            background: #2c2c2c;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .social-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .social-icon.whatsapp {
+            background: #25d366;
+        }
+        .social-icon.whatsapp:hover {
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        .social-icon.telegram {
+            background: #0088cc;
+        }
+        .social-icon.telegram:hover {
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
+        }
+        .social-icon.instagram {
+            background: #e4405f;
+        }
+        .social-icon.instagram:hover {
+            box-shadow: 0 8px 25px rgba(228, 64, 95, 0.4);
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 16px;
+        }
+        .contact-form .form-group label {
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+        }
+        .contact-form .form-group input,
+        .contact-form .form-group textarea,
+        .contact-form .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #dce5ed;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: 0.3s;
+            background: #fff;
+            font-family: 'Inter', sans-serif;
+        }
+        .contact-form .form-group input:focus,
+        .contact-form .form-group textarea:focus,
+        .contact-form .form-group select:focus {
+            border-color: #c4956a;
+            outline: 0;
+        }
+        .contact-form .btn-submit {
+            width: 100%;
+            padding: 14px;
+            font-size: 17px;
+        }
+
+        .success-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        .success-modal-overlay.active {
+            display: flex;
+        }
+        .success-modal {
+            background: #fff;
+            border-radius: 30px;
+            padding: 50px 60px;
+            max-width: 480px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        .success-modal .icon {
+            font-size: 72px;
+            color: #27ae60;
+            margin-bottom: 16px;
+            animation: scaleIn 0.6s ease 0.2s both;
+        }
+        .success-modal .icon i {
+            background: #e8f8f0;
+            padding: 20px;
+            border-radius: 50%;
+        }
+        .success-modal h2 {
+            font-size: 28px;
+            color: #1e2a3a;
+            margin-bottom: 12px;
+            animation: fadeUp 0.5s ease 0.3s both;
+        }
+        .success-modal p {
+            font-size: 16px;
+            color: #5a6e7e;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            animation: fadeUp 0.5s ease 0.4s both;
+        }
+        .success-modal .btn-ok {
+            background: #2c2c2c;
+            color: #fff;
+            border: 0;
+            padding: 14px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            animation: fadeUp 0.5s ease 0.5s both;
+        }
+        .success-modal .btn-ok:hover {
+            background: #3d3d3d;
+            transform: scale(1.02);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        footer {
+            background: #2c2c2c;
+            color: #b0a094;
+            text-align: center;
+            padding: 30px 0;
+        }
+        footer span {
+            color: #c4956a;
+        }
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 15px 0 10px;
+        }
+        .footer-contacts a {
+            color: #b0a094;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-contacts a:hover {
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .footer-contacts a i {
+            font-size: 22px;
+        }
+
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+            .nav-menu {
+                display: none;
+            }
+            .hero-slogan {
+                font-size: 32px;
+            }
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            .project-modal {
+                padding: 20px;
+            }
+            .project-modal .project-images {
+                grid-template-columns: 1fr;
+            }
+            .project-modal .project-images img:first-child {
+                max-height: 200px;
+            }
+            .project-modal .project-images img {
+                max-height: 150px;
+            }
+            .project-modal .project-title {
+                font-size: 24px;
+            }
+            .project-modal .project-details {
+                grid-template-columns: 1fr 1fr;
+            }
+            .success-modal {
+                padding: 35px 25px;
+            }
+            .success-modal .icon {
+                font-size: 52px;
+            }
+            .success-modal h2 {
+                font-size: 22px;
+            }
+            .logo img {
+                height: 150px;
+            }
+            header {
+                height: 90px;
+            }
+            .review-success-modal .success-modal {
+                padding: 35px 25px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 52px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 22px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper .flag-select {
+                width: 100%;
+            }
+            .custom-select-wrapper {
+                width: 100%;
+            }
+            .reviews-carousel {
+                min-height: 320px;
+            }
+            .carousel-slide {
+                padding: 30px 40px;
+            }
+            .carousel-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+            .carousel-slide .review-text {
+                font-size: 14px;
+                max-width: 95%;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-slogan {
+                font-size: 22px;
+            }
+            .hero-content h1 {
+                font-size: 22px;
+            }
+            .about-text .stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+            .project-modal .project-details {
+                grid-template-columns: 1fr;
+            }
+            .success-modal {
+                padding: 25px 18px;
+            }
+            .success-modal .icon {
+                font-size: 42px;
+            }
+            .success-modal .icon i {
+                padding: 14px;
+            }
+            .success-modal h2 {
+                font-size: 19px;
+            }
+            .success-modal p {
+                font-size: 14px;
+            }
+            .success-modal .btn-ok {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+            .logo img {
+                height: 150px;
+            }
+            header {
+                height: 90px;
+            }
+            .review-success-modal .success-modal {
+                padding: 25px 18px;
+            }
+            .review-success-modal .success-modal .icon {
+                font-size: 42px;
+            }
+            .review-success-modal .success-modal .icon i {
+                padding: 14px;
+            }
+            .review-success-modal .success-modal h2 {
+                font-size: 19px;
+            }
+            .review-success-modal .success-modal p {
+                font-size: 14px;
+            }
+            .review-success-modal .success-modal .btn-ok {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+            .phone-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .phone-input-wrapper .flag-select {
+                width: 100%;
+            }
+            .custom-select-wrapper {
+                width: 100%;
+            }
+            .reviews-carousel {
+                min-height: 360px;
+            }
+            .carousel-slide {
+                padding: 20px 15px;
+            }
+            .carousel-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            .carousel-btn.prev {
+                left: 3px;
+            }
+            .carousel-btn.next {
+                right: 3px;
+            }
+            .carousel-slide .review-text {
+                font-size: 13px;
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+
     <header>
         <div class="container">
-            <div class="logo"><img src="logo.png" alt="Maison SV" /></div>
+            <div class="logo">
+                <img src="logo.png" alt="Maison SV" />
+            </div>
             <div class="nav-menu">
                 <a href="#about" data-lang="about">About</a>
                 <a href="#portfolio" data-lang="portfolio">Portfolio</a>
@@ -200,7 +1323,11 @@
                     <button data-lang="uk">UA</button>
                 </div>
             </div>
-            <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+            <button class="burger" id="burgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
 
@@ -234,16 +1361,27 @@
             <h2 class="section-title" data-lang="about-title">About <span>me</span></h2>
             <p class="section-subtitle" data-lang="about-subtitle">Interior designer with 8 years of experience</p>
             <div class="about-grid">
-                <div class="about-image"><img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Sviatoslava" /></div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?w=600&h=600&fit=crop&crop=center" alt="Sviatoslava" />
+                </div>
                 <div class="about-text">
                     <h3 data-lang="designer-name">Sviatoslava</h3>
                     <div class="designer-title" data-lang="designer-title">Maison SV — interior design</div>
                     <p data-lang="about-text-1">I create interiors that reflect the character and lifestyle of their owners. My philosophy is the harmony of functionality and aesthetics.</p>
                     <p data-lang="about-text-2">Over 8 years of work, I have completed more than 70 projects: from cozy studios to spacious country houses. Each project is a story told through color, texture and light.</p>
                     <div class="stats">
-                        <div><div class="number">70+</div><div class="label" data-lang="stat-projects">Projects completed</div></div>
-                        <div><div class="number">8 years</div><div class="label" data-lang="stat-experience">Years of experience</div></div>
-                        <div><div class="number">100%</div><div class="label" data-lang="stat-clients">Happy clients</div></div>
+                        <div>
+                            <div class="number">70+</div>
+                            <div class="label" data-lang="stat-projects">Projects completed</div>
+                        </div>
+                        <div>
+                            <div class="number">8 years</div>
+                            <div class="label" data-lang="stat-experience">Years of experience</div>
+                        </div>
+                        <div>
+                            <div class="number">100%</div>
+                            <div class="label" data-lang="stat-clients">Happy clients</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,11 +1412,27 @@
                 <button class="carousel-btn next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
                 <div class="carousel-dots" id="carouselDots"></div>
             </div>
+
             <div class="review-form" id="reviewForm">
                 <h3 data-lang="review-form-title"><i class="fas fa-pen"></i> Leave a review</h3>
-                <div class="form-group"><label data-lang="review-form-name">Your name *</label><input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder" /></div>
-                <div class="form-group"><label data-lang="review-form-rating">Rating</label><select id="reviewRating"><option value="5">⭐⭐⭐⭐⭐</option><option value="4">⭐⭐⭐⭐</option><option value="3">⭐⭐⭐</option><option value="2">⭐⭐</option><option value="1">⭐</option></select></div>
-                <div class="form-group"><label data-lang="review-form-text">Your review *</label><textarea id="reviewText" rows="3" placeholder="Share your experience..." data-lang="review-text-placeholder"></textarea></div>
+                <div class="form-group">
+                    <label data-lang="review-form-name">Your name *</label>
+                    <input type="text" id="reviewName" placeholder="Ivan Ivanov" data-lang="review-name-placeholder" />
+                </div>
+                <div class="form-group">
+                    <label data-lang="review-form-rating">Rating</label>
+                    <select id="reviewRating">
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-lang="review-form-text">Your review *</label>
+                    <textarea id="reviewText" rows="3" placeholder="Share your experience..." data-lang="review-text-placeholder"></textarea>
+                </div>
                 <button class="btn-submit-review" id="submitReviewBtn" data-lang="review-form-submit"><i class="fas fa-paper-plane"></i> Send review</button>
             </div>
         </div>
@@ -300,9 +1454,9 @@
             <div class="contact-grid">
                 <div class="contact-info">
                     <h3 data-lang="contact-info-title">Contacts</h3>
-                    <p><i class="fas fa-phone" style="color:#c4956a;width:24px"></i> +33 7 80 30 46 79</p>
-                    <p><i class="fas fa-envelope" style="color:#c4956a;width:24px"></i> antonis1312w@gmail.com</p>
-                    <p><i class="fas fa-map-marker-alt" style="color:#c4956a;width:24px"></i> Paris, France</p>
+                    <p><i class="fas fa-phone" style="color:#c4956a; width:24px;"></i> +33 7 80 30 46 79</p>
+                    <p><i class="fas fa-envelope" style="color:#c4956a; width:24px;"></i> antonis1312w@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt" style="color:#c4956a; width:24px;"></i> Paris, France</p>
                     <div class="social-links">
                         <a href="https://wa.me/33780304679" target="_blank" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
                         <a href="https://t.me/maisonsv" target="_blank" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
@@ -311,16 +1465,44 @@
                 </div>
                 <div class="contact-form">
                     <form id="contactForm">
-                        <div class="form-group"><label data-lang="form-name">Full name *</label><input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required /></div>
-                        <div class="form-group"><label data-lang="form-contact-type">Contact method</label><select id="contactType"><option value="phone">📞 Phone</option><option value="email">✉️ Email</option></select></div>
-                        <div class="form-group" id="phoneGroup"><label data-lang="form-phone">Phone *</label>
+                        <div class="form-group">
+                            <label data-lang="form-name">Full name *</label>
+                            <input type="text" id="clientName" placeholder="Ivan Ivanov" data-lang="form-name-placeholder" required />
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-contact-type">Contact method</label>
+                            <select id="contactType">
+                                <option value="phone">📞 Phone</option>
+                                <option value="email">✉️ Email</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="phoneGroup">
+                            <label data-lang="form-phone">Phone *</label>
                             <div class="phone-input-wrapper">
-                                <div class="custom-select-wrapper"><select class="flag-select" id="countryCode"><option value="+7">🇷🇺 +7</option><option value="+33" selected>🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+380">🇺🇦 +380</option><option value="+420">🇨🇿 +420</option><option value="+1">🇺🇸 +1</option></select></div>
-                                <input type="tel" id="clientPhone" placeholder="7 80 30 46 79" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+" />
+                                <div class="custom-select-wrapper">
+                                    <select class="flag-select" id="countryCode">
+                                        <option value="+7">🇷🇺 +7</option>
+                                        <option value="+33" selected>🇫🇷 +33</option>
+                                        <option value="+49">🇩🇪 +49</option>
+                                        <option value="+380">🇺🇦 +380</option>
+                                        <option value="+420">🇨🇿 +420</option>
+                                        <option value="+1">🇺🇸 +1</option>
+                                    </select>
+                                </div>
+                                <!-- ИСПРАВЛЕННЫЙ ПЛЕЙСХОЛДЕР -->
+                                <input type="tel" id="clientPhone" placeholder="Введите номер телефона" data-lang="form-phone-placeholder" required pattern="[0-9\s\-]+" />
                             </div>
                         </div>
-                        <div class="form-group" id="emailGroup" style="display:none"><label data-lang="form-email">Email *</label><div class="email-input-wrapper"><input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder" /></div></div>
-                        <div class="form-group"><label data-lang="form-message">Discuss the project</label><textarea id="clientMessage" rows="4" placeholder="Tell about your project..." data-lang="form-message-placeholder"></textarea></div>
+                        <div class="form-group" id="emailGroup" style="display:none;">
+                            <label data-lang="form-email">Email *</label>
+                            <div class="email-input-wrapper">
+                                <input type="email" id="clientEmail" placeholder="ivan@mail.ru" data-lang="form-email-placeholder" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label data-lang="form-message">Discuss the project</label>
+                            <textarea id="clientMessage" rows="4" placeholder="Tell about your project..." data-lang="form-message-placeholder"></textarea>
+                        </div>
                         <button type="submit" class="btn btn-submit" data-lang="form-submit"><i class="fas fa-paper-plane"></i> Send</button>
                     </form>
                 </div>
@@ -352,16 +1534,18 @@
         <div class="container">
             <p>© 2025 <span>Maison SV</span> — <span data-lang="footer-text">interiors you'll want to live in</span></p>
             <div class="footer-contacts">
-                <a href="https://wa.me/33780304679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366"></i> WhatsApp</a>
-                <a href="https://t.me/maisonsv" target="_blank"><i class="fab fa-telegram" style="color:#0088cc"></i> Telegram</a>
-                <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram" style="color:#e4405f"></i> Instagram</a>
+                <a href="https://wa.me/33780304679" target="_blank"><i class="fab fa-whatsapp" style="color:#25d366;"></i> WhatsApp</a>
+                <a href="https://t.me/maisonsv" target="_blank"><i class="fab fa-telegram" style="color:#0088cc;"></i> Telegram</a>
+                <a href="https://www.instagram.com/maisonsv.design" target="_blank"><i class="fab fa-instagram" style="color:#e4405f;"></i> Instagram</a>
             </div>
-            <p style="font-size:13px;margin-top:6px;opacity:.7" data-lang="footer-sub">Made with ❤️ for inspiration</p>
+            <p style="font-size:13px; margin-top:6px; opacity:0.7;" data-lang="footer-sub">Made with ❤️ for inspiration</p>
         </div>
     </footer>
 
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js">
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js">
+    </script>
 
     <script>
         // ============================================================
@@ -381,14 +1565,14 @@
         const db = firebase.firestore();
 
         // ============================================================
-        //  ПЕРЕВОДЫ
+        //  ПЕРЕВОДЫ (С ОБНОВЛЁННЫМ ПЛЕЙСХОЛДЕРОМ)
         // ============================================================
         const translations = {
             ru: {
-                about: 'Обо мне',
-                portfolio: 'Портфолио',
-                reviews: 'Отзывы',
-                contact: 'Контакты',
+                'about': 'Обо мне',
+                'portfolio': 'Портфолио',
+                'reviews': 'Отзывы',
+                'contact': 'Контакты',
                 'reviews-title': 'Отзывы <span>клиентов</span>',
                 'reviews-subtitle': 'Что говорят о моей работе',
                 'review-form-title': 'Оставить отзыв',
@@ -401,7 +1585,7 @@
                 'review-success-title': 'Спасибо за ваш отзыв! ⭐',
                 'review-success-text': 'Отзыв отправлен на проверку. После одобрения он появится в карусели.',
                 'review-success-btn': 'Хорошо',
-                slogan: 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
+                'slogan': 'ТВОРИМ ПРОСТРАНСТВО <br>ДЛЯ ЖИЗНИ',
                 'hero-title': 'Интерьеры, в которых <br>хочется <span>жить</span>',
                 'hero-desc': 'Дизайн-проекты для квартир, домов и офисов. Создаю пространство, которое отражает вашу индивидуальность.',
                 'hero-btn': 'Обсудить проект',
@@ -429,7 +1613,7 @@
                 'form-contact-phone': '📞 Телефон',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': '7 80 30 46 79',
+                'form-phone-placeholder': 'Введите номер телефона', // ИСПРАВЛЕНО
                 'form-email': 'Email *',
                 'form-email-placeholder': 'ivan@mail.ru',
                 'form-message': 'Обсудить проект',
@@ -443,14 +1627,14 @@
                 'view-btn': 'Смотреть',
                 'no-reviews': 'Отзывов пока нет',
                 'be-first': 'Будьте первым!',
-                verified: 'Подтверждённый клиент',
+                'verified': 'Подтверждённый клиент',
                 'no-projects': 'Проектов пока нет'
             },
             en: {
-                about: 'About',
-                portfolio: 'Portfolio',
-                reviews: 'Reviews',
-                contact: 'Contact',
+                'about': 'About',
+                'portfolio': 'Portfolio',
+                'reviews': 'Reviews',
+                'contact': 'Contact',
                 'reviews-title': 'Client <span>reviews</span>',
                 'reviews-subtitle': 'What they say about my work',
                 'review-form-title': 'Leave a review',
@@ -463,7 +1647,7 @@
                 'review-success-title': 'Thank you for your review! ⭐',
                 'review-success-text': 'Your review has been sent for moderation. It will appear after approval.',
                 'review-success-btn': 'OK',
-                slogan: 'CREATING SPACE <br>FOR LIFE',
+                'slogan': 'CREATING SPACE <br>FOR LIFE',
                 'hero-title': 'Interiors you\'ll <br>want to <span>live in</span>',
                 'hero-desc': 'Design projects for apartments, houses and offices. Creating spaces that reflect your personality.',
                 'hero-btn': 'Discuss a project',
@@ -491,7 +1675,7 @@
                 'form-contact-phone': '📞 Phone',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Phone *',
-                'form-phone-placeholder': '7 80 30 46 79',
+                'form-phone-placeholder': 'Enter phone number', // ИСПРАВЛЕНО
                 'form-email': 'Email *',
                 'form-email-placeholder': 'ivan@mail.ru',
                 'form-message': 'Discuss the project',
@@ -505,14 +1689,14 @@
                 'view-btn': 'View',
                 'no-reviews': 'No reviews yet',
                 'be-first': 'Be the first!',
-                verified: 'Verified client',
+                'verified': 'Verified client',
                 'no-projects': 'No projects yet'
             },
             fr: {
-                about: 'À propos',
-                portfolio: 'Portfolio',
-                reviews: 'Avis',
-                contact: 'Contact',
+                'about': 'À propos',
+                'portfolio': 'Portfolio',
+                'reviews': 'Avis',
+                'contact': 'Contact',
                 'reviews-title': 'Avis des <span>clients</span>',
                 'reviews-subtitle': 'Ce qu\'ils disent de mon travail',
                 'review-form-title': 'Laisser un avis',
@@ -525,7 +1709,7 @@
                 'review-success-title': 'Merci pour votre avis ! ⭐',
                 'review-success-text': 'Votre avis a été envoyé pour modération. Il apparaîtra après approbation.',
                 'review-success-btn': 'OK',
-                slogan: 'CRÉER UN ESPACE <br>POUR LA VIE',
+                'slogan': 'CRÉER UN ESPACE <br>POUR LA VIE',
                 'hero-title': 'Des intérieurs où <br>on a envie de <span>vivre</span>',
                 'hero-desc': 'Projets de design pour appartements, maisons et bureaux. Créer des espaces qui reflètent votre personnalité.',
                 'hero-btn': 'Discuter un projet',
@@ -553,7 +1737,7 @@
                 'form-contact-phone': '📞 Téléphone',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Téléphone *',
-                'form-phone-placeholder': '7 80 30 46 79',
+                'form-phone-placeholder': 'Entrez le numéro de téléphone', // ИСПРАВЛЕНО
                 'form-email': 'Email *',
                 'form-email-placeholder': 'ivan@mail.ru',
                 'form-message': 'Discuter le projet',
@@ -567,14 +1751,14 @@
                 'view-btn': 'Voir',
                 'no-reviews': 'Aucun avis',
                 'be-first': 'Soyez le premier!',
-                verified: 'Client vérifié',
+                'verified': 'Client vérifié',
                 'no-projects': 'Aucun projet'
             },
             de: {
-                about: 'Über mich',
-                portfolio: 'Portfolio',
-                reviews: 'Bewertungen',
-                contact: 'Kontakt',
+                'about': 'Über mich',
+                'portfolio': 'Portfolio',
+                'reviews': 'Bewertungen',
+                'contact': 'Kontakt',
                 'reviews-title': 'Kunden <span>bewertungen</span>',
                 'reviews-subtitle': 'Was sie über meine Arbeit sagen',
                 'review-form-title': 'Bewertung hinterlassen',
@@ -587,7 +1771,7 @@
                 'review-success-title': 'Vielen Dank für Ihre Bewertung! ⭐',
                 'review-success-text': 'Ihre Bewertung wurde zur Moderation gesendet. Sie wird nach der Genehmigung angezeigt.',
                 'review-success-btn': 'OK',
-                slogan: 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
+                'slogan': 'RAUM FÜRS LEBEN <br>SCH-AFFEN',
                 'hero-title': 'Innenräume, in denen <br>man <span>leben</span> möchte',
                 'hero-desc': 'Designprojekte für Wohnungen, Häuser und Büros. Schaffung von Räumen, die Ihre Persönlichkeit widerspiegeln.',
                 'hero-btn': 'Projekt besprechen',
@@ -615,7 +1799,7 @@
                 'form-contact-phone': '📞 Telefon',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Telefon *',
-                'form-phone-placeholder': '7 80 30 46 79',
+                'form-phone-placeholder': 'Telefonnummer eingeben', // ИСПРАВЛЕНО
                 'form-email': 'Email *',
                 'form-email-placeholder': 'ivan@mail.ru',
                 'form-message': 'Projekt besprechen',
@@ -629,14 +1813,14 @@
                 'view-btn': 'Ansehen',
                 'no-reviews': 'Keine Bewertungen',
                 'be-first': 'Seien Sie der Erste!',
-                verified: 'Verifizierter Kunde',
+                'verified': 'Verifizierter Kunde',
                 'no-projects': 'Keine Projekte'
             },
             uk: {
-                about: 'Про мене',
-                portfolio: 'Портфоліо',
-                reviews: 'Відгуки',
-                contact: 'Контакти',
+                'about': 'Про мене',
+                'portfolio': 'Портфоліо',
+                'reviews': 'Відгуки',
+                'contact': 'Контакти',
                 'reviews-title': 'Відгуки <span>клієнтів</span>',
                 'reviews-subtitle': 'Що говорять про мою роботу',
                 'review-form-title': 'Залишити відгук',
@@ -649,7 +1833,7 @@
                 'review-success-title': 'Дякуємо за ваш відгук! ⭐',
                 'review-success-text': 'Відгук надіслано на перевірку. Після схвалення він з\'явиться в каруселі.',
                 'review-success-btn': 'Добре',
-                slogan: 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
+                'slogan': 'ТВОРИМО ПРОСТІР <br>ДЛЯ ЖИТТЯ',
                 'hero-title': 'Інтер\'єри, в яких <br>хочеться <span>жити</span>',
                 'hero-desc': 'Дизайн-проекти для квартир, будинків та офісів. Створюю простір, який відображає вашу індивідуальність.',
                 'hero-btn': 'Обговорити проект',
@@ -677,7 +1861,7 @@
                 'form-contact-phone': '📞 Телефон',
                 'form-contact-email': '✉️ Email',
                 'form-phone': 'Телефон *',
-                'form-phone-placeholder': '7 80 30 46 79',
+                'form-phone-placeholder': 'Введіть номер телефону', // ИСПРАВЛЕНО
                 'form-email': 'Email *',
                 'form-email-placeholder': 'ivan@mail.ru',
                 'form-message': 'Обговорити проект',
@@ -691,7 +1875,7 @@
                 'view-btn': 'Дивитись',
                 'no-reviews': 'Відгуків поки немає',
                 'be-first': 'Будьте першим!',
-                verified: 'Підтверджений клієнт',
+                'verified': 'Підтверджений клієнт',
                 'no-projects': 'Проектів поки немає'
             }
         };
@@ -703,6 +1887,13 @@
         let currentSlideIndex = 0;
         let slidesArray = [];
         let autoSlideInterval = null;
+
+        // ============================================================
+        //  🔒 ЗАЩИТА
+        // ============================================================
+        console.log = function() {};
+        console.warn = function() {};
+        console.error = function() {};
 
         function escapeHtml(text) {
             if (!text) return '';
@@ -731,17 +1922,22 @@
             const items = filter === 'all' ? portfolioData : portfolioData.filter(p => p.category === filter);
             if (!items || items.length === 0) {
                 grid.innerHTML =
-                    `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#6a6a6a;"><i class="fas fa-images" style="font-size:48px;opacity:.3;margin-bottom:12px"></i><p data-lang="no-projects">No projects yet</p></div>`;
+                    `<div style="grid-column:1/-1;text-align:center;padding:40px;color:#6a6a6a;"><i class="fas fa-images" style="font-size:48px;opacity:.3;margin-bottom:12px;"></i><p data-lang="no-projects">No projects yet</p></div>`;
                 return;
             }
             grid.innerHTML = items.map(p => {
                 const imgSrc = p.images && p.images.length > 0 ? p.images[0] :
                     'https://via.placeholder.com/300x200/0b2a4a/ffffff?text=?';
-                return `<div class="portfolio-item" onclick="openProject('${p.id}')">
+                return `
+                        <div class="portfolio-item" onclick="openProject('${p.id}')">
                             <img src="${imgSrc}" alt="${escapeHtml(p.title)}" loading="lazy">
                             <div class="view-btn" data-lang="view-btn">View</div>
-                            <div class="overlay"><h4>${escapeHtml(p.title)}</h4><p>${escapeHtml(p.category)}</p></div>
-                        </div>`;
+                            <div class="overlay">
+                                <h4>${escapeHtml(p.title)}</h4>
+                                <p>${escapeHtml(p.category)}</p>
+                            </div>
+                        </div>
+                    `;
             }).join('');
         }
 
@@ -753,11 +1949,11 @@
                 const modal = document.getElementById('projectModal');
                 document.body.style.overflow = 'hidden';
                 modal.classList.add('active');
-                const images = project.images && project.images.length > 0 ? project.images : [
-                    'https://via.placeholder.com/800x600/0b2a4a/ffffff?text=No+photos'
-                ];
+                const images = project.images && project.images.length > 0 ? project.images :
+                    ['https://via.placeholder.com/800x600/0b2a4a/ffffff?text=No+photos'];
                 document.getElementById('projectImages').innerHTML = images.map(img =>
-                    `<img src="${img}" alt="${escapeHtml(project.title)}" loading="lazy">`).join('');
+                    `<img src="${img}" alt="${escapeHtml(project.title)}" loading="lazy">`
+                ).join('');
                 document.getElementById('projectTitle').textContent = escapeHtml(project.title);
                 document.getElementById('projectCategory').textContent = escapeHtml(project.category);
                 document.getElementById('projectDescription').textContent = escapeHtml(project.description ||
@@ -775,7 +1971,7 @@
         }
 
         // ============================================================
-        //  КАРУСЕЛЬ ОТЗЫВОВ (перевод "Verified client" живёт внутри)
+        //  КАРУСЕЛЬ ОТЗЫВОВ
         // ============================================================
         async function loadReviews() {
             try {
@@ -798,14 +1994,20 @@
             if (!container) return;
 
             if (!reviews || reviews.length === 0) {
-                container.innerHTML =
-                    `<div class="carousel-slide active"><div style="padding:40px;text-align:center;color:#7f8c8d;"><i class="fas fa-comment-dots" style="font-size:48px;opacity:.3;margin-bottom:16px"></i><p style="font-size:18px" data-lang="no-reviews">No reviews yet</p><p style="font-size:14px;margin-top:6px" data-lang="be-first">Be the first!</p></div></div>`;
+                container.innerHTML = `
+                        <div class="carousel-slide active">
+                            <div style="padding:40px;text-align:center;color:#7f8c8d;">
+                                <i class="fas fa-comment-dots" style="font-size:48px;opacity:.3;margin-bottom:16px;"></i>
+                                <p style="font-size:18px;" data-lang="no-reviews">No reviews yet</p>
+                                <p style="font-size:14px;margin-top:6px;" data-lang="be-first">Be the first!</p>
+                            </div>
+                        </div>
+                    `;
                 dotsContainer.innerHTML = '';
                 return;
             }
 
             const verifiedText = translations[currentLang]?.verified || 'Verified client';
-
             let slidesHTML = '';
             reviews.forEach((r, index) => {
                 const stars = '⭐'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
@@ -838,7 +2040,6 @@
             startAutoSlide();
         }
 
-        // ===== обновление текста в уже отрисованной карусели (без перезагрузки) =====
         function updateCarouselLanguage() {
             const verifiedText = translations[currentLang]?.verified || 'Verified client';
             document.querySelectorAll('.review-verified').forEach(el => {
@@ -913,7 +2114,7 @@
         });
 
         // ============================================================
-        //  ЗАЯВКА
+        //  ОТПРАВКА ЗАЯВКИ
         // ============================================================
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -981,12 +2182,10 @@
         function setLanguage(lang) {
             currentLang = lang;
 
-            // активная кнопка языка
             document.querySelectorAll('.lang-selector button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
-            // основной перевод по data-lang
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.dataset.lang;
                 if (translations[lang] && translations[lang][key] !== undefined) {
@@ -1003,7 +2202,6 @@
                 }
             });
 
-            // select «Способ связи»
             const contactSelect = document.getElementById('contactType');
             if (contactSelect) {
                 const options = contactSelect.querySelectorAll('option');
@@ -1015,7 +2213,6 @@
                 });
             }
 
-            // кнопки фильтров (ещё раз для подстраховки)
             document.querySelectorAll('.portfolio-filter button[data-filter]').forEach(btn => {
                 const filterKey = 'filter-' + btn.dataset.filter;
                 if (translations[lang] && translations[lang][filterKey]) {
@@ -1023,7 +2220,6 @@
                 }
             });
 
-            // кнопки «Смотреть / View / Voir ...»
             document.querySelectorAll('.portfolio-item .view-btn').forEach(el => {
                 const key = 'view-btn';
                 if (translations[lang] && translations[lang][key]) {
@@ -1031,7 +2227,6 @@
                 }
             });
 
-            // тексты-заглушки
             const noReviews = document.querySelector('[data-lang="no-reviews"]');
             const beFirst = document.querySelector('[data-lang="be-first"]');
             const verified = document.querySelector('[data-lang="verified"]');
@@ -1043,7 +2238,6 @@
                 `<i class="fas fa-check-circle"></i> ${translations[lang]['verified']}`;
             if (noProjects && translations[lang]['no-projects']) noProjects.textContent = translations[lang]['no-projects'];
 
-            // !!! ОБНОВЛЯЕМ КАРУСЕЛЬ БЕЗ ПЕРЕЗАГРУЗКИ !!!
             updateCarouselLanguage();
 
             localStorage.setItem('designer_lang', lang);
@@ -1126,7 +2320,7 @@
         loadPortfolio();
         setTimeout(() => { loadReviews(); }, 500);
         console.log('🎨 Maison SV запущен (основной язык — английский)');
-        console.log('✅ «Verified client» переводится без перезагрузки');
+        console.log('✅ Плейсхолдер телефона исправлен');
     </script>
 </body>
 </html>
